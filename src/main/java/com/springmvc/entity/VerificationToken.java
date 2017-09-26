@@ -12,7 +12,7 @@ public class VerificationToken {
     private String token;
 
     @OneToOne
-    private User user;
+    private Newer newer;
 
     public String getToken() {
         return token;
@@ -22,11 +22,11 @@ public class VerificationToken {
         this.token = token;
     }
 
-    public User getUser() {
-        return user;
+    public Newer getNewer() {
+        return newer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setNewer(Newer newer) {
+        this.newer = newer;
     }
 }

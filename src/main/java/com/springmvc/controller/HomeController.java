@@ -1,7 +1,6 @@
 package com.springmvc.controller;
 
 
-import com.springmvc.entity.User;
 import com.springmvc.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,16 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public String home(){
+        return "home";
+    }
+
+    @RequestMapping("/signin")
+    public String signIn(){
+        return "signin";
+    }
+
+    @RequestMapping("/error")
+    public String error(){
         return "home";
     }
 }
