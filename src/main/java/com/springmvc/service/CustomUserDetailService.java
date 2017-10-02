@@ -2,7 +2,7 @@ package com.springmvc.service;
 
 import com.springmvc.entity.Newer;
 import com.springmvc.entity.Role;
-import com.springmvc.repositories.UserRepository;
+import com.springmvc.repositories.NewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,12 +20,12 @@ import java.util.Set;
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private NewerRepository newerRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("loadUserByUsername called " + username);
-        Newer newer = userRepository.findByUsername(username);
+        Newer newer = newerRepository.findByUsername(username);
         if (newer == null) {
             throw new UsernameNotFoundException("No newer found with username " + username);
         }

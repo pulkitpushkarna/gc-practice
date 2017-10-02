@@ -1,7 +1,7 @@
 package com.springmvc.controller;
 
 
-import com.springmvc.repositories.UserRepository;
+import com.springmvc.repositories.NewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @Autowired
-    UserRepository userRepository;
+    NewerRepository newerRepository;
 
     @RequestMapping(value = "/")
     public String home(){

@@ -1,9 +1,7 @@
 package com.springmvc.config.security;
 
-import com.springmvc.repositories.UserRepository;
 import com.springmvc.service.CustomSocialUserDetailService;
 import com.springmvc.service.CustomUserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.social.security.SpringSocialConfigurer;
-
-import javax.sql.DataSource;
 
 /**
  * Created by diwakar on 17/09/17.

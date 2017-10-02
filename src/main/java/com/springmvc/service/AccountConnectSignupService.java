@@ -3,13 +3,10 @@ package com.springmvc.service;
 import com.springmvc.entity.Newer;
 import com.springmvc.entity.Role;
 import com.springmvc.enums.UserRole;
-import com.springmvc.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.springmvc.repositories.NewerRepository;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,10 +17,11 @@ import java.util.UUID;
  */
 public class AccountConnectSignupService implements ConnectionSignUp {
 
-    private UserRepository userRepository;
+    private NewerRepository newerRepository;
+    private static final String TO_THE_NEW = "tothenew.com";
 
-    public AccountConnectSignupService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AccountConnectSignupService(NewerRepository newerRepository) {
+        this.newerRepository = newerRepository;
     }
 
     /**
@@ -35,17 +33,23 @@ public class AccountConnectSignupService implements ConnectionSignUp {
     @Override
     public String execute(Connection<?> connection) {
         UserProfile userProfile = connection.fetchUserProfile();
-        String userId = UUID.randomUUID().toString();
-        System.out.println(userProfile.getEmail());
-        Newer newer = new Newer();
-        newer.setUsername(userId);
-        newer.setPassword("random Password");
-        Set<Role> roles = new HashSet<>();
-        Role role = new Role();
-        role.setUserRole(UserRole.ROLE_NEWER);
-        roles.add(role);
-        newer.setUserRoles(roles);
-        userRepository.save(newer);
+        String userEmail = userProfile.getEmail();
+        String userId = null;
+        if (userEmail != null && userEmail.contains(TO_THE_NEW)) {
+            userId = UUID.randomUUID().toString();
+            Newer newer = new Newer();
+            newer.setUsername(userId);
+            newer.setPassword(UUID.randomUUID().toString());
+            newer.setEmail(userEmail);
+            newer.setFirstName(userProfile.getFirstName());
+            newer.setLastName(userProfile.getLastName());
+            Set<Role> roles = new HashSet<>();
+            Role role = new Role();
+            role.setUserRole(UserRole.ROLE_NEWER);
+            roles.add(role);
+            newer.setUserRoles(roles);
+            newerRepository.save(newer);
+        }
         return userId;
     }
 }

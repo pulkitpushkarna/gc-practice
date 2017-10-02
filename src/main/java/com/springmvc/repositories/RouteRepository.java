@@ -1,12 +1,12 @@
 package com.springmvc.repositories;
 
-import com.springmvc.entity.Newer;
+import com.springmvc.entity.Route;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Created by diwakar on 02/10/17.
+ */
 @Repository
-public interface UserRepository extends CrudRepository<Newer,Integer> {
-
-    Newer findByUsername(String userName);
-
+public interface RouteRepository extends CrudRepository<Route, Long> {
 }

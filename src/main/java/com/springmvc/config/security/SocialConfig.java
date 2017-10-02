@@ -1,6 +1,6 @@
 package com.springmvc.config.security;
 
-import com.springmvc.repositories.UserRepository;
+import com.springmvc.repositories.NewerRepository;
 import com.springmvc.service.AccountConnectSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class SocialConfig implements SocialConfigurer {
     private DataSource dataSource;
 
     @Autowired
-    private UserRepository userRepository;
+    private NewerRepository newerRepository;
 
     /**
      * Callback method to allow configuration of {@link org.springframework.social.connect.ConnectionFactory}s.
@@ -64,7 +64,7 @@ public class SocialConfig implements SocialConfigurer {
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository jdbcUsersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-        jdbcUsersConnectionRepository.setConnectionSignUp(new AccountConnectSignupService(userRepository));
+        jdbcUsersConnectionRepository.setConnectionSignUp(new AccountConnectSignupService(newerRepository));
         return jdbcUsersConnectionRepository;
     }
 }
