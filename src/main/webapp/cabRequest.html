@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+        <script src="/resources/js/jquery-1.12.4.js"></script>
+        <script src="/resources/js/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( "#pickUpDate" ).datepicker();
+
+                jQuery("#submit").click(function(){
+                    var pickUpDate = jQuery("#pickUpDate").val();
+                    var dropLocation = jQuery("#dropLocation").val();
+                    var projectName = jQuery("#projectName").val();
+                    var projectManager = jQuery("#projectManager").val();
+
+
+                    jQuery.ajax({
+                        url:"/cabRequestSubmission",
+                        data:{
+                            pickUpDate: pickUpDate,
+                            dropLocation: dropLocation,
+                            projectName: projectName,
+                            projectManager: projectManager
+                        },
+                        success:function(data){
+                            console.log(data);
+                        }
+                    });
+                });
+            } );
+        </script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>Select the Date</td>
+                <td><input type="text" id="pickUpDate"></td>
+            </tr>
+            <tr>
+                <td>Drop Location</td>
+                <td><input type="text" id="dropLocation">  </td>
+            </tr>
+            <tr>
+                <td>Project Name</td>
+                <td><input type="text" id="projectName"></td>
+            </tr>
+            <tr>
+                <td>Project Manager</td>
+                <td><input type="text" id="projectManager"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Submit" id="submit"></td>
+            </tr>
+        </table>
+    </body>
+</html>
