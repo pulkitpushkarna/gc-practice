@@ -1,6 +1,8 @@
 package com.springmvc.config;
 
 
+import com.springmvc.config.security.SecurityConfig;
+import com.springmvc.config.security.SocialConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -11,11 +13,13 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebConfig.class, PersistenceConfig.class};
+        return new Class<?>[]{WebConfig.class, PersistenceConfig.class, SecurityConfig.class, SocialConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+
 }

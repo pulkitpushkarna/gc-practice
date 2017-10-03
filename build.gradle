@@ -30,6 +30,15 @@ dependencies {
     compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
     compile 'org.springframework.security:spring-security-config:4.2.3.RELEASE'
     compile 'org.hibernate:hibernate-validator:4.2.0.Final'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.1'
+
+    compile group: 'org.springframework.social', name: 'spring-social-security', version: '1.1.4.RELEASE'
+    compile("org.springframework.social:spring-social-config:1.1.4.RELEASE")
+    compile group: 'org.springframework.social', name: 'spring-social-web', version: '1.1.4.RELEASE'
+    compile group: 'org.springframework.social', name: 'spring-social-google', version: '1.0.0.RELEASE'
+
     def tomcatVersion = '7.0.57'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
@@ -39,5 +48,32 @@ dependencies {
 tomcatRun {
     contextPath = ""
     httpPort = 8080
+}
+
+task tomcatDebug {
+    // Create a new task tomcatDebug, add a description and add it to the same group as tomcatRun
+    description "Starting Tomcat with debugger enabled on port 5008."
+    group "web application"
+} << {
+
+    org.gradle.tooling.ProjectConnection conn = org.gradle.tooling.GradleConnector.newConnector()
+            .forProjectDirectory(new File("."))
+            .connect();
+
+    try {
+
+        org.gradle.tooling.model.build.BuildEnvironment env = conn.getModel(org.gradle.tooling.model.build.BuildEnvironment.class)
+        org.gradle.tooling.BuildLauncher build = conn.newBuild();
+
+        build.forTasks("tomcatRun")
+        // Enable debug via jvm arguments and append JVM arguments of the currently running vm (except -D).
+        build.setJvmArguments("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008", *env.java.jvmArguments)
+
+        // Run tomcatRun in the new JVM with debug parameters
+        build.run()
+
+    } finally {
+        conn.close();
+    }
 }
 
