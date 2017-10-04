@@ -20,7 +20,7 @@ public class PersistenceConfig {
     DataSource dataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/poc");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/gc");
         driverManagerDataSource.setUsername("root");
         return driverManagerDataSource;
     }
@@ -32,12 +32,10 @@ public class PersistenceConfig {
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setPackagesToScan("com.springmvc.entity");
-
         Properties jpaProperties= new Properties();
         jpaProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
         jpaProperties.setProperty("hibernate.show_sql","true");
         jpaProperties.setProperty("hibernate.hbm2ddl.auto","update");
-
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
         return entityManagerFactoryBean;
     }

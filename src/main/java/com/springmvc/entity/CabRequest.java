@@ -1,11 +1,11 @@
 package com.springmvc.entity;
 
+import com.springmvc.enums.CabRequestStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by diwakar on 02/10/17.
- */
+
 @Entity
 public class CabRequest {
 
@@ -20,7 +20,56 @@ public class CabRequest {
     private Route route;
 
     @ManyToOne
-    private Newer requester;
+    private Newer newer;
+
+    private String dropLocation;
+
+    private String projectName;
+
+    private String managerName;
+
+    @Enumerated(EnumType.STRING)
+    private CabRequestStatus cabRequestStatus;
+
+    public CabRequestStatus getCabRequestStatus() {
+        return cabRequestStatus;
+    }
+
+    public void setCabRequestStatus(CabRequestStatus cabRequestStatus) {
+        this.cabRequestStatus = cabRequestStatus;
+    }
+
+    public Newer getNewer() {
+        return newer;
+    }
+
+    public void setNewer(Newer newer) {
+        this.newer = newer;
+    }
+
+    public String getDropLocation() {
+        return dropLocation;
+    }
+
+    public void setDropLocation(String dropLocation) {
+        this.dropLocation = dropLocation;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
 
     public long getId() {
         return id;
@@ -52,6 +101,11 @@ public class CabRequest {
                 "id=" + id +
                 ", requestDate=" + requestDate +
                 ", route=" + route +
+                ", newer=" + newer +
+                ", dropLocation='" + dropLocation + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", managerName='" + managerName + '\'' +
+                ", cabRequestStatus=" + cabRequestStatus +
                 '}';
     }
 }

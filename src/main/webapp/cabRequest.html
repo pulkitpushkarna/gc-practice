@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" href="/resources/css/jquery-ui.css">
         <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
@@ -7,6 +7,19 @@
         <script>
             $( function() {
                 $( "#pickUpDate" ).datepicker();
+
+                jQuery("input[name='cancelCabRequest']").click(function(){
+                    var cabRequestId = jQuery(this).attr("id");
+                    jQuery.ajax({
+                        url:"/cancelCabRequest",
+                        data:{
+                            cabRequestId: cabRequestId
+                        },
+                        success:function(data){
+                            alert(data)
+                        }
+                    });
+                });
 
                 jQuery("#submit").click(function(){
                     var pickUpDate = jQuery("#pickUpDate").val();
@@ -53,5 +66,18 @@
                 <td><input type="button" value="Submit" id="submit"></td>
             </tr>
         </table>
+
+        <table>
+            <tr th:each="cabRequest : ${cabRequestList}">
+                <td th:text="${cabRequest.dropLocation}"> </td>
+                <td th:text="${cabRequest.projectName}"> </td>
+                <td th:text="${cabRequest.dropLocation}"> </td>
+                <td th:text="${cabRequest.managerName}"> </td>
+                <td th:text="${cabRequest.cabRequestStatus}"></td>
+                <td><input th:id="${cabRequest.id}" type="button" name="cancelCabRequest" value="Cancel"/></td>
+
+            </tr>
+        </table>
+
     </body>
 </html>
