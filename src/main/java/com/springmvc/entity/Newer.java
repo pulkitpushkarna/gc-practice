@@ -1,11 +1,17 @@
 package com.springmvc.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Newer implements Serializable{
 
     @Id
@@ -41,6 +47,24 @@ public class Newer implements Serializable{
 
     @OneToMany(mappedBy = "newer")
     private Set<CabRequest> cabRequests;
+
+    @CreatedDate
+    private Date creationTime;
+
+    @LastModifiedDate
+    private Date modificationTime;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
 
     public String getUsername() {
         return username;
