@@ -1,5 +1,6 @@
 package com.springmvc.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -16,12 +17,22 @@ import java.util.Properties;
 @EnableJpaRepositories("com.springmvc.repositories")
 public class PersistenceConfig {
 
+    @Value("${app.datasource.username}")
+    private String username;
+    @Value("${app.datasource.password}")
+    private String password;
+    @Value("${app.datasource.driverClass}")
+    private String driverClass;
+    @Value("${app.datasource.url}")
+    private String url;
+
     @Bean
     DataSource dataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/poc");
-        driverManagerDataSource.setUsername("root");
+        driverManagerDataSource.setDriverClassName(driverClass);
+        driverManagerDataSource.setUrl(url);
+        driverManagerDataSource.setUsername(username);
+        driverManagerDataSource.setPassword(password);
         return driverManagerDataSource;
     }
 
