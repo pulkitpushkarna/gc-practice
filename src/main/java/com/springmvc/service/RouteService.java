@@ -8,6 +8,9 @@ import com.springmvc.repositories.CabRepository;
 import com.springmvc.repositories.RouteRepository;
 import com.springmvc.repositories.StopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,16 +33,19 @@ public class RouteService {
     @Autowired
     private CabRepository cabRepository;
 
+    public List<Route> listRoutes(Pageable pageable){
+        Page<Route> routes = routeRepository.findAll(pageable);
+        return routes.getContent();
+    }
+
     public void insertRoute(RouteCommand routeCommand){
         if(routeCommand != null){
-            Set<Long> stopList = routeCommand.getStopIds();
+            Set<String> stopList = routeCommand.getStops();
             Route route = new Route();
-            Set<Stop> stops = new HashSet<>();
-            for (Long stopId:stopList) {
-                Stop stop = stopRepository.findOne(stopId);
-                if(stop != null){
-                   stops.add(stop);
-                }
+            List<Stop> stops = new ArrayList<>();
+            for (String stopName:stopList) {
+                Stop stop = new Stop();
+                stop.setStopName(stopName);
             }
             route.setRouteName(routeCommand.getRouteName());
             route.setStops(stops);
@@ -52,9 +58,8 @@ public class RouteService {
            Cab cab = cabRepository.findOne(cabId);
            if(cab != null){
              Route route = routeRepository.findOne(routeId);
-             Set<Cab> cabs = route.getCabs();
-             cabs.add(cab);
-             route.setCabs(cabs);
+             Cab cabs = route.getCab();
+             route.setCab(cab);
              routeRepository.save(route);
            }
         }

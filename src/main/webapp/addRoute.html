@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/resources/js/jquery-1.12.4.js"></script>
+    <script src="/resources/js/jquery-ui.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function() {
+            let stops = $("#stops");
+            stops.sortable();
+            stops.disableSelection();
+            $("#addStop").click(function() {
+                $("#stopName").toggle();
+                $("#submitStop").toggle();
+            });
+
+            $("#submitStop").click(function() {
+                let stopNameElem = $("#stopName");
+                let stopName = stopNameElem.val();
+                stops.append(`<li>${stopName}</li>`);
+                stopNameElem.hide();
+                stopNameElem.val("");
+                $("#submitStop").hide();
+                stops.sortable();
+                stops.disableSelection();
+            });
+
+            jQuery("#submit").click(function() {
+                let routeName = jQuery("#routeName").val();
+                let stopElemList = stops.children();
+                let stopsList = $.map(stopElemList, function(stopElem) {
+                    return stopElem.innerHTML.trim();
+                });
+                let cabRegNo = $("#vehicleRegNumber").val();
+                let maxCapacity = parseInt($("#maxCapacity").val());
+                let data = {
+                    routeName: routeName,
+                    stops: stopsList,
+                    cabRegNo: cabRegNo,
+                    maxCapacity: maxCapacity
+                };
+                let addRoutePath = "/route/add?_csrf=" + [[${_csrf.token}]];
+                jQuery.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    'type': 'POST',
+                    'url': addRoutePath,
+                    'data': JSON.stringify(data),
+                    'dataType': 'json',
+                    'success': function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+        /*]]>*/
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Route Name</td>
+        <td><input type="text" id="routeName"></td>
+    </tr>
+    <tr>
+        <td>Stops
+            <button id="addStop">Add Stop</button>
+            <input type="text" id="stopName" style="display: none">
+            <button id="submitStop" style="display: none">Add</button>
+        </td>
+        <td>
+            <ul id="stops"></ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Cab Reg No.</td>
+        <td><input type="text" id="vehicleRegNumber"></td>
+    </tr>
+    <tr>
+        <td>Cab Capacity</td>
+        <td><input type="number" id="maxCapacity"></td>
+    </tr>
+    <tr>
+        <td><input type="button" value="Submit" id="submit"></td>
+    </tr>
+</table>
+</body>
+</html>

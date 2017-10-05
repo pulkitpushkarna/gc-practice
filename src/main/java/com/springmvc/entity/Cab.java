@@ -24,6 +24,9 @@ public class Cab {
     @OneToMany
     private Set<Feedback> feedbacks;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Route route;
+
     public long getId() {
         return id;
     }

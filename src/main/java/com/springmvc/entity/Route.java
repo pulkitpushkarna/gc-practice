@@ -16,13 +16,13 @@ public class Route {
 
     private String routeName;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Set<Stop> stops;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Stop> stops;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private Set<Cab> cabs;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cab cab;
 
-    @OneToMany(mappedBy = "route")
+    @OneToMany(mappedBy = "requestRoute")
     private Set<CabRequest> cabRequests;
 
     public long getId() {
@@ -41,11 +41,11 @@ public class Route {
         this.routeName = routeName;
     }
 
-    public Set<Stop> getStops() {
+    public List<Stop> getStops() {
         return stops;
     }
 
-    public void setStops(Set<Stop> stops) {
+    public void setStops(List<Stop> stops) {
         this.stops = stops;
     }
 
@@ -57,12 +57,12 @@ public class Route {
         this.cabRequests = cabRequests;
     }
 
-    public Set<Cab> getCabs() {
-        return cabs;
+    public Cab getCab() {
+        return cab;
     }
 
-    public void setCabs(Set<Cab> cabs) {
-        this.cabs = cabs;
+    public void setCab(Cab cab) {
+        this.cab = cab;
     }
 
     @Override
