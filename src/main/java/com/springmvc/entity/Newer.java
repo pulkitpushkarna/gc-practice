@@ -39,7 +39,7 @@ public class Newer implements Serializable{
     @OneToMany
     private Set<Attendance> attendances;
 
-    @OneToMany(mappedBy = "requester")
+    @OneToMany(mappedBy = "newer")
     private Set<CabRequest> cabRequests;
 
     public String getUsername() {
