@@ -1,5 +1,6 @@
 package com.springmvc.config.security;
 
+import com.springmvc.config.AppConfig;
 import com.springmvc.repositories.NewerRepository;
 import com.springmvc.service.AccountConnectSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class SocialConfig implements SocialConfigurer {
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private AppConfig appConfig;
 
     @Autowired
     private NewerRepository newerRepository;
@@ -64,7 +68,7 @@ public class SocialConfig implements SocialConfigurer {
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository jdbcUsersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-        jdbcUsersConnectionRepository.setConnectionSignUp(new AccountConnectSignupService(newerRepository));
+        jdbcUsersConnectionRepository.setConnectionSignUp(new AccountConnectSignupService(newerRepository,appConfig));
         return jdbcUsersConnectionRepository;
     }
 }

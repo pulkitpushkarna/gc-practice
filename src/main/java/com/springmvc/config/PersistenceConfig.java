@@ -3,6 +3,7 @@ package com.springmvc.config;
 import com.springmvc.auditing.AuditingDateTimeProvider;
 import com.springmvc.auditing.CurrentDateTimeService;
 import com.springmvc.auditing.DateTimeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,14 +25,8 @@ import java.util.Properties;
 
 public class PersistenceConfig {
 
-    @Value("${app.datasource.username}")
-    private String username;
-    @Value("${app.datasource.password}")
-    private String password;
-    @Value("${app.datasource.driverClass}")
-    private String driverClass;
-    @Value("${app.datasource.url}")
-    private String url;
+    @Autowired
+    private AppConfig appConfig;
 
     @Bean
     DateTimeService currentTimeDateTimeService(){
@@ -45,10 +40,10 @@ public class PersistenceConfig {
     @Bean
     DataSource dataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName(driverClass);
-        driverManagerDataSource.setUrl(url);
-        driverManagerDataSource.setUsername(username);
-        driverManagerDataSource.setPassword(password);
+        driverManagerDataSource.setDriverClassName(appConfig.getDriverClass());
+        driverManagerDataSource.setUrl(appConfig.getUrl());
+        driverManagerDataSource.setUsername(appConfig.getUsername());
+        driverManagerDataSource.setPassword(appConfig.getPassword());
         return driverManagerDataSource;
     }
 

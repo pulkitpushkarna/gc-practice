@@ -19,7 +19,7 @@ public class Newer implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private int newerId;
+    private long newerId;
 
     private String username;
 
@@ -36,6 +36,8 @@ public class Newer implements Serializable{
 
     @ManyToMany
     private List<Route> newerRoutes;
+
+    private long managerEmpId;
 
     @ManyToOne
     private Cab cab;
@@ -97,11 +99,11 @@ public class Newer implements Serializable{
     }
 
 
-    public int getNewerId() {
+    public long getNewerId() {
         return newerId;
     }
 
-    public void setNewerId(int newerId) {
+    public void setNewerId(long newerId) {
         this.newerId = newerId;
     }
 
@@ -145,6 +147,42 @@ public class Newer implements Serializable{
         this.cab = cab;
     }
 
+    public List<Route> getNewerRoutes() {
+        return newerRoutes;
+    }
+
+    public void setNewerRoutes(List<Route> newerRoutes) {
+        this.newerRoutes = newerRoutes;
+    }
+
+    public Set<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
+    public Set<CabRequest> getCabRequests() {
+        return cabRequests;
+    }
+
+    public void setCabRequests(Set<CabRequest> cabRequests) {
+        this.cabRequests = cabRequests;
+    }
+
+    public void setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+    }
+
+    public long getManagerEmpId() {
+        return managerEmpId;
+    }
+
+    public void setManagerEmpId(long managerEmpId) {
+        this.managerEmpId = managerEmpId;
+    }
+
     @Override
     public String toString() {
         return "Newer{" +
@@ -156,7 +194,8 @@ public class Newer implements Serializable{
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userRole=" + userRole +
-                ", route=" + newerRoutes +
+                ", newerRoutes=" + newerRoutes +
+                ", managerEmpId=" + managerEmpId +
                 ", cab=" + cab +
                 ", attendances=" + attendances +
                 ", cabRequests=" + cabRequests +

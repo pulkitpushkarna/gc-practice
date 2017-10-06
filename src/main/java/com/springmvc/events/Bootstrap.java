@@ -10,7 +10,6 @@ public class Bootstrap {
     @EventListener(ContextRefreshedEvent.class)
     void startUpEvent(){
 
-
     }
 
 }
