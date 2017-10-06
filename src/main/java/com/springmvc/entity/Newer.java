@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,8 +34,8 @@ public class Newer implements Serializable{
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole ;
 
-    @ManyToOne
-    private Route route;
+    @ManyToMany
+    private List<Route> newerRoutes;
 
     @ManyToOne
     private Cab cab;
@@ -128,12 +129,12 @@ public class Newer implements Serializable{
         this.email = email;
     }
 
-    public Route getRoute() {
-        return route;
+    public List<Route> getRoute() {
+        return newerRoutes;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setRoute(List<Route> route) {
+        this.newerRoutes = route;
     }
 
     public Cab getCab() {
@@ -155,7 +156,7 @@ public class Newer implements Serializable{
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userRole=" + userRole +
-                ", route=" + route +
+                ", route=" + newerRoutes +
                 ", cab=" + cab +
                 ", attendances=" + attendances +
                 ", cabRequests=" + cabRequests +

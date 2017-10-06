@@ -25,8 +25,13 @@ public class Route {
     @OneToOne(cascade = CascadeType.REFRESH)
     private Cab cab;
 
+    @ManyToMany
+    private List<Newer> newers;
+
     @OneToMany(mappedBy = "route")
     private Set<CabRequest> cabRequests;
+
+    private boolean isActive;
 
     @CreatedDate
     private Date creationTime;
@@ -86,6 +91,22 @@ public class Route {
         this.cab = cab;
     }
 
+    public List<Newer> getCabbies() {
+        return newers;
+    }
+
+    public void setCabbies(List<Newer> cabbies) {
+        this.newers = cabbies;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public String toString() {
         return "Route{" +
@@ -93,7 +114,9 @@ public class Route {
                 ", routeName='" + routeName + '\'' +
                 ", stops=" + stops +
                 ", cab=" + cab +
+                ", cabbies=" + newers +
                 ", cabRequests=" + cabRequests +
+                ", isActive=" + isActive +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +
                 '}';
