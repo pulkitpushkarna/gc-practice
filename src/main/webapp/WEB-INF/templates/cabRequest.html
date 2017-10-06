@@ -8,6 +8,18 @@
             $( function() {
                 $( "#pickUpDate" ).datepicker();
 
+                jQuery("#cabRequestType").change(function(){
+                   console.log("<<<<<jQuery(this).val()>>>>>"+jQuery(this).val());
+                   var cabRequest = jQuery(this).val();
+                   if(cabRequest==="PERMANENT"){
+                        jQuery("#route-td").show();
+                        jQuery("#date-td").hide();
+                   }else{
+                        jQuery("#route-td").hide();
+                        jQuery("#date-td").show();
+                   }
+                });
+
                 jQuery("input[name='cancelCabRequest']").click(function(){
                     var cabRequestId = jQuery(this).attr("id");
                     jQuery.ajax({
@@ -26,7 +38,7 @@
                     var dropLocation = jQuery("#dropLocation").val();
                     var projectName = jQuery("#projectName").val();
                     var projectManager = jQuery("#projectManager").val();
-
+                    var cabRequestType = jQuery("#cabRequestType").val();
 
                     jQuery.ajax({
                         url:"/cabRequestSubmission",
@@ -34,7 +46,8 @@
                             pickUpDate: pickUpDate,
                             dropLocation: dropLocation,
                             projectName: projectName,
-                            projectManager: projectManager
+                            projectManager: projectManager,
+                            cabRequestType: cabRequestType
                         },
                         success:function(data){
                             console.log(data);
@@ -47,12 +60,37 @@
     <body>
         <table>
             <tr>
+                <td>Request Type</td>
+                <td>
+                    <select id="cabRequestType" name="cabRequestType" >
+                        <option th:each="cabRequestType : ${cabRequestTypes}"
+                            th:value="${cabRequestType}" th:text="${cabRequestType.getName()}"
+                                th:selected="${cabRequestType.name.equals('Permanent')}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="date-td" hidden>
                 <td>Select the Date</td>
                 <td><input type="text" id="pickUpDate"></td>
+            </tr>
+            <tr id="route-td">
+            <td>Route</td>
+            <td>
+                <select id="route" name="route" >
+                    <option th:each="route : ${routeList}"
+                            th:value="${route.id}" th:text="${route.name}">
+                    </option>
+                </select>
+            </td>
             </tr>
             <tr>
                 <td>Drop Location</td>
                 <td><input type="text" id="dropLocation">  </td>
+            </tr>
+            <tr>
+                <td>Pickup Location</td>
+                <td><input type="text" id="pickupLocation"></td>
             </tr>
             <tr>
                 <td>Project Name</td>

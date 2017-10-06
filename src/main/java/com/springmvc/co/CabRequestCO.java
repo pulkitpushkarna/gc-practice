@@ -1,6 +1,7 @@
 package com.springmvc.co;
 
 
+import com.springmvc.enums.CabRequestType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -10,8 +11,26 @@ public class CabRequestCO {
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date pickUpDate;
     private String dropLocation;
+    private String pickUpLocation;
     private String projectName;
     private String projectManager;
+    private CabRequestType cabRequestType;
+
+    public CabRequestType getCabRequestType() {
+        return cabRequestType;
+    }
+
+    public void setCabRequestType(CabRequestType cabRequestType) {
+        this.cabRequestType = cabRequestType;
+    }
+
+    public String getPickUpLocation() {
+        return pickUpLocation;
+    }
+
+    public void setPickUpLocation(String pickUpLocation) {
+        this.pickUpLocation = pickUpLocation;
+    }
 
     public Date getPickUpDate() {
         return pickUpDate;

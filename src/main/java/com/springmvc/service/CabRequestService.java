@@ -27,13 +27,14 @@ public class CabRequestService {
         cabRequest.setRequestDate(cabRequestCO.getPickUpDate());
         cabRequest.setProjectName(cabRequestCO.getProjectName());
         cabRequest.setCabRequestStatus(CabRequestStatus.APPLIED);
+        cabRequest.setCabRequestType(cabRequestCO.getCabRequestType());
         cabRequest.setNewer(springSecurityService.getCurrentUser());
         cabRequestRepository.save(cabRequest);
     }
 
     public List<CabRequest> getCabRequestsForNewer(){
         Newer newer = springSecurityService.getCurrentUser();
-        return cabRequestRepository.findAllByNewer(newer);
+        return cabRequestRepository.findAllByNewerAndCabRequestStatus(newer,CabRequestStatus.APPLIED);
     }
 
     public void cancelCabRequest(Long cabRequestId){
@@ -45,5 +46,17 @@ public class CabRequestService {
     public List<CabRequest> getCabRequestsForApproval(){
         List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatus(CabRequestStatus.APPLIED);
         return cabRequestList;
+    }
+
+    public void rejectCabRequest(Long cabRequestId){
+        CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
+        cabRequest.setCabRequestStatus(CabRequestStatus.REJECTED);
+        cabRequestRepository.save(cabRequest);
+    }
+
+    public void approveCabRequest(Long cabRequestId){
+        CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
+        cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
+        cabRequestRepository.save(cabRequest);
     }
 }
