@@ -5,9 +5,20 @@
 <body>
 Hello World spring mvc Thymleaf testing
 <div>
-    <a th:href="@{/cabRequest}">Cab Request</a>
-    <a th:href="@{/feedback}">Feedback</a>
-    <a th:href="@{/cabRequestsForApproval}">Cab Request for Approval</a>
+    <ul>
+        <li>
+            <a th:href="@{/cabRequest}">Cab Request</a>
+        </li>
+        <li>
+            <a th:href="@{/feedback}">Feedback</a>
+        </li>
+        <li>
+            <a th:href="@{/permanentCabRequestsForApproval}">Permanent Cab Request for Approval</a>
+        <li>
+        <li>
+            <a th:href="@{/adhocCabRequestsForApproval}"> Ad-hoc Cab Request for Approval</a>
+        </li>
+    </ul>
 </div>
 <div id="logout" style="float: right">
     <form method="post" th:action="@{/logout}" id="form-logout">

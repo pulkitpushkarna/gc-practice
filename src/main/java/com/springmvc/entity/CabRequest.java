@@ -5,10 +5,8 @@ import com.springmvc.enums.CabRequestType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import java.util.Date;
-
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -18,7 +16,6 @@ public class CabRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Temporal(TemporalType.DATE)
     private Date requestDate;
 
     @ManyToOne
@@ -38,6 +35,10 @@ public class CabRequest {
     @Enumerated(EnumType.STRING)
     private CabRequestType cabRequestType;
 
+    private Date approvalDate;
+
+    private Date unavailingDate;
+
     @CreatedDate
     private Date creationTime;
 
@@ -46,6 +47,22 @@ public class CabRequest {
 
     @Enumerated(EnumType.STRING)
     private CabRequestStatus cabRequestStatus;
+
+    public Date getApprovalDate() {
+        return approvalDate;
+    }
+
+    public void setApprovalDate(Date approvalDate) {
+        this.approvalDate = approvalDate;
+    }
+
+    public Date getUnavailingDate() {
+        return unavailingDate;
+    }
+
+    public void setUnavailingDate(Date unavailingDate) {
+        this.unavailingDate = unavailingDate;
+    }
 
     public CabRequestType getCabRequestType() {
         return cabRequestType;
