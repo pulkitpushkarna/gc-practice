@@ -1,14 +1,13 @@
 package com.springmvc.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import javax.persistence.*;
+import java.util.Date;
 
-/**
- * Created by diwakar on 23/09/17.
- */
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class UserConnection {
 
     @Id
@@ -28,6 +27,23 @@ public class UserConnection {
     private String refreshToken;
     private Long expireTime;
 
+    @CreatedDate
+    private Date creationTime;
+
+    @LastModifiedDate
+    private Date modificationTime;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
     public UserConnection(String userId, String providerId, String providerUserId, int rank, String displayName, String profileUrl, String imageUrl, String accessToken, String secret, String refreshToken, Long expireTime) {
         this.userId = userId;
         this.providerId = providerId;

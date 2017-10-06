@@ -1,11 +1,17 @@
 package com.springmvc.entity;
 
+import com.springmvc.enums.UserRole;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Newer implements Serializable{
 
     @Id
@@ -24,11 +30,8 @@ public class Newer implements Serializable{
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "Newer_Roles",
-            joinColumns = { @JoinColumn(name = "Newer_Id") },
-            inverseJoinColumns = { @JoinColumn(name = "Role_Id") })
-    private Set<Role> userRoles = new HashSet<>();
+    @Enumerated(value = EnumType.STRING)
+    private UserRole userRole ;
 
     @ManyToOne
     private Route route;
@@ -41,6 +44,32 @@ public class Newer implements Serializable{
 
     @OneToMany(mappedBy = "newer")
     private Set<CabRequest> cabRequests;
+
+    @CreatedDate
+    private Date creationTime;
+
+    @LastModifiedDate
+    private Date modificationTime;
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
 
     public String getUsername() {
         return username;
@@ -66,13 +95,6 @@ public class Newer implements Serializable{
         this.id = id;
     }
 
-    public Set<Role> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<Role> userRoles) {
-        this.userRoles = userRoles;
-    }
 
     public int getNewerId() {
         return newerId;
@@ -132,7 +154,13 @@ public class Newer implements Serializable{
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", userRoles=" + userRoles +
+                ", userRole=" + userRole +
+                ", route=" + route +
+                ", cab=" + cab +
+                ", attendances=" + attendances +
+                ", cabRequests=" + cabRequests +
+                ", creationTime=" + creationTime +
+                ", modificationTime=" + modificationTime +
                 '}';
     }
 }
