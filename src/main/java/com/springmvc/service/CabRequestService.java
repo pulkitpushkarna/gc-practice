@@ -66,7 +66,13 @@ public class CabRequestService {
         if(cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)){
             cabRequest.setApprovalDate(new Date());
         }
+        cabRequest.setActive(true);
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
         cabRequestRepository.save(cabRequest);
+    }
+
+    public List<CabRequest> getApprovedAdhocCabRequestsOfNewer(){
+        Newer newer = springSecurityService.getCurrentUser();
+        return cabRequestRepository.findAllByNewerAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPROVED,CabRequestType.AD_HOC);
     }
 }
