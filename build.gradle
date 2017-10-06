@@ -1,5 +1,5 @@
 apply plugin: 'war'
-apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'org.akhikhl.gretty'
 
 buildscript {
     repositories {
@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
+        classpath 'org.akhikhl.gretty:gretty:+'
     }
 }
 
@@ -44,41 +44,46 @@ dependencies {
     compile group: 'org.springframework.social', name: 'spring-social-web', version: '1.1.4.RELEASE'
     compile group: 'org.springframework.social', name: 'spring-social-google', version: '1.0.0.RELEASE'
 
-    def tomcatVersion = '7.0.57'
-    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
-            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+//    def tomcatVersion = '7.0.57'
+//    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+//            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+//            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
 
-tomcatRun {
-    contextPath = ""
+gretty {
     httpPort = 8080
+    contextPath = '/'
 }
 
-task tomcatDebug {
-    // Create a new task tomcatDebug, add a description and add it to the same group as tomcatRun
-    description "Starting Tomcat with debugger enabled on port 5008."
-    group "web application"
-} << {
+//tomcatRun {
+//    contextPath = ""
+//    httpPort = 8080
+//}
 
-    org.gradle.tooling.ProjectConnection conn = org.gradle.tooling.GradleConnector.newConnector()
-            .forProjectDirectory(new File("."))
-            .connect();
-
-    try {
-
-        org.gradle.tooling.model.build.BuildEnvironment env = conn.getModel(org.gradle.tooling.model.build.BuildEnvironment.class)
-        org.gradle.tooling.BuildLauncher build = conn.newBuild();
-
-        build.forTasks("tomcatRun")
-        // Enable debug via jvm arguments and append JVM arguments of the currently running vm (except -D).
-        build.setJvmArguments("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008", *env.java.jvmArguments)
-
-        // Run tomcatRun in the new JVM with debug parameters
-        build.run()
-
-    } finally {
-        conn.close();
-    }
-}
+//task tomcatDebug {
+//    // Create a new task tomcatDebug, add a description and add it to the same group as tomcatRun
+//    description "Starting Tomcat with debugger enabled on port 5008."
+//    group "web application"
+//} << {
+//
+//    org.gradle.tooling.ProjectConnection conn = org.gradle.tooling.GradleConnector.newConnector()
+//            .forProjectDirectory(new File("."))
+//            .connect();
+//
+//    try {
+//
+//        org.gradle.tooling.model.build.BuildEnvironment env = conn.getModel(org.gradle.tooling.model.build.BuildEnvironment.class)
+//        org.gradle.tooling.BuildLauncher build = conn.newBuild();
+//
+//        build.forTasks("tomcatRun")
+//        // Enable debug via jvm arguments and append JVM arguments of the currently running vm (except -D).
+//        build.setJvmArguments("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008", *env.java.jvmArguments)
+//
+//        // Run tomcatRun in the new JVM with debug parameters
+//        build.run()
+//
+//    } finally {
+//        conn.close();
+//    }
+//}
 
