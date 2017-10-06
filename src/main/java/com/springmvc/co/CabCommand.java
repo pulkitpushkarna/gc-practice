@@ -7,6 +7,7 @@ public class CabCommand {
 
     private String vehicleRegNo;
     private int capacity;
+    private String cabModel;
 
     public String getVehicleRegNo() {
         return vehicleRegNo;
@@ -24,11 +25,20 @@ public class CabCommand {
         this.capacity = capacity;
     }
 
+    public String getCabModel() {
+        return cabModel;
+    }
+
+    public void setCabModel(String cabModel) {
+        this.cabModel = cabModel;
+    }
+
     @Override
     public String toString() {
         return "CabCommand{" +
                 "vehicleRegNo='" + vehicleRegNo + '\'' +
                 ", capacity=" + capacity +
+                ", cabModel='" + cabModel + '\'' +
                 '}';
     }
 }

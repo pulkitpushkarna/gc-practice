@@ -24,6 +24,8 @@ public class Cab {
 
     private String vehicleRegNumber;
 
+    private String cabModel;
+
     @OneToOne
     private Route route;
 
@@ -84,12 +86,33 @@ public class Cab {
         this.feedbacks = feedbacks;
     }
 
+    public String getCabModel() {
+        return cabModel;
+    }
+
+    public void setCabModel(String cabModel) {
+        this.cabModel = cabModel;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
     @Override
     public String toString() {
         return "Cab{" +
                 "id=" + id +
                 ", maxCapacity=" + maxCapacity +
                 ", vehicleRegNumber='" + vehicleRegNumber + '\'' +
+                ", cabModel='" + cabModel + '\'' +
+                ", route=" + route +
+                ", feedbacks=" + feedbacks +
+                ", creationTime=" + creationTime +
+                ", modificationTime=" + modificationTime +
                 '}';
     }
 }

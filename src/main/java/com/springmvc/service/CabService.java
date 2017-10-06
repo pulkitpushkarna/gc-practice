@@ -36,6 +36,7 @@ public class CabService {
         Cab cab = new Cab();
         cab.setVehicleRegNumber(cabCommand.getVehicleRegNo());
         cab.setMaxCapacity(cabCommand.getCapacity());
+        cab.setCabModel(cabCommand.getCabModel());
         cabRepository.save(cab);
     }
 
