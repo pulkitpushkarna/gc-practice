@@ -24,6 +24,9 @@ public class Cab {
 
     private String vehicleRegNumber;
 
+    @OneToOne
+    private Route route;
+
     @OneToMany
     private Set<Attendance> attendances;
 

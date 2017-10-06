@@ -62,7 +62,8 @@ public class PersistenceConfig {
         Properties jpaProperties= new Properties();
         jpaProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
         jpaProperties.setProperty("hibernate.show_sql","true");
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto","create");
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto","update");
+        jpaProperties.setProperty("hibernate.enable_lazy_load_no_trans","true");
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
         return entityManagerFactoryBean;
     }

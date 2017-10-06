@@ -94,6 +94,11 @@ public class Route {
         return "Route{" +
                 "id=" + id +
                 ", routeName='" + routeName + '\'' +
+                ", stops=" + stops +
+                ", cab=" + cab +
+                ", cabRequests=" + cabRequests +
+                ", creationTime=" + creationTime +
+                ", modificationTime=" + modificationTime +
                 '}';
     }
 }
