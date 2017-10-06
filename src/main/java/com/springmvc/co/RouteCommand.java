@@ -1,5 +1,7 @@
 package com.springmvc.co;
 
+import com.springmvc.entity.Cab;
+
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
@@ -16,10 +18,8 @@ public class RouteCommand {
     private List<String> stops;
 
     @NotNull
-    private String cabRegNo;
+    private String cabRegId;
 
-    @NotNull
-    private int maxCapacity;
 
     public String getRouteName() {
         return routeName;
@@ -37,20 +37,12 @@ public class RouteCommand {
         this.stops = stops;
     }
 
-    public String getCabRegNo() {
-        return cabRegNo;
+    public String getCabRegId() {
+        return cabRegId;
     }
 
-    public void setCabRegNo(String cabRegNo) {
-        this.cabRegNo = cabRegNo;
-    }
-
-    public int getMaxCapacity() {
-        return maxCapacity;
-    }
-
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
+    public void setCabRegId(String cabRegId) {
+        this.cabRegId = cabRegId;
     }
 
     @Override
@@ -58,8 +50,7 @@ public class RouteCommand {
         return "RouteCommand{" +
                 "routeName='" + routeName + '\'' +
                 ", stops=" + stops +
-                ", cabRegNo='" + cabRegNo + '\'' +
-                ", maxCapacity=" + maxCapacity +
+                ", cab=" + cabRegId +
                 '}';
     }
 }

@@ -40,15 +40,18 @@ public class RouteService {
 
     public void insertRoute(RouteCommand routeCommand){
         if(routeCommand != null){
-            Set<String> stopList = routeCommand.getStops();
+            List<String> stopList = routeCommand.getStops();
+            Cab cab = cabRepository.findByVehicleRegNumber(routeCommand.getCabRegId());
             Route route = new Route();
             List<Stop> stops = new ArrayList<>();
             for (String stopName:stopList) {
                 Stop stop = new Stop();
                 stop.setStopName(stopName);
+                stops.add(stop);
             }
             route.setRouteName(routeCommand.getRouteName());
             route.setStops(stops);
+            route.setCab(cab);
             routeRepository.save(route);
         }
     }

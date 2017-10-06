@@ -25,10 +25,10 @@ public class Route {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Stop> stops;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Cab cab;
 
-    @OneToMany(mappedBy = "requestRoute")
+    @OneToMany(mappedBy = "route")
     private Set<CabRequest> cabRequests;
 
     @CreatedDate

@@ -27,6 +27,9 @@ public class Cab {
     @OneToMany
     private Set<Attendance> attendances;
 
+    @OneToMany(mappedBy = "cab", cascade = CascadeType.PERSIST)
+    private Set<Newer> cabbies;
+
     @OneToMany
     private Set<Feedback> feedbacks;
 

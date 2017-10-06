@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -29,6 +29,7 @@
 
             jQuery("#submit").click(function() {
                 let routeName = jQuery("#routeName").val();
+                let cab = jQuery("#cab").val();
                 let stopElemList = stops.children();
                 let stopsList = $.map(stopElemList, function(stopElem) {
                     return stopElem.innerHTML.trim();
@@ -38,8 +39,7 @@
                 let data = {
                     routeName: routeName,
                     stops: stopsList,
-                    cabRegNo: cabRegNo,
-                    maxCapacity: maxCapacity
+                    cabRegId: cab
                 };
                 let addRoutePath = "/route/add?_csrf=" + [[${_csrf.token}]];
                 jQuery.ajax({
@@ -61,7 +61,7 @@
     </script>
 </head>
 <body>
-<table>
+<table layout:fragment="content">
     <tr>
         <td>Route Name</td>
         <td><input type="text" id="routeName"></td>
@@ -77,12 +77,14 @@
         </td>
     </tr>
     <tr>
-        <td>Cab Reg No.</td>
-        <td><input type="text" id="vehicleRegNumber"></td>
-    </tr>
-    <tr>
-        <td>Cab Capacity</td>
-        <td><input type="number" id="maxCapacity"></td>
+        <td>Cab</td>
+        <td>
+            <select name="cab" id="cab">
+                <option th:each="cab : ${cabs}">
+                    <span th:text="${cab.vehicleRegNumber}" th:id="${cab.id}"></span>
+                </option>
+            </select>
+        </td>
     </tr>
     <tr>
         <td><input type="button" value="Submit" id="submit"></td>

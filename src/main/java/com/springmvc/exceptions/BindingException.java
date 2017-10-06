@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by diwakar on 04/10/17.
  */
-public class BindingExceptions extends Exception {
+public class BindingException extends Exception {
 
-    public BindingExceptions(List<ObjectError> errorList){
+    public BindingException(List<ObjectError> errorList){
         for (ObjectError objectError:errorList) {
             System.out.println(objectError.toString());
         }
