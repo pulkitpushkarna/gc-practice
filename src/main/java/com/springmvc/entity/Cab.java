@@ -28,9 +28,6 @@ public class Cab {
     private Route route;
 
     @OneToMany
-    private Set<Attendance> attendances;
-
-    @OneToMany
     private Set<Feedback> feedbacks;
 
     @CreatedDate
@@ -79,14 +76,6 @@ public class Cab {
         this.vehicleRegNumber = vehicleRegNumber;
     }
 
-    public Set<Attendance> getAttendances() {
-        return attendances;
-    }
-
-    public void setAttendances(Set<Attendance> attendances) {
-        this.attendances = attendances;
-    }
-
     public Set<Feedback> getFeedbacks() {
         return feedbacks;
     }
@@ -94,8 +83,6 @@ public class Cab {
     public void setFeedbacks(Set<Feedback> feedbacks) {
         this.feedbacks = feedbacks;
     }
-
-
 
     @Override
     public String toString() {

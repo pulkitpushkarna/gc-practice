@@ -42,9 +42,6 @@ public class Newer implements Serializable{
     @ManyToOne
     private Cab cab;
 
-    @OneToMany
-    private Set<Attendance> attendances;
-
     @OneToMany(mappedBy = "newer")
     private Set<CabRequest> cabRequests;
 
@@ -155,14 +152,6 @@ public class Newer implements Serializable{
         this.newerRoutes = newerRoutes;
     }
 
-    public Set<Attendance> getAttendances() {
-        return attendances;
-    }
-
-    public void setAttendances(Set<Attendance> attendances) {
-        this.attendances = attendances;
-    }
-
     public Set<CabRequest> getCabRequests() {
         return cabRequests;
     }
@@ -197,7 +186,6 @@ public class Newer implements Serializable{
                 ", newerRoutes=" + newerRoutes +
                 ", managerEmpId=" + managerEmpId +
                 ", cab=" + cab +
-                ", attendances=" + attendances +
                 ", cabRequests=" + cabRequests +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +
