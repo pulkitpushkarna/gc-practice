@@ -41,4 +41,9 @@ public class CabRequestService {
         cabRequest.setCabRequestStatus(CabRequestStatus.CANCEL);
         cabRequestRepository.save(cabRequest);
     }
+
+    public List<CabRequest> getCabRequestsForApproval(){
+        List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatus(CabRequestStatus.APPLIED);
+        return cabRequestList;
+    }
 }
