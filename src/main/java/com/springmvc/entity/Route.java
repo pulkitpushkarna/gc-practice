@@ -19,14 +19,19 @@ public class Route {
 
     private String routeName;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Set<Stop> stops;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Stop> stops;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private Set<Cab> cabs;
+    @OneToOne(cascade = CascadeType.REFRESH)
+    private Cab cab;
+
+    @ManyToMany
+    private List<Newer> newers;
 
     @OneToMany(mappedBy = "route")
     private Set<CabRequest> cabRequests;
+
+    private boolean isActive;
 
     @CreatedDate
     private Date creationTime;
@@ -62,11 +67,11 @@ public class Route {
         this.routeName = routeName;
     }
 
-    public Set<Stop> getStops() {
+    public List<Stop> getStops() {
         return stops;
     }
 
-    public void setStops(Set<Stop> stops) {
+    public void setStops(List<Stop> stops) {
         this.stops = stops;
     }
 
@@ -78,12 +83,28 @@ public class Route {
         this.cabRequests = cabRequests;
     }
 
-    public Set<Cab> getCabs() {
-        return cabs;
+    public Cab getCab() {
+        return cab;
     }
 
-    public void setCabs(Set<Cab> cabs) {
-        this.cabs = cabs;
+    public void setCab(Cab cab) {
+        this.cab = cab;
+    }
+
+    public List<Newer> getCabbies() {
+        return newers;
+    }
+
+    public void setCabbies(List<Newer> cabbies) {
+        this.newers = cabbies;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override
@@ -91,6 +112,13 @@ public class Route {
         return "Route{" +
                 "id=" + id +
                 ", routeName='" + routeName + '\'' +
+                ", stops=" + stops +
+                ", cab=" + cab +
+                ", cabbies=" + newers +
+                ", cabRequests=" + cabRequests +
+                ", isActive=" + isActive +
+                ", creationTime=" + creationTime +
+                ", modificationTime=" + modificationTime +
                 '}';
     }
 }

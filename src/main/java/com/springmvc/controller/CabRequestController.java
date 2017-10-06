@@ -48,10 +48,18 @@ public class CabRequestController {
         return modelAndView;
     }
 
-    @RequestMapping("/cabRequestsForApproval")
+    @RequestMapping("/permanentCabRequestsForApproval")
     public ModelAndView cabRequestForApproval(){
-        ModelAndView modelAndView = new ModelAndView("cabRequestsForApproval");
-        List<CabRequest> cabRequestList = cabRequestService.getCabRequestsForApproval();
+        ModelAndView modelAndView = new ModelAndView("permanentCabRequestsForApproval");
+        List<CabRequest> cabRequestList = cabRequestService.getPermanentCabRequestsForApproval();
+        modelAndView.addObject("cabRequestList",cabRequestList);
+        return modelAndView;
+    }
+
+    @RequestMapping("/adhocCabRequestsForApproval")
+    public ModelAndView adhocCabRequestsForApproval(){
+        ModelAndView modelAndView = new ModelAndView("adhocCabRequestsForApproval");
+        List<CabRequest> cabRequestList = cabRequestService.adhocCabRequestsForApproval();
         modelAndView.addObject("cabRequestList",cabRequestList);
         return modelAndView;
     }

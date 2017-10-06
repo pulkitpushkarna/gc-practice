@@ -4,11 +4,13 @@ import com.springmvc.co.CabRequestCO;
 import com.springmvc.entity.CabRequest;
 import com.springmvc.entity.Newer;
 import com.springmvc.enums.CabRequestStatus;
+import com.springmvc.enums.CabRequestType;
 import com.springmvc.repositories.CabRequestRepository;
 import com.springmvc.repositories.NewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -43,8 +45,13 @@ public class CabRequestService {
         cabRequestRepository.save(cabRequest);
     }
 
-    public List<CabRequest> getCabRequestsForApproval(){
-        List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatus(CabRequestStatus.APPLIED);
+    public List<CabRequest> getPermanentCabRequestsForApproval(){
+        List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPLIED, CabRequestType.PERMANENT);
+        return cabRequestList;
+    }
+
+    public List<CabRequest> adhocCabRequestsForApproval(){
+        List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPLIED, CabRequestType.AD_HOC);
         return cabRequestList;
     }
 
@@ -56,6 +63,9 @@ public class CabRequestService {
 
     public void approveCabRequest(Long cabRequestId){
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
+        if(cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)){
+            cabRequest.setApprovalDate(new Date());
+        }
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
         cabRequestRepository.save(cabRequest);
     }

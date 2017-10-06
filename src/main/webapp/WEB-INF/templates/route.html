@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Routes</title>
+</head>
+<body>
+<table layout:fragment="content">
+    <thead>Route Name</thead>
+    <thead>StartPoint-EndPoint</thead>
+    <thead>Cab Name</thead>
+    <tr th:each="routeInfo:${routes}">
+        <td th:text="${routeInfo.name}"></td>
+        <td th:text="${routeInfo.startPoint} + '-' + ${routeInfo.endPoint}"></td>
+        <td th:text="${routeInfo.cabName}"></td>
+    </tr>
+</table>
+</body>
+</html>

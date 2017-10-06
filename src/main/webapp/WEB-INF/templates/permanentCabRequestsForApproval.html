@@ -5,18 +5,15 @@
       layout:decorate="~{layout/mainLayout}">
 <head>
     <title>Sign In</title>
-
-
 </head>
 <body>
 <div class="row" layout:fragment="content">
     <table>
         <tr th:each="cabRequest :${cabRequestList}">
-            <td th:text="${cabRequest.requestDate}"></td>
             <td th:text="${cabRequest.projectName}"> </td>
             <td th:text="${cabRequest.managerName}"> </td>
-            <td><input type="button" name="reject" th:attr="request-id=${cabRequest.id}"> </td>
-            <td><input type="button" name="approve" th:attr="request-id=${cabRequest.id}"> </td>
+            <td><input type="button" name="reject" th:attr="request-id=${cabRequest.id}" value="Reject"> </td>
+            <td><input type="button" name="approve" th:attr="request-id=${cabRequest.id}" value="Approve"> </td>
         </tr>
     </table>
 </div>
@@ -26,22 +23,24 @@
     jQuery(document).ready(function(){
         jQuery("input[name='reject']").click(function(){
             var cabRequestId = jQuery(this).attr("request-id");
+            var requestElement = this;
             jQuery.ajax({
                 url: "/rejectCabRequest",
                 data : {cabRequestId: cabRequestId},
                 success : function(){
-                    alert("success");
+                    jQuery(requestElement).parent().parent().remove();
                 }
             });
         });
 
         jQuery("input[name='approve']").click(function(){
             var cabRequestId = jQuery(this).attr("request-id");
+            var requestElement = this ;
             jQuery.ajax({
                 url: "/approveCabRequest",
                 data: {cabRequestId: cabRequestId},
                 success : function(){
-                    alert("success")
+                    jQuery(requestElement).parent().parent().remove();
                 }
             })
         });
