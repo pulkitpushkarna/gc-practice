@@ -9,9 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by diwakar on 01/10/17.
- */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Route {

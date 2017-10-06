@@ -1,6 +1,7 @@
 package com.springmvc.entity;
 
 import com.springmvc.enums.CabRequestStatus;
+import com.springmvc.enums.CabRequestType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -26,17 +27,41 @@ public class CabRequest {
     @ManyToOne
     private Newer newer;
 
+    private String pickUpLocation;
+
     private String dropLocation;
 
     private String projectName;
 
     private String managerName;
 
+    @Enumerated(EnumType.STRING)
+    private CabRequestType cabRequestType;
+
     @CreatedDate
     private Date creationTime;
 
     @LastModifiedDate
     private Date modificationTime;
+
+    @Enumerated(EnumType.STRING)
+    private CabRequestStatus cabRequestStatus;
+
+    public CabRequestType getCabRequestType() {
+        return cabRequestType;
+    }
+
+    public void setCabRequestType(CabRequestType cabRequestType) {
+        this.cabRequestType = cabRequestType;
+    }
+
+    public String getPickUpLocation() {
+        return pickUpLocation;
+    }
+
+    public void setPickUpLocation(String pickUpLocation) {
+        this.pickUpLocation = pickUpLocation;
+    }
 
     public Date getCreationTime() {
         return creationTime;
@@ -53,10 +78,6 @@ public class CabRequest {
     public void setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
     }
-
-    @Enumerated(EnumType.STRING)
-    private CabRequestStatus cabRequestStatus;
-
     public CabRequestStatus getCabRequestStatus() {
         return cabRequestStatus;
     }
@@ -128,9 +149,13 @@ public class CabRequest {
                 ", requestDate=" + requestDate +
                 ", route=" + route +
                 ", newer=" + newer +
+                ", pickUpLocation='" + pickUpLocation + '\'' +
                 ", dropLocation='" + dropLocation + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", managerName='" + managerName + '\'' +
+                ", cabRequestType=" + cabRequestType +
+                ", creationTime=" + creationTime +
+                ", modificationTime=" + modificationTime +
                 ", cabRequestStatus=" + cabRequestStatus +
                 '}';
     }
