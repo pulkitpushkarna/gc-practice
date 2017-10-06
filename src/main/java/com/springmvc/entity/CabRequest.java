@@ -1,12 +1,16 @@
 package com.springmvc.entity;
 
 import com.springmvc.enums.CabRequestStatus;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class CabRequest {
 
     @Id
@@ -27,6 +31,28 @@ public class CabRequest {
     private String projectName;
 
     private String managerName;
+
+    @CreatedDate
+    private Date creationTime;
+
+    @LastModifiedDate
+    private Date modificationTime;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+    }
 
     @Enumerated(EnumType.STRING)
     private CabRequestStatus cabRequestStatus;

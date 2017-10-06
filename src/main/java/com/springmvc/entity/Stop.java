@@ -1,14 +1,17 @@
 package com.springmvc.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by diwakar on 01/10/17.
  */
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Stop {
 
     @Id
@@ -16,6 +19,24 @@ public class Stop {
     private long id;
 
     private String stopName;
+
+    @CreatedDate
+    private Date creationTime;
+
+    @LastModifiedDate
+    private Date modificationTime;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getModificationTime() {
+        return modificationTime;
+    }
 
     public long getId() {
         return id;

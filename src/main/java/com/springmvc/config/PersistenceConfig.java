@@ -1,7 +1,13 @@
 package com.springmvc.config;
 
+import com.springmvc.auditing.AuditingDateTimeProvider;
+import com.springmvc.auditing.CurrentDateTimeService;
+import com.springmvc.auditing.DateTimeService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.auditing.DateTimeProvider;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -14,14 +20,35 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("com.springmvc.repositories")
+@EnableJpaAuditing(dateTimeProviderRef = "dateTimeProvider")
+
 public class PersistenceConfig {
 
+    @Value("${app.datasource.username}")
+    private String username;
+    @Value("${app.datasource.password}")
+    private String password;
+    @Value("${app.datasource.driverClass}")
+    private String driverClass;
+    @Value("${app.datasource.url}")
+    private String url;
+
+    @Bean
+    DateTimeService currentTimeDateTimeService(){
+        return new CurrentDateTimeService();
+    }
+
+    @Bean
+    DateTimeProvider dateTimeProvider(DateTimeService dateTimeService) {
+        return new AuditingDateTimeProvider(dateTimeService);
+    }
     @Bean
     DataSource dataSource(){
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/gc");
-        driverManagerDataSource.setUsername("root");
+        driverManagerDataSource.setDriverClassName(driverClass);
+        driverManagerDataSource.setUrl(url);
+        driverManagerDataSource.setUsername(username);
+        driverManagerDataSource.setPassword(password);
         return driverManagerDataSource;
     }
 
@@ -35,7 +62,7 @@ public class PersistenceConfig {
         Properties jpaProperties= new Properties();
         jpaProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
         jpaProperties.setProperty("hibernate.show_sql","true");
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto","update");
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto","create");
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
         return entityManagerFactoryBean;
     }

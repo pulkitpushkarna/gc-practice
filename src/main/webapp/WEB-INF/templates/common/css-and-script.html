@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="common-css">
+    <link rel="stylesheet" href="/resources/css/jquery-ui.css" th:href="@{/resources/css/jquery-ui.css}"/>
+    <link rel="stylesheet" href="/resources/css/bootstrap.css" th:href="@{/resources/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="/resources/css/bootstrap-responsive.css" th:href="@{/resources/css/bootstrap-responsive.css}"/>
+</th:block>
+
+<th:block th:fragment="common-js">
+    <script src="/resources/js/jquery-1.12.4.js" th:src="@{/resources/js/jquery-1.12.4.js}"></script>
+    <script src="/resources/js/jquery-ui.js" th:src="@{/resources/js/jquery-ui.js}"></script>
+    <script src="/resources/js/bootstrap.js" th:src="@{/resources/js/bootstrap.js}"></script>
+</th:block>
+</html>

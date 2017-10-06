@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{application.title.short}"></title>
+
+    <th:block th:replace="common/css-and-script :: common-css">
+        <link rel="stylesheet" href="/resources/css/jquery-ui.css"/>
+        <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
+        <link rel="stylesheet" href="/resources/css/bootstrap-responsive.css"/>
+    </th:block>
+<!-- CSS which needs to be injected from page -->
+    <th:block layout:fragment="post-common-css">
+    </th:block>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        This content is only used for static prototyping purposes (natural templates)
+    </div>
+</div>
+
+<div th:fragment="copy">
+    &copy; 2011 The Good Thymes Virtual Grocery
+</div>
+
+<th:block th:replace="common/css-and-script :: common-js">
+    <script src="/resources/js/jquery-1.12.4.js"></script>
+    <script src="/resources/js/jquery-ui.js"></script>
+    <script src="/resources/js/bootstrap.js"></script>
+</th:block>
+
+<!-- Scripts which needs to be injected from page -->
+<th:block layout:fragment="post-common-scripts">
+</th:block>
+
+</body>
+</html>
