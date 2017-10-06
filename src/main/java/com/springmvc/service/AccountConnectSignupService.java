@@ -12,9 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by diwakar on 18/09/17.
- */
 public class AccountConnectSignupService implements ConnectionSignUp {
 
     private NewerRepository newerRepository;
@@ -43,11 +40,7 @@ public class AccountConnectSignupService implements ConnectionSignUp {
             newer.setEmail(userEmail);
             newer.setFirstName(userProfile.getFirstName());
             newer.setLastName(userProfile.getLastName());
-            Set<Role> roles = new HashSet<>();
-            Role role = new Role();
-            role.setUserRole(UserRole.ROLE_NEWER);
-            roles.add(role);
-            newer.setUserRoles(roles);
+            newer.setUserRole(UserRole.ROLE_NEWER);
             newerRepository.save(newer);
         }
         return userId;

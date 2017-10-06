@@ -30,11 +30,9 @@ public class CustomUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("No newer found with username " + username);
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        Set<Role> newerRoles = newer.getUserRoles();
-        for (Role role : newerRoles) {
-            SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.getUserRole().toString());
-            grantedAuthorities.add(simpleGrantedAuthority);
-        }
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(newer.getUserRole().toString());
+        grantedAuthorities.add(simpleGrantedAuthority);
+
         return new User(newer.getUsername(), newer.getPassword(), grantedAuthorities);
     }
 }

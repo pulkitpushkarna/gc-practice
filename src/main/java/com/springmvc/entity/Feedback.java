@@ -7,9 +7,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by diwakar on 02/10/17.
- */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Feedback {

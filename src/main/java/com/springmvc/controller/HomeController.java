@@ -22,27 +22,9 @@ public class HomeController {
     @Autowired
     NewerRepository newerRepository;
 
-    @Autowired
-    CabRequestService cabRequestService;
-
-    @RequestMapping(value = "/cancelCabRequest")
-    @ResponseBody
-    public String cancelCabRequest(Long cabRequestId){
-        cabRequestService.cancelCabRequest(cabRequestId);
-        return "Success";
-    }
-
     @RequestMapping(value = "/")
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView("home");
-        return modelAndView;
-    }
-
-    @RequestMapping("/cabRequest")
-    public ModelAndView cabRequest(){
-        List<CabRequest> cabRequestList = cabRequestService.getCabRequestsForNewer();
-        ModelAndView modelAndView = new ModelAndView("cabRequest");
-        modelAndView.addObject("cabRequestList",cabRequestList);
         return modelAndView;
     }
 
@@ -56,10 +38,6 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping("/cabRequestSubmission")
-    @ResponseBody
-    public CabRequestCO cabRequestSubmission(CabRequestCO cabRequestCO){
-        cabRequestService.saveCabRequest(cabRequestCO);
-        return cabRequestCO;
-    }
+
+
 }
