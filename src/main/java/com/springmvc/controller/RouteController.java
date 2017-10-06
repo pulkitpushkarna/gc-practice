@@ -4,6 +4,7 @@ import com.springmvc.co.RouteCommand;
 import com.springmvc.entity.Cab;
 import com.springmvc.entity.Route;
 import com.springmvc.exceptions.BindingException;
+import com.springmvc.service.CabRouteMappingService;
 import com.springmvc.service.CabService;
 import com.springmvc.service.RouteService;
 import com.springmvc.vo.RouteListVO;
@@ -28,6 +29,9 @@ public class RouteController {
     @Autowired
     private CabService cabService;
 
+    @Autowired
+    private CabRouteMappingService cabRouteMappingService;
+
     @RequestMapping(path = "/route", method = RequestMethod.GET)
     public String listRoutes(@RequestParam int offset, @RequestParam int limit, Model model) {
         System.out.println("offset " +offset + "limit");
@@ -38,7 +42,7 @@ public class RouteController {
 
     @RequestMapping(value = "/route/add", method = RequestMethod.GET)
     public String addRoute(Model model) {
-        List<Cab> cabList = cabService.getCabsWithNoRoute();
+        List<Cab> cabList = cabRouteMappingService.getCabsWithNoRoute();
         model.addAttribute("cabs", cabList);
         return "addRoute";
     }

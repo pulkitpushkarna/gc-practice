@@ -19,10 +19,10 @@ public class CabService {
     @Autowired
     private CabRepository cabRepository;
 
-    public List<Cab> getCabsWithNoRoute(){
+   /* public List<Cab> getCabsWithNoRoute(){
         return cabRepository.findAllByRouteIsNull();
     }
-
+*/
     public List<Cab> getAllCabs(){
         return (List<Cab>) cabRepository.findAll();
     }

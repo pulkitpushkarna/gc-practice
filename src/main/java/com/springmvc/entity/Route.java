@@ -22,9 +22,6 @@ public class Route {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Stop> stops;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
-    private Cab cab;
-
     @ManyToMany
     private List<Newer> newers;
 
@@ -83,14 +80,6 @@ public class Route {
         this.cabRequests = cabRequests;
     }
 
-    public Cab getCab() {
-        return cab;
-    }
-
-    public void setCab(Cab cab) {
-        this.cab = cab;
-    }
-
     public List<Newer> getCabbies() {
         return newers;
     }
@@ -113,7 +102,6 @@ public class Route {
                 "id=" + id +
                 ", routeName='" + routeName + '\'' +
                 ", stops=" + stops +
-                ", cab=" + cab +
                 ", cabbies=" + newers +
                 ", cabRequests=" + cabRequests +
                 ", isActive=" + isActive +

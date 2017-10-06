@@ -2,6 +2,7 @@ package com.springmvc.service;
 
 import com.springmvc.co.RouteCommand;
 import com.springmvc.entity.Cab;
+import com.springmvc.entity.Newer;
 import com.springmvc.entity.Route;
 import com.springmvc.entity.Stop;
 import com.springmvc.repositories.CabRepository;
@@ -39,10 +40,8 @@ public class RouteService {
         List<RouteListVO> routeListVOList = new ArrayList<>();
         for (Route route : routes) {
             RouteListVO routeListVO = new RouteListVO();
-            Cab cab = route.getCab();
             List<Stop> stops = route.getStops();
             System.out.println(stops.size());
-            routeListVO.setCabName(cab.getVehicleRegNumber());
             routeListVO.setName(route.getRouteName());
             System.out.println(route);
             Stop startPoint = stops.get(0);
@@ -67,12 +66,16 @@ public class RouteService {
             }
             route.setRouteName(routeCommand.getRouteName());
             route.setStops(stops);
-            route.setCab(cab);
             routeRepository.save(route);
         }
     }
 
-    public void assignCabToRoute(long cabId, long routeId) {
+    public List<Newer> getNewersOnRoute(Long id){
+        Route route = routeRepository.findOne(id);
+        return route.getCabbies();
+    }
+
+/*    public void assignCabToRoute(long cabId, long routeId) {
         if (cabId > 0 && routeId > 0) {
             Cab cab = cabRepository.findOne(cabId);
             if (cab != null) {
@@ -82,6 +85,6 @@ public class RouteService {
                 routeRepository.save(route);
             }
         }
-    }
+    }*/
 
 }

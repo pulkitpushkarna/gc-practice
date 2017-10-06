@@ -24,9 +24,6 @@ public class Cab {
 
     private String vehicleRegNumber;
 
-    @OneToOne
-    private Route route;
-
     @OneToMany
     private Set<Attendance> attendances;
 
@@ -38,6 +35,8 @@ public class Cab {
 
     @LastModifiedDate
     private Date modificationTime;
+
+    private long cost;
 
     public Date getCreationTime() {
         return creationTime;
@@ -95,7 +94,28 @@ public class Cab {
         this.feedbacks = feedbacks;
     }
 
+    public long getCost() {
+        return cost;
+    }
 
+    public void setCost(long cost) {
+        this.cost = cost;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cab cab = (Cab) o;
+
+        return id == cab.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 
     @Override
     public String toString() {
