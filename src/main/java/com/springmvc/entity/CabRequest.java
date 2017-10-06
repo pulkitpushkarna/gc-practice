@@ -48,6 +48,16 @@ public class CabRequest {
     @Enumerated(EnumType.STRING)
     private CabRequestStatus cabRequestStatus;
 
+    private boolean isActive;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public Date getApprovalDate() {
         return approvalDate;
     }

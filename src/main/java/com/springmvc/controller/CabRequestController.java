@@ -77,4 +77,13 @@ public class CabRequestController {
         cabRequestService.approveCabRequest(cabRequestId);
         return "Success";
     }
+
+    @RequestMapping("/approvedAdhocCabRequests")
+    public ModelAndView approvedAdhocCabRequests(){
+        ModelAndView modelAndView = new ModelAndView("approvedAdhocCabRequests");
+        List<CabRequest> cabRequestList = cabRequestService.getApprovedAdhocCabRequestsOfNewer();
+        modelAndView.addObject("cabRequestList",cabRequestList);
+        return modelAndView;
+    }
+
 }
