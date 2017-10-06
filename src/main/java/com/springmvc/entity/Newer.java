@@ -37,7 +37,7 @@ public class Newer implements Serializable{
     @ManyToMany
     private List<Route> newerRoutes;
 
-    private long managerEmpId;
+    private String managerEmail;
 
     @ManyToOne
     private Cab cab;
@@ -164,12 +164,12 @@ public class Newer implements Serializable{
         this.modificationTime = modificationTime;
     }
 
-    public long getManagerEmpId() {
-        return managerEmpId;
+    public String getManagerEmail() {
+        return managerEmail;
     }
 
-    public void setManagerEmpId(long managerEmpId) {
-        this.managerEmpId = managerEmpId;
+    public void setManagerEmail(String managerEmail) {
+        this.managerEmail = managerEmail;
     }
 
     @Override
@@ -184,7 +184,7 @@ public class Newer implements Serializable{
                 ", password='" + password + '\'' +
                 ", userRole=" + userRole +
                 ", newerRoutes=" + newerRoutes +
-                ", managerEmpId=" + managerEmpId +
+                ", managerEmail=" + managerEmail +
                 ", cab=" + cab +
                 ", cabRequests=" + cabRequests +
                 ", creationTime=" + creationTime +
