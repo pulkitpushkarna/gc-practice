@@ -11,7 +11,7 @@
     <thead>Cab Name</thead>
     <tr th:each="routeInfo:${routes}">
         <td th:text="${routeInfo.name}"></td>
-        <td th:text="${routeInfo.startPoint} ${routeInfo.endPoint}"></td>
+        <td th:text="${routeInfo.startPoint} + '-' + ${routeInfo.endPoint}"></td>
         <td th:text="${routeInfo.cabName}"></td>
     </tr>
 </table>
