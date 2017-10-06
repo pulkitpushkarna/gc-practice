@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/favicon.ico", "/static-resources/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
-                .apply(new SpringSocialConfigurer().postLoginUrl("/").alwaysUsePostLoginUrl(true));
+                .apply(new SpringSocialConfigurer().postLoginUrl("/"));
     }
 
     @Bean
