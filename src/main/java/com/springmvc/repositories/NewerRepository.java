@@ -17,4 +17,5 @@ public interface NewerRepository extends CrudRepository<Newer,Long> {
 
     List<Newer> findAllByUserRoleNot(UserRole role, Pageable pageable);
 
+    Newer findByNewerId(long newerId);
 }
