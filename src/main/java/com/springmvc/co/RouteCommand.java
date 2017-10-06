@@ -1,5 +1,7 @@
 package com.springmvc.co;
 
+import com.springmvc.entity.Cab;
+
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +15,11 @@ public class RouteCommand {
     private String routeName;
 
     @NotNull
-    private Set<Long> stopIds;
+    private List<String> stops;
+
+    @NotNull
+    private String cabRegId;
+
 
     public String getRouteName() {
         return routeName;
@@ -23,19 +29,28 @@ public class RouteCommand {
         this.routeName = routeName;
     }
 
-    public Set<Long> getStopIds() {
-        return stopIds;
+    public List<String> getStops() {
+        return stops;
     }
 
-    public void setStopIds(Set<Long> stopIds) {
-        this.stopIds = stopIds;
+    public void setStops(List<String> stops) {
+        this.stops = stops;
+    }
+
+    public String getCabRegId() {
+        return cabRegId;
+    }
+
+    public void setCabRegId(String cabRegId) {
+        this.cabRegId = cabRegId;
     }
 
     @Override
     public String toString() {
         return "RouteCommand{" +
                 "routeName='" + routeName + '\'' +
-                ", stopIds=" + stopIds +
+                ", stops=" + stops +
+                ", cab=" + cabRegId +
                 '}';
     }
 }

@@ -24,8 +24,14 @@ public class Cab {
 
     private String vehicleRegNumber;
 
+    @OneToOne
+    private Route route;
+
     @OneToMany
     private Set<Attendance> attendances;
+
+    @OneToMany(mappedBy = "cab", cascade = CascadeType.PERSIST)
+    private Set<Newer> cabbies;
 
     @OneToMany
     private Set<Feedback> feedbacks;
