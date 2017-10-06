@@ -7,6 +7,7 @@ import com.springmvc.service.CabRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.security.SocialUser;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
+@Secured("ROLE_NEWER")
 public class HomeController {
 
     @Autowired
@@ -47,11 +49,6 @@ public class HomeController {
     @RequestMapping("/feedback")
     public String feedback(){
         return "feedback";
-    }
-
-    @RequestMapping("/signin")
-    public String signIn(){
-        return "signin";
     }
 
     @RequestMapping("/error")
