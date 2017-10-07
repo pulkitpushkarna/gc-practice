@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ZoneRepository extends CrudRepository<Zone, Long> {
 
+    Zone findByName(String name);
+
 }

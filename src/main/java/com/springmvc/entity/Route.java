@@ -1,5 +1,6 @@
 package com.springmvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,9 +25,11 @@ public class Route {
     @ManyToOne
     private Zone zone;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "route")
     List<NewerRouteMapping> newerRouteMapping;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "route")
     List<CabRouteMapping> cabRouteMapping;
 
@@ -39,6 +42,10 @@ public class Route {
     public Route setNewerRouteMapping(List<NewerRouteMapping> newerRouteMapping) {
         this.newerRouteMapping = newerRouteMapping;
         return this;
+    }
+
+    public List<NewerRouteMapping> getNewerRouteMapping() {
+        return newerRouteMapping;
     }
 
     public List<CabRouteMapping> getCabRouteMapping() {
