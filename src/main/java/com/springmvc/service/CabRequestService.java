@@ -46,6 +46,7 @@ public class CabRequestService {
             zoneRepository.save(zone);
         }else{
             cabRequest.setTravelDate(cabRequestCO.getTravelDate());
+            cabRequest.setReason(cabRequestCO.getReason());
         }
         cabRequestRepository.save(cabRequest);
     }
@@ -77,15 +78,31 @@ public class CabRequestService {
         cabRequestRepository.save(cabRequest);
     }
 
-    public void approveCabRequest(Long cabRequestId) {
+    public void approveCabRequest(Long cabRequestId, String details) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
+        cabRequest.setDetails(details);
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
         cabRequestRepository.save(cabRequest);
+    }
+
+    public List<CabRequest> getPendingAdhocCabRequestsOfNewer() {
+        Newer newer = springSecurityService.getCurrentUser();
+        return cabRequestRepository.findAllByRequesterAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPLIED,CabRequestType.AD_HOC);
     }
 
     public List<CabRequest> getApprovedAdhocCabRequestsOfNewer() {
         Newer newer = springSecurityService.getCurrentUser();
         return cabRequestRepository.findAllByRequesterAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPROVED,CabRequestType.AD_HOC);
+    }
+
+    public List<CabRequest> getPendingPermanentCabRequestsOfNewer() {
+        Newer newer = springSecurityService.getCurrentUser();
+        return cabRequestRepository.findAllByRequesterAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPLIED,CabRequestType.PERMANENT);
+    }
+
+    public List<CabRequest> getApprovedPermanentCabRequestsOfNewer() {
+        Newer newer = springSecurityService.getCurrentUser();
+        return cabRequestRepository.findAllByRequesterAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPROVED,CabRequestType.PERMANENT);
     }
 
     public CabRequest getCabRequestForId(long cabRequestId){
@@ -96,6 +113,7 @@ public class CabRequestService {
         Route route = routeRepository.findOne(routeId);
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
+        cabRequestRepository.save(cabRequest);
         Newer requester = cabRequest.getRequester();
         NewerRouteMapping newerRouteMapping = new NewerRouteMapping();
         newerRouteMapping.setRoute(route);

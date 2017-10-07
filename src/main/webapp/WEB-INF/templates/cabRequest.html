@@ -64,6 +64,10 @@
                             <label>Pickup Location</label>
                             <textarea class="form-control" type="text" id="pickUpLocation"></textarea>
                         </div>
+                            <div class="form-group" id="reason-div" hidden>
+                                <label>Reason</label>
+                                <textarea class="form-control" type="text" id="reason"></textarea>
+                            </div>
                         <div>
                             <button data-toggle="modal" type="button" data-target="#confirmation" class="btn btn-sm btn-primary m-t-n-xs"><strong>Submit</strong></button>
                             <div class="modal inmodal fade" id="confirmation" tabindex="-1" role="dialog" aria-hidden="true">
@@ -105,10 +109,12 @@
                         jQuery("#route-td").show();
                         jQuery("#date-td").hide();
                         jQuery("#pickup-location-td").hide();
+                        jQuery("#reason-div").hide();
                    }else{
                         jQuery("#route-td").hide();
                         jQuery("#date-td").show();
                         jQuery("#pickup-location-td").show();
+                        jQuery("#reason-div").show();
                    }
                 });
 
@@ -122,6 +128,7 @@
                     var projectManager = jQuery("#projectManager").val();
                     var pickUpLocation = jQuery("#pickUpLocation").val();
                     var zoneId = jQuery("#zone").val();
+                    var reason = jQuery("#reason").val();
                     var data = {
                                     dropLocation: dropLocation,
                                     cabRequestType: cabRequestType,
@@ -129,9 +136,10 @@
                                 };
 
                    if(cabRequestType==="PERMANENT"){
-                        data.zoneId = zoneId
+                        data.zoneId = zoneId ;
                    }else{
-                        data.travelDate = pickUpDate
+                        data.travelDate = pickUpDate ;
+                        data.reason = reason;
                    }
 
                     jQuery.ajax({
@@ -143,6 +151,7 @@
                             jQuery("#dropLocation").val("");
                             jQuery("#pickUpDate").val("");
                             jQuery("#pickUpLocation").val("");
+                            jQuery("#reason").val("");
                             alert("Request submitted successfully!!");
                         }
                     });

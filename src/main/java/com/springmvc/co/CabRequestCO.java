@@ -14,6 +14,15 @@ public class CabRequestCO {
     private String pickUpLocation;
     private Long zoneId;
     private CabRequestType cabRequestType;
+    private String reason;
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
     public CabRequestType getCabRequestType() {
         return cabRequestType;
