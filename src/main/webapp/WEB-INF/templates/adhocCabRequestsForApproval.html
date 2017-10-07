@@ -12,9 +12,13 @@
         <tr th:each="cabRequest :${cabRequestList}">
             <td th:text="${cabRequest.travelDate}"> </td>
             <td th:text="${cabRequest.requester.email}"> </td>
+            <td th:text="${cabRequest.pickUpLocation}"> </td>
             <td th:text="${cabRequest.dropLocation}"> </td>
-            <td><input type="button" name="reject" th:attr="request-id=${cabRequest.id}" value="Reject"> </td>
-            <td><input type="button" name="approve" th:attr="request-id=${cabRequest.id}" value="Approve"> </td>
+            <td th:text="${cabRequest.creationTime}"> </td>
+            <td th:text="${cabRequest.cabRequestStatus}"> </td>
+            <td><input type="button" name="viewDetails" th:attr="request-id=${cabRequest.id}" value="View Details"> </td>
+            <!--<td><input type="button" name="reject" th:attr="request-id=${cabRequest.id}" value="Reject"> </td>-->
+            <!--<td><input type="button" name="approve" th:attr="request-id=${cabRequest.id}" value="Approve"> </td>-->
         </tr>
     </table>
 </div>
@@ -22,6 +26,12 @@
 <th:block layout:fragment="post-common-scripts">
     <script>
     jQuery(document).ready(function(){
+
+
+        jQuery("input[name='viewDetails']").click(function(){
+            alert("viewDetails");
+        });
+
         jQuery("input[name='reject']").click(function(){
             var cabRequestId = jQuery(this).attr("request-id");
             var requestElement = this ;
