@@ -39,7 +39,7 @@ public class RouteService {
         List<RouteListVO> routeListVOList = new ArrayList<>();
         for (Route route : routes) {
             RouteListVO routeListVO = new RouteListVO();
-            Cab cab = route.getCab();
+            Cab cab = route.getCabRouteMapping().getCab();
             List<Stop> stops = route.getStops();
             System.out.println(stops.size());
             routeListVO.setCabName(cab.getVehicleRegNumber());
@@ -67,20 +67,8 @@ public class RouteService {
             }
             route.setRouteName(routeCommand.getRouteName());
             route.setStops(stops);
-            route.setCab(cab);
+//            route.setCab(cab);
             routeRepository.save(route);
-        }
-    }
-
-    public void assignCabToRoute(long cabId, long routeId) {
-        if (cabId > 0 && routeId > 0) {
-            Cab cab = cabRepository.findOne(cabId);
-            if (cab != null) {
-                Route route = routeRepository.findOne(routeId);
-                Cab cabs = route.getCab();
-                route.setCab(cab);
-                routeRepository.save(route);
-            }
         }
     }
 

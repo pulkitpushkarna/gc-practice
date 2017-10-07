@@ -33,6 +33,13 @@ public class Cab {
     @LastModifiedDate
     private Date modificationTime;
 
+    public List<CabRouteMapping> getCabRouteMappingList() {
+        return cabRouteMappingList;
+    }
+
+    public void setCabRouteMappingList(List<CabRouteMapping> cabRouteMappingList) {
+        this.cabRouteMappingList = cabRouteMappingList;
+    }
 
     public Date getCreationTime() {
         return creationTime;
@@ -72,6 +79,14 @@ public class Cab {
 
     public void setVehicleRegNumber(String vehicleRegNumber) {
         this.vehicleRegNumber = vehicleRegNumber;
+    }
+
+    public String getVehicleModel() {
+        return vehicleModel;
+    }
+
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
     }
 
     @Override

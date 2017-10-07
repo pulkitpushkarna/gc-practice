@@ -24,9 +24,6 @@ public class CabRequestService {
     public void saveCabRequest(CabRequestCO cabRequestCO) {
         CabRequest cabRequest = new CabRequest();
         cabRequest.setDropLocation(cabRequestCO.getDropLocation());
-        cabRequest.setManagerName(cabRequestCO.getProjectManager());
-        cabRequest.setRequestDate(cabRequestCO.getPickUpDate());
-        cabRequest.setProjectName(cabRequestCO.getProjectName());
         cabRequest.setCabRequestStatus(CabRequestStatus.APPLIED);
         cabRequest.setCabRequestType(cabRequestCO.getCabRequestType());
         cabRequest.setRequester(springSecurityService.getCurrentUser());
@@ -63,7 +60,7 @@ public class CabRequestService {
     public void approveCabRequest(Long cabRequestId) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
         if (cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)) {
-            cabRequest.setApprovalDate(new Date());
+//            cabRequest.setApprovalDate(new Date());
         }
         cabRequest.setActive(true);
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
