@@ -14,11 +14,11 @@ public class HomeController {
     @Autowired
     NewerRepository newerRepository;
 
-    @RequestMapping(value = "/")
+/*    @RequestMapping(value = "/")
     public ModelAndView home(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("home");
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping("/feedback")
     public String feedback(){

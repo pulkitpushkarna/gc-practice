@@ -43,7 +43,7 @@ public class Bootstrap {
     @EventListener(ContextRefreshedEvent.class)
     void startUpEvent() {
 
-        for (BaseZone zone : BaseZone.values()) {
+       /* for (BaseZone zone : BaseZone.values()) {
             ZoneCO zoneCO = new ZoneCO();
             zoneCO.setName(zone.getName());
             zoneService.saveZone(zoneCO);
@@ -113,7 +113,7 @@ public class Bootstrap {
         cabRouteMapping.setCab(cab);
         cabRouteMapping.setRoute(route);
 
-        cabRouteMappingRepository.save(cabRouteMapping);
+        cabRouteMappingRepository.save(cabRouteMapping);*/
 
 
     }
