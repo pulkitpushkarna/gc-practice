@@ -1,13 +1,18 @@
 package com.springmvc.vo;
 
+import java.util.Date;
+
 /**
  * Created by diwakar on 06/10/17.
  */
-public class RouteListVO {
+public class RouteVO {
     private String name;
+    private Date createdOn;
+    private String zone;
     private String startPoint;
     private String endPoint;
     private String cabName;
+    private int totalNewersInRoute;
 
     public String getName() {
         return name;
@@ -41,13 +46,40 @@ public class RouteListVO {
         this.cabName = cabName;
     }
 
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public int getTotalNewersInRoute() {
+        return totalNewersInRoute;
+    }
+
+    public void setTotalNewersInRoute(int totalNewersInRoute) {
+        this.totalNewersInRoute = totalNewersInRoute;
+    }
+
     @Override
     public String toString() {
-        return "RouteListVO{" +
+        return "RouteVO{" +
                 "name='" + name + '\'' +
+                ", createdOn=" + createdOn +
+                ", zone=" + zone +
                 ", startPoint='" + startPoint + '\'' +
                 ", endPoint='" + endPoint + '\'' +
                 ", cabName='" + cabName + '\'' +
+                ", totalNewersInRoute=" + totalNewersInRoute +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.springmvc.co;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.springmvc.enums.CabType;
 
 /**
@@ -8,7 +9,7 @@ import com.springmvc.enums.CabType;
 public class CabCommand {
 
     private String vehicleRegNo;
-    private CabType capacity;
+    private CabType cabType;
     private String cabModel;
 
     public String getVehicleRegNo() {
@@ -19,12 +20,12 @@ public class CabCommand {
         this.vehicleRegNo = vehicleRegNo;
     }
 
-    public CabType getCapacity() {
-        return capacity;
+    public CabType getCabType() {
+        return cabType;
     }
 
-    public void setCapacity(CabType capacity) {
-        this.capacity = capacity;
+    public void setCabType(CabType cabType) {
+        this.cabType = cabType;
     }
 
     public String getCabModel() {
@@ -39,7 +40,7 @@ public class CabCommand {
     public String toString() {
         return "CabCommand{" +
                 "vehicleRegNo='" + vehicleRegNo + '\'' +
-                ", capacity=" + capacity +
+                ", capacity=" + cabType +
                 ", cabModel='" + cabModel + '\'' +
                 '}';
     }
