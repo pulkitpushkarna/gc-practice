@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by diwakar on 17/09/17.
@@ -24,7 +25,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("loadUserByUsername called " + username);
-        Newer newer = newerRepository.findByUsername(username);
+        Newer newer = newerRepository.findByEmail(username);
         if (newer == null) {
             throw new UsernameNotFoundException("No newer found with username " + username);
         }
@@ -32,6 +33,6 @@ public class CustomUserDetailService implements UserDetailsService {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(newer.getUserRole().toString());
         grantedAuthorities.add(simpleGrantedAuthority);
 
-        return new User(newer.getUsername(), newer.getPassword(), grantedAuthorities);
+        return new User(newer.getEmail(), UUID.randomUUID().toString(), grantedAuthorities);
     }
 }

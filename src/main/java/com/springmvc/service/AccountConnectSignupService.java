@@ -36,25 +36,21 @@ public class AccountConnectSignupService implements ConnectionSignUp {
     public String execute(Connection<?> connection) {
         UserProfile userProfile = connection.fetchUserProfile();
         String userEmail = userProfile.getEmail();
-        String userId = null;
         if (userEmail != null && userEmail.contains(TO_THE_NEW)) {
             Map<String, Object> newerInfo = getNewerInfo(userEmail);
             Long newerId = Long.parseLong((String) newerInfo.get("employeeCode"));
             Map<String,String> manager = (Map<String, String>) newerInfo.get("reportingManager");
             String managerEmail = manager.get("email");
-            userId = UUID.randomUUID().toString();
             Newer newer = new Newer();
             newer.setNewerId(newerId);
-            newer.setUsername(userId);
-            newer.setPassword(UUID.randomUUID().toString());
             newer.setEmail(userEmail);
-            newer.setManagerEmail(managerEmail);
+            newer.setReportingManagerEmail(managerEmail);
             newer.setFirstName(userProfile.getFirstName());
             newer.setLastName(userProfile.getLastName());
             newer.setUserRole(UserRole.ROLE_NEWER);
             newerRepository.save(newer);
         }
-        return userId;
+        return userEmail;
     }
 
     private Map<String, Object> getNewerInfo(String newerEmail) {
