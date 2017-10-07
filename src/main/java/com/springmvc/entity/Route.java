@@ -105,10 +105,6 @@ public class Route {
         this.stops = stops;
     }
 
-    public List<NewerRouteMapping> getNewerRouteMapping() {
-        return newerRouteMapping;
-    }
-
     @Override
     public String toString() {
         return "Route{" +

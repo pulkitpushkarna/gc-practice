@@ -2,9 +2,9 @@ package com.springmvc.repositories;
 
 import com.springmvc.entity.Cab;
 import com.springmvc.entity.CabRouteMapping;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
-import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 
