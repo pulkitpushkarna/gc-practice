@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Title</title>
 </head>
@@ -28,6 +28,14 @@ Hello World spring mvc Thymleaf testing
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" id="logoutButton" value="logout">
     </form>
+
+    <div th:text="${#authentication.name}">
+        The value of the "name" property of the authentication object should appear here.
+    </div>
+
+    <div sec:authentication="name">
+        The value of the "name" property of the authentication object should appear here.
+    </div>
 </div>
 </body>
 </html>
