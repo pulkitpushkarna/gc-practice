@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -28,7 +29,7 @@ public class CabRequest {
     private Zone zone;
 
     @OneToMany(mappedBy = "cabRequest")
-    NewerRouteMapping newerRouteMapping;
+    List<NewerRouteMapping> newerRouteMapping;
 
     String pickUpLocation;
 
@@ -148,15 +149,6 @@ public class CabRequest {
 
     public CabRequest setZone(Zone zone) {
         this.zone = zone;
-        return this;
-    }
-
-    public NewerRouteMapping getNewerRouteMapping() {
-        return newerRouteMapping;
-    }
-
-    public CabRequest setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
-        this.newerRouteMapping = newerRouteMapping;
         return this;
     }
 

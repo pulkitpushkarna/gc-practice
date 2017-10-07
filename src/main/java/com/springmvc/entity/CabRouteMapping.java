@@ -1,7 +1,6 @@
 package com.springmvc.entity;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -18,15 +17,15 @@ public class CabRouteMapping {
     private long id;
 
     @ManyToOne
-    Cab cab;
+    private Cab cab;
 
     @ManyToOne
-    Route route;
+    private Route route;
 
-    Boolean isActive;
+    private Boolean isActive;
 
     @OneToMany(mappedBy = "cabRouteMapping")
-    List<MonthlyExpenditure> monthlyExpenditures;
+    private List<MonthlyExpenditure> monthlyExpenditures;
 
     @CreatedDate
     private Date creationTime;

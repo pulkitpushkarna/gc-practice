@@ -39,7 +39,7 @@ public class RouteService {
         List<RouteListVO> routeListVOList = new ArrayList<>();
         for (Route route : routes) {
             RouteListVO routeListVO = new RouteListVO();
-            Cab cab = route.getCabRouteMapping().getCab();
+            Cab cab = route.getCabRouteMapping().get(0).getCab();
             List<Stop> stops = route.getStops();
             System.out.println(stops.size());
             routeListVO.setCabName(cab.getVehicleRegNumber());
