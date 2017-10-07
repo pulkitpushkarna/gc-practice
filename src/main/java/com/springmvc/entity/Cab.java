@@ -18,14 +18,15 @@ public class Cab {
     private long id;
 
     //    TODO: change to enum (big/small or seater)
+    @Enumerated(EnumType.STRING)
     private CabType cabType;
 
     private String vehicleRegNumber;
 
     private String vehicleModel;
 
-    @OneToMany(mappedBy = "cab")
-    List<CabRouteMapping> cabRouteMappingList;
+    @OneToMany(mappedBy = "cab", cascade = CascadeType.PERSIST)
+    private List<CabRouteMapping> cabRouteMappingList;
 
     @CreatedDate
     private Date creationTime;

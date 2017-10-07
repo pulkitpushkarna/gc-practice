@@ -15,12 +15,12 @@ public class MonthlyExpenditure {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    long amountSpend;
+    private long amountSpend;
 
-    long amountRecieved;
+    private long amountRecieved;
 
     @ManyToOne
-    CabRouteMapping cabRouteMapping;
+    private CabRouteMapping cabRouteMapping;
 
     @CreatedDate
     private Date creationTime;

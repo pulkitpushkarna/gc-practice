@@ -20,6 +20,9 @@ public class RouteCommand {
     @NotNull
     private String cabRegId;
 
+    @NotNull
+    private String zoneName;
+
 
     public String getRouteName() {
         return routeName;
@@ -45,12 +48,21 @@ public class RouteCommand {
         this.cabRegId = cabRegId;
     }
 
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
+    }
+
     @Override
     public String toString() {
         return "RouteCommand{" +
                 "routeName='" + routeName + '\'' +
                 ", stops=" + stops +
-                ", cab=" + cabRegId +
+                ", cabRegId='" + cabRegId + '\'' +
+                ", zone='" + zoneName + '\'' +
                 '}';
     }
 }

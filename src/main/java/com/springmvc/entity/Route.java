@@ -24,11 +24,11 @@ public class Route {
     @ManyToOne
     private Zone zone;
 
-    @OneToMany(mappedBy = "route")
-    List<NewerRouteMapping> newerRouteMapping;
+    @OneToMany(mappedBy = "route", cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<NewerRouteMapping> newerRouteMapping;
 
     @OneToMany(mappedBy = "route")
-    List<CabRouteMapping> cabRouteMapping;
+    private List<CabRouteMapping> cabRouteMapping;
 
     @CreatedDate
     private Date creationTime;
@@ -96,6 +96,10 @@ public class Route {
 
     public void setStops(List<Stop> stops) {
         this.stops = stops;
+    }
+
+    public List<NewerRouteMapping> getNewerRouteMapping() {
+        return newerRouteMapping;
     }
 
     @Override

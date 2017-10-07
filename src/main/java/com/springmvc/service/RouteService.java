@@ -1,23 +1,14 @@
 package com.springmvc.service;
 
 import com.springmvc.co.RouteCommand;
-import com.springmvc.entity.Cab;
-import com.springmvc.entity.Route;
-import com.springmvc.entity.Stop;
-import com.springmvc.repositories.CabRepository;
-import com.springmvc.repositories.RouteRepository;
-import com.springmvc.repositories.StopRepository;
-import com.springmvc.vo.RouteListVO;
+import com.springmvc.entity.*;
+import com.springmvc.repositories.*;
+import com.springmvc.vo.RouteVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by diwakar on 02/10/17.
@@ -34,24 +25,35 @@ public class RouteService {
     @Autowired
     private CabRepository cabRepository;
 
-    public List<RouteListVO> listRoutes(Pageable pageable) {
+    @Autowired
+    private ZoneRepository zoneRepository;
+
+    @Autowired
+    private CabRouteMappingRepository cabRouteMappingRepository;
+
+    public List<RouteVO> listRoutes(Pageable pageable) {
         List<Route> routes = routeRepository.findAll(pageable).getContent();
-        List<RouteListVO> routeListVOList = new ArrayList<>();
+        List<RouteVO> routeVOList = new ArrayList<>();
         for (Route route : routes) {
-            RouteListVO routeListVO = new RouteListVO();
-            Cab cab = route.getCabRouteMapping().get(0).getCab();
+            RouteVO routeVO = new RouteVO();
+            List<CabRouteMapping> cabRouteMappings = route.getCabRouteMapping();
+            Optional<CabRouteMapping> cabRouteMapping = cabRouteMappings.stream().filter(CabRouteMapping::getActive).findFirst();
+            if (cabRouteMapping.isPresent()) {
+                Cab cab = cabRouteMapping.get().getCab();
+                routeVO.setCabName(cab.getVehicleModel() + "-" + cab.getVehicleRegNumber());
+            }
+            routeVO.setZone(route.getZone().getName());
+            routeVO.setTotalNewersInRoute((int) (route.getNewerRouteMapping().stream().filter(NewerRouteMapping::isActive).count()));
             List<Stop> stops = route.getStops();
-            System.out.println(stops.size());
-            routeListVO.setCabName(cab.getVehicleRegNumber());
-            routeListVO.setName(route.getRouteName());
+            routeVO.setName(route.getRouteName());
             System.out.println(route);
             Stop startPoint = stops.get(0);
             Stop endPoint = stops.get(stops.size() - 1);
-            routeListVO.setStartPoint(startPoint.getStopName());
-            routeListVO.setEndPoint(endPoint.getStopName());
-            routeListVOList.add(routeListVO);
+            routeVO.setStartPoint(startPoint.getStopName());
+            routeVO.setEndPoint(endPoint.getStopName());
+            routeVOList.add(routeVO);
         }
-        return routeListVOList;
+        return routeVOList;
     }
 
     public void insertRoute(RouteCommand routeCommand) {
@@ -67,7 +69,13 @@ public class RouteService {
             }
             route.setRouteName(routeCommand.getRouteName());
             route.setStops(stops);
-//            route.setCab(cab);
+            Zone zone = zoneRepository.findByName(routeCommand.getZoneName());
+            route.setZone(zone);
+            CabRouteMapping cabRouteMapping = cabRouteMappingRepository.findByCabAndIsActiveIsTrue(cab);
+            List<CabRouteMapping> cabRouteMappings = new ArrayList<>();
+            cabRouteMapping.setRoute(route);
+            cabRouteMappings.add(cabRouteMapping);
+            route.setCabRouteMapping(cabRouteMappings);
             routeRepository.save(route);
         }
     }

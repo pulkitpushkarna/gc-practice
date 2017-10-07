@@ -2,13 +2,18 @@ package com.springmvc.service;
 
 import com.springmvc.co.CabCommand;
 import com.springmvc.entity.Cab;
+import com.springmvc.entity.CabRouteMapping;
+import com.springmvc.enums.CabType;
 import com.springmvc.repositories.CabRepository;
+import com.springmvc.repositories.CabRouteMappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by diwakar on 05/10/17.
@@ -19,8 +24,11 @@ public class CabService {
     @Autowired
     private CabRepository cabRepository;
 
+    @Autowired
+    private CabRouteMappingRepository cabRouteMappingRepository;
+
     public List<Cab> getCabsWithNoRoute(){
-        return null;
+        return cabRouteMappingRepository.findByIsActiveIsTrueAndRouteIsNull().stream().map(CabRouteMapping::getCab).collect(Collectors.toList());
     }
 
     public List<Cab> getAllCabs(){
@@ -35,8 +43,14 @@ public class CabService {
     public void insertCab(CabCommand cabCommand){
         Cab cab = new Cab();
         cab.setVehicleRegNumber(cabCommand.getVehicleRegNo());
-        cab.setCabType(cabCommand.getCapacity());
+        cab.setCabType(cabCommand.getCabType());
         cab.setVehicleModel(cabCommand.getCabModel());
+        List<CabRouteMapping> cabRouteMappings = new ArrayList<>();
+        CabRouteMapping cabRouteMapping = new CabRouteMapping();
+        cabRouteMapping.setCab(cab);
+        cabRouteMapping.setActive(true);
+        cabRouteMappings.add(cabRouteMapping);
+        cab.setCabRouteMappingList(cabRouteMappings);
         cabRepository.save(cab);
     }
 

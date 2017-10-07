@@ -3,7 +3,7 @@ package com.springmvc.enums;
 //TODO: PHASE -II : Remove hard coded and allow to Add/Edit from UI
 public enum CabType {
 
-    FOUR_SEARTER("Four Seater"),
+    FOUR_SEATER("Four Seater"),
     SEVEN_SEATER("Seven Seater");
 
     private String name;
