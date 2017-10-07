@@ -143,7 +143,10 @@
                             jQuery("#dropLocation").val("");
                             jQuery("#pickUpDate").val("");
                             jQuery("#pickUpLocation").val("");
-                            alert("Request submitted successfully!!");
+                            toastr.success('Your Cab Request has been submitted');
+                        },
+                        error:function(){
+                            toastr.error('Cab request failed','Please try after sometime')
                         }
                     });
                 });
