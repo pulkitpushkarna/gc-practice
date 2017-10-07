@@ -1,0 +1,69 @@
+.field-content{
+    width: 100px;
+    text-align: center;
+    display: inline-block;
+}
+
+.field-content img{
+    width: 100%;
+    border-radius: 50%
+}
+
+.action{
+	text-align: center;
+	font-size: 20px
+}
+
+.table-responsive{
+	overflow: visible;
+}
+
+.fuel-table-responsive {
+    display: inline-block;
+    width: 100%;
+}
+.fuel-table{position: relative;margin-bottom: 0;margin-top: 20px; background: #fff}
+.fuel-table #recall_button{position: absolute;margin: 15px 0 0 0;right: 0;background: #f04b4b!important;border: none!important}
+
+.fuel-outer{background: #fff;padding: 15px;position: relative;padding-bottom: 50px;}
+.fuel-outer h2{border-bottom: 1px solid #e7e7e7;padding: 0 0 10px 15px;margin: 0 -15px 20px -15px;font:700 22px/30px "open sans",Arial,sans-serif}
+.fuel-table{padding: 0;margin: 0;font-family: "open sans",Arial,sans-serif;border-bottom: 1px solid #e7e7e7;}
+.fuel-table .form-wrapper,.fuel-table .fuel-detal-txt{border: 1px solid #e7e7e7;border-bottom: none}
+.right-txt{display: inline-block;width: 255px;}
+.fuel-table .heading,.fuel-table .heading p,.fuel-table .heading label {background-color: #ddd;color: #676a6c;font-size: 13px;font-weight: bold;}
+.fuel-table .heading .amt_heading {width: 200px;display: inline-block;}
+.fuel-table .field--name-field-total{background-color: #ccc;}
+.fuel-table .field--name-field-total label{font-weight: 700;}
+.fuel-table div{margin: 0!important;}
+.fuel-table p,.fuel-table label,.fuel-table span.fieldset-legend.form-required{ display: inline-block;padding: 12px;margin: 0;width: 220px;border-right: 1px solid #e7e7e7;margin-right: 10px;font-size: 14px;line-height: 20px;font-weight: normal;}
+
+.mb-40{margin-bottom: 40px}
+
+.datetimepicker  td, .datetimepicker th{
+    font-size: 14px;
+    color: #000;
+}
+
+.table-condensed>thead>tr>th, .table-condensed>thead>tr>td{
+ padding: 8px;
+}
+.pickup{
+    position:relative
+}
+
+
+@media only screen and (max-width: 767px) {
+    .fuel-table p{
+    	display: block;
+    	width: auto;
+    	border-right: none; 
+    }
+
+    .fuel-table div {
+    	padding-left: 12px;
+    	padding-bottom: 12px
+	}
+}
+
+
+

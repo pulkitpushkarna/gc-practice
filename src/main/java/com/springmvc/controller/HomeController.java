@@ -22,11 +22,11 @@ public class HomeController {
     @Autowired
     NewerRepository newerRepository;
 
-    @RequestMapping(value = "/")
-    public ModelAndView home(){
-        ModelAndView modelAndView = new ModelAndView("home");
-        return modelAndView;
-    }
+//    @RequestMapping(value = "/")
+//    public ModelAndView home(){
+//        ModelAndView modelAndView = new ModelAndView("home");
+//        return modelAndView;
+//    }
 
     @RequestMapping("/feedback")
     public String feedback(){

@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="common-css">
-    <link rel="stylesheet" href="/resources/css/jquery-ui.css" th:href="@{/resources/css/jquery-ui.css}"/>
-    <link rel="stylesheet" href="/resources/css/bootstrap.css" th:href="@{/resources/css/bootstrap.css}"/>
-    <link rel="stylesheet" href="/resources/css/bootstrap-responsive.css" th:href="@{/resources/css/bootstrap-responsive.css}"/>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
+    <link href="/resources/font-awesome/css/font-awesome.css" rel="stylesheet" th:href="@{/resources/font-awesome/css/font-awesome.css}">
+    <link href="/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet" th:href="@{/resources/css/plugins/datapicker/datepicker3.css}">
+    <link href="/resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet" th:href="@{/resources/css/plugins/dataTables/datatables.min.css}">
     <link rel="stylesheet" href="/resources/css/bootstrap-datetimepicker.css" th:href="@{/resources/css/bootstrap-datetimepicker.css}"/>
+    <link href="/resources/css/animate.css" rel="stylesheet" th:href="@{/resources/css/animate.css}">
+    <link href="/resources/css/style.css" rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <link href="/resources/css/custom.css" rel="stylesheet" th:href="@{/resources/css/custom.css}">
 </th:block>
 
 <th:block th:fragment="common-js">
-    <script src="/resources/js/jquery-1.12.4.js" th:src="@{/resources/js/jquery-1.12.4.js}"></script>
-    <script src="/resources/js/jquery-ui.js" th:src="@{/resources/js/jquery-ui.js}"></script>
-    <script src="/resources/js/bootstrap.js" th:src="@{/resources/js/bootstrap.js}"></script>
+
+    <!-- Mainly scripts -->
+    <script src="/resources/js/jquery-3.1.1.min.js" th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+    <script src="/resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <script src="/resources/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script src="/resources/js/plugins/slimscroll/jquery.slimscroll.min.js" th:src="@{/resources/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+
+    <script src="/resources/js/inspinia.js" th:src="@{/resources/js/inspinia.js}"></script>
+    <script src="/resources/js/plugins/pace/pace.min.js" th:src="@{/resources/js/plugins/pace/pace.min.js}"></script>
+
     <script src="/resources/js/bootstrap.js" th:src="@{/resources/js/bootstrap-datetimepicker.js}"></script>
+
+
+
+    <script src="/resources/js/plugins/typehead/bootstrap3-typeahead.min.js" th:src="@{/resources/js/plugins/typehead/bootstrap3-typeahead.min.js}"></script>
+
+
+    <script src="/resources/js/plugins/dataTables/datatables.min.js" th:src="@{/resources/js/plugins/dataTables/datatables.min.js}"></script>
+
+    <!-- Custom code and plugin initialization -->
     <script src="/resources/js/application.js" th:src="@{/resources/js/application.js}"></script>
 </th:block>
 </html>
