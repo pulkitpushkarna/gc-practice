@@ -7,7 +7,9 @@
     <title>Sign In</title>
 </head>
 <body>
+
 <div class="row" layout:fragment="content">
+    <input type="month" id="filter">
     <div>
         Month/Year
     </div>
@@ -24,13 +26,39 @@
         Amount Received
     </div>
 
-    <div>
-        Amount Received
-    </div>
+    <table>
+        <input type="hidden" th:value="${monthlyExpenditure.month.value}" id="month"/>
+        <input type="hidden" th:value="${monthlyExpenditure.year}" id="year"/>
+        <tr th:each="monthlyExpenditur :${monthlyExpenditure.monthlyExpenditureList}">
+            <td th:text="${monthlyExpenditure.month}"> </td>&nbsp;
+            <td th:text="${monthlyExpenditure.year}"> </td>&nbsp;
+            <td th:text="${monthlyExpenditur.cabRouteMapping.route.zone.name}"> </td>
+            <td th:text="${monthlyExpenditur.cabRouteMapping.route.routeName}"> </td>
+            <td th:text="${monthlyExpenditur.amountSpend}"> </td>&nbsp;
+            <td th:text="${monthlyExpenditureamountRecieved}"> </td>
+        </tr>
+    </table>
 </div>
 
 <th:block layout:fragment="post-common-scripts">
     <script>
+        jQuery(document).ready(function(){
+            if(jQuery("#year") != null){
+                if(jQuery("#month").val()<10){
+                    jQuery("#filter").val( jQuery("#year").val()+"-0"+jQuery("#month").val());
+                }else{
+                    jQuery("#filter").val( jQuery("#year").val()+"-"+jQuery("#month").val());
+                }
+
+            }
+
+
+            jQuery("#filter").on("change",function(event){
+                var data = event.currentTarget.value;
+                var arr = data.split("-");
+                window.location.href="http://localhost:8080/costManagement/" + arr[0]+"/"+arr[1];
+            });
+        });
 
     </script>
 </th:block>

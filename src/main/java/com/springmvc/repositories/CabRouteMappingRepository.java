@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CabRouteMappingRepository extends PagingAndSortingRepository<CabRouteMapping,Long> {
 
-    List<CabRouteMapping> findAllByCreationTimeBetween( Date startDate, Date endDate, Pageable pageable);
+    List<CabRouteMapping> findAllByIsActiveAndCreationTimeBetween(Boolean isActive, Date startDate, Date endDate, Pageable pageable);
 
 
 }
