@@ -3,10 +3,12 @@ package com.springmvc.service;
 import com.springmvc.co.CabRequestCO;
 import com.springmvc.entity.CabRequest;
 import com.springmvc.entity.Newer;
+import com.springmvc.entity.Route;
 import com.springmvc.entity.Zone;
 import com.springmvc.enums.CabRequestStatus;
 import com.springmvc.enums.CabRequestType;
 import com.springmvc.repositories.CabRequestRepository;
+import com.springmvc.repositories.RouteRepository;
 import com.springmvc.repositories.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class CabRequestService {
 
     @Autowired
     SpringSecurityService springSecurityService;
+
+    @Autowired
+    RouteRepository routeRepository;
 
     @Autowired
     ZoneRepository zoneRepository;
@@ -86,5 +91,12 @@ public class CabRequestService {
 
     public CabRequest getCabRequestForId(long cabRequestId){
         return cabRequestRepository.findOne(cabRequestId);
+    }
+
+    public void approvePermanentCabRequest(long routeId, long cabRequestId){
+        System.out.println(routeId);
+        System.out.println(cabRequestId);
+        Route route = routeRepository.findOne(routeId);
+        CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
     }
 }

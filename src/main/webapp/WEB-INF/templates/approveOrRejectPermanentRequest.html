@@ -8,7 +8,11 @@
 </head>
 <body>
 <div class="row" layout:fragment="content">
-
+    <select id="route" name="route" >
+        <option th:each="route : ${routes}"
+                th:value="${route.id}" th:text="${route.routeName}">
+        </option>
+    </select>
     <button id="approve" value="Approve" th:attr="cab-request-id=${cabRequest.id}">Approve</button>
     <button id="reject" value="Reject" th:attr="cab-request-id=${cabRequest.id}">reject</button>
 </div>
@@ -17,13 +21,22 @@
     <script>
             jQuery(document).ready(function(){
                 jQuery("#approve").click(function(){
-                    alert(jQuery(this).attr("cab-request-id"));
+                  var routeId = jQuery("#route").val();
+                  var cabRequestId = jQuery(this).attr("cab-request-id");
+                  jQuery.ajax({
+                        url:"/approvePermanentRequest",
+                        data:{
+                             routeId: routeId,
+                             cabRequestId: cabRequestId
+                        },success:function(){
+                           alert("Success");
+                        }
+                  });
                 });
 
                 jQuery("#reject").click(function(){
                     alert(jQuery(this).attr("cab-request-id"));
                 });
-
             });
     </script>
 </th:block>
