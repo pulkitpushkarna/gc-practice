@@ -25,10 +25,10 @@ public class Route {
     private Zone zone;
 
     @OneToMany(mappedBy = "route")
-    NewerRouteMapping newerRouteMapping;
+    List<NewerRouteMapping> newerRouteMapping;
 
     @OneToMany(mappedBy = "route")
-    CabRouteMapping cabRouteMapping;
+    List<CabRouteMapping> cabRouteMapping;
 
     @CreatedDate
     private Date creationTime;
@@ -36,20 +36,18 @@ public class Route {
     @LastModifiedDate
     private Date modificationTime;
 
-    public NewerRouteMapping getNewerRouteMapping() {
-        return newerRouteMapping;
-    }
-
-    public void setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
+    public Route setNewerRouteMapping(List<NewerRouteMapping> newerRouteMapping) {
         this.newerRouteMapping = newerRouteMapping;
+        return this;
     }
 
-    public CabRouteMapping getCabRouteMapping() {
+    public List<CabRouteMapping> getCabRouteMapping() {
         return cabRouteMapping;
     }
 
-    public void setCabRouteMapping(CabRouteMapping cabRouteMapping) {
+    public Route setCabRouteMapping(List<CabRouteMapping> cabRouteMapping) {
         this.cabRouteMapping = cabRouteMapping;
+        return this;
     }
 
     public Date getCreationTime() {
@@ -98,24 +96,6 @@ public class Route {
 
     public void setStops(List<Stop> stops) {
         this.stops = stops;
-    }
-
-    public NewerRouteMapping getNewerRouteMapping() {
-        return newerRouteMapping;
-    }
-
-    public Route setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
-        this.newerRouteMapping = newerRouteMapping;
-        return this;
-    }
-
-    public CabRouteMapping getCabRouteMapping() {
-        return cabRouteMapping;
-    }
-
-    public Route setCabRouteMapping(CabRouteMapping cabRouteMapping) {
-        this.cabRouteMapping = cabRouteMapping;
-        return this;
     }
 
     @Override

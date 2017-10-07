@@ -9,7 +9,6 @@ import com.springmvc.repositories.CabRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -62,7 +61,6 @@ public class CabRequestService {
         if (cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)) {
 //            cabRequest.setApprovalDate(new Date());
         }
-        cabRequest.setActive(true);
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
         cabRequestRepository.save(cabRequest);
     }
