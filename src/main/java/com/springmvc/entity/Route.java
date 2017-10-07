@@ -36,6 +36,22 @@ public class Route {
     @LastModifiedDate
     private Date modificationTime;
 
+    public NewerRouteMapping getNewerRouteMapping() {
+        return newerRouteMapping;
+    }
+
+    public void setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
+        this.newerRouteMapping = newerRouteMapping;
+    }
+
+    public CabRouteMapping getCabRouteMapping() {
+        return cabRouteMapping;
+    }
+
+    public void setCabRouteMapping(CabRouteMapping cabRouteMapping) {
+        this.cabRouteMapping = cabRouteMapping;
+    }
+
     public Date getCreationTime() {
         return creationTime;
     }

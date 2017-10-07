@@ -60,7 +60,7 @@ public class CabRequestService {
     public void approveCabRequest(Long cabRequestId) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
         if (cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)) {
-            cabRequest.setApprovalDate(new Date());
+//            cabRequest.setApprovalDate(new Date());
         }
         cabRequest.setActive(true);
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
