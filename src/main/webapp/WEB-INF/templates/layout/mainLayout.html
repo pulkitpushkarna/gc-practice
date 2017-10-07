@@ -37,7 +37,7 @@
                         </div>
                     </li>
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
+                        <a th:href="@{/}"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
                     </li>
                     <li>
                         <a href="myCabs.html"><i class="fa fa-edit"></i> <span class="nav-label">My Cabs</span> </a>
@@ -48,6 +48,16 @@
                     <li>
                         <a th:href="@{/costManagement}"><i class="fa fa-file"></i> <span class="nav-label">Cost Management</span> </a>
                     </li>
+                    <li>
+                        <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Adhoc Cab Requests</span> </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Permanent Cab Requests</span> </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">approvedAdhocCabRequests</span> </a>
+                    </li>
+
                 </ul>
 
             </div>

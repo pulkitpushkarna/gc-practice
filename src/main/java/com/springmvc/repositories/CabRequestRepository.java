@@ -13,5 +13,5 @@ public interface CabRequestRepository extends CrudRepository<CabRequest, Long>{
 
     List<CabRequest> findAllByCabRequestStatusAndCabRequestType(CabRequestStatus cabRequestStatus, CabRequestType cabRequestType);
 
-//    List<CabRequest> findAllByNewerAndCabRequestStatusAndCabRequestType(Newer newer, CabRequestStatus cabRequestStatus, CabRequestType cabRequestType);
+    List<CabRequest> findAllByRequesterAndCabRequestStatusAndCabRequestType(Newer newer, CabRequestStatus cabRequestStatus, CabRequestType cabRequestType);
 }

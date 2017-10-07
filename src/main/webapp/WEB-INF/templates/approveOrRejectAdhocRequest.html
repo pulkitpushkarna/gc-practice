@@ -17,11 +17,25 @@
     <script>
             jQuery(document).ready(function(){
                 jQuery("#approve").click(function(){
-                    alert(jQuery(this).attr("cab-request-id"));
+                    var cabRequestId = jQuery(this).attr("cab-request-id");
+                    jQuery.ajax({
+                            url: "/approveCabRequest",
+                            data: {cabRequestId: cabRequestId},
+                            success : function(){
+                                alert("Success");
+                            }
+                        });
                 });
 
                 jQuery("#reject").click(function(){
-                    alert(jQuery(this).attr("cab-request-id"));
+                    var cabRequestId = jQuery(this).attr("cab-request-id");
+                    jQuery.ajax({
+                            url: "/rejectCabRequest",
+                            data: {cabRequestId: cabRequestId},
+                            success : function(){
+                                alert("Success");
+                            }
+                        });
                 });
 
             });

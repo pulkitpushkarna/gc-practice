@@ -14,7 +14,7 @@
         </option>
     </select>
     <button id="approve" value="Approve" th:attr="cab-request-id=${cabRequest.id}">Approve</button>
-    <button id="reject" value="Reject" th:attr="cab-request-id=${cabRequest.id}">reject</button>
+    <button id="reject" value="Reject" th:attr="cab-request-id=${cabRequest.id}">Reject</button>
 </div>
 
 <th:block layout:fragment="post-common-scripts">
@@ -35,8 +35,17 @@
                 });
 
                 jQuery("#reject").click(function(){
-                    alert(jQuery(this).attr("cab-request-id"));
+                        var cabRequestId = jQuery(this).attr("cab-request-id");
+                        jQuery.ajax({
+                            url: "/rejectCabRequest",
+                            data: {cabRequestId: cabRequestId},
+                            success : function(){
+                                alert("Success");
+                            }
+                        });
                 });
+
+
             });
     </script>
 </th:block>

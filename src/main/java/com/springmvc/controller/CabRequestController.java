@@ -93,7 +93,6 @@ public class CabRequestController {
     public ModelAndView approveOrRejectAdhocRequest(@PathVariable("cabRequestId") long cabRequestId){
         ModelAndView modelAndView = new ModelAndView("approveOrRejectAdhocRequest");
         modelAndView.addObject("cabRequest",cabRequestService.getCabRequestForId(cabRequestId));
-        System.out.println("cabRequestId>>>"+cabRequestId);
         return modelAndView;
     }
 
@@ -102,8 +101,6 @@ public class CabRequestController {
         CabRequest cabRequest = cabRequestService.getCabRequestForId(cabRequestId);
         ModelAndView modelAndView = new ModelAndView("approveOrRejectPermanentRequest");
         Zone zone = cabRequest.getZone();
-        System.out.println("zone>>>"+zone);
-        System.out.println("zone.getRoute()>>>>>>>>"+zone.getRoute());
         modelAndView.addObject("cabRequest",cabRequest);
         modelAndView.addObject("routes",zone.getRoute());
         return modelAndView;
