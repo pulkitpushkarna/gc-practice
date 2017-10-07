@@ -1,22 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Routes</title>
+    <title>Cost Management</title>
 </head>
 <body>
-<table layout:fragment="content">
-    <thead>Route Name</thead>
-    <thead>StartPoint-EndPoint</thead>
-    <thead>Cab Name</thead>
-    <tr th:each="routeInfo:${routes}">
-        <td th:text="${routeInfo.name}"></td>
-        <td th:text="${routeInfo.startPoint} + '-' + ${routeInfo.endPoint}"></td>
-        <td th:text="${routeInfo.cabName}"></td>
-    </tr>
-</table>
-<div>
-    <a th:href="@{/route/add}">Add Route</a>
+<div class="row" layout:fragment="content">
+    <div class="col-xs-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Manage Route</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a th:href="@{/route/add}" class="btn btn-primary">Add New</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Created On </th>
+                            <th>Route Name </th>
+                            <th>Zone </th>
+                            <th>Start-End Point </th>
+                            <th>Cab Name </th>
+                            <th>Route Occupancy</th>
+                            <th align="center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="routeInfo,stat:${routes}">
+                            <td th:text="${stat.index}"></td>
+                            <td>Jul 22, 17</td>
+                            <td>Delhi</td>
+                            <td><a th:text="${routeInfo.name}"></a></td>
+                            <td th:text="${routeInfo.startPoint} + '-' + ${routeInfo.endPoint}"></td>
+                            <td th:text="${routeInfo.cabName}"></td>
+                            <td>100%</td>
+                            <td align="center">
+                                <div class="d-ib">
+                                    <i class="fa fa-edit"></i>
+                                </div>
+                                <div class="d-ib ml-10">
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<th:block layout:fragment="post-common-scripts">
+    <script>
+
+    </script>
+</th:block>
+
 </body>
 </html>
