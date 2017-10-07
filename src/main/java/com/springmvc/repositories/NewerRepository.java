@@ -11,11 +11,9 @@ import java.util.List;
 @Repository
 public interface NewerRepository extends CrudRepository<Newer,Long> {
 
-    Newer findByNewerId(int newerId);
-
-    Newer findByUsername(String userName);
-
     List<Newer> findAllByUserRoleNot(UserRole role, Pageable pageable);
 
     Newer findByNewerId(long newerId);
+
+    Newer findByEmail(String email);
 }

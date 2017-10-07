@@ -15,6 +15,6 @@ public class SpringSecurityService {
 
     Newer getCurrentUser(){
         SocialUser socialUser=(SocialUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return newerRepository.findByUsername(socialUser.getUsername());
+        return newerRepository.findByEmail(socialUser.getUsername());
     }
 }

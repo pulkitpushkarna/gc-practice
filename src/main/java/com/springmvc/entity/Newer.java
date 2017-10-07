@@ -20,9 +20,6 @@ public class Newer implements Serializable {
 
     private long newerId;
 
-    //    TODO: remove
-    private String username;
-
     //    TODO: change to name
     private String firstName;
 
@@ -30,16 +27,10 @@ public class Newer implements Serializable {
 
     private String email;
 
-    //    TODO: Remove
-    private String password;
-
     private String reportingManagerEmail;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
-
-
-    private String managerEmail;
 
     @OneToMany(mappedBy = "requester")
     private List<CabRequest> cabRequests;
@@ -81,22 +72,6 @@ public class Newer implements Serializable {
 
     public Date getModificationTime() {
         return modificationTime;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public long getId() {
@@ -145,14 +120,6 @@ public class Newer implements Serializable {
         this.modificationTime = modificationTime;
     }
 
-    public String getManagerEmail() {
-        return managerEmail;
-    }
-
-    public void setManagerEmail(String managerEmail) {
-        this.managerEmail = managerEmail;
-    }
-
     public String getReportingManagerEmail() {
         return reportingManagerEmail;
     }
@@ -184,13 +151,10 @@ public class Newer implements Serializable {
         return "Newer{" +
                 "id=" + id +
                 ", newerId=" + newerId +
-                ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", userRole=" + userRole +
-                ", managerEmail=" + managerEmail +
                 ", cabRequests=" + cabRequests +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +
