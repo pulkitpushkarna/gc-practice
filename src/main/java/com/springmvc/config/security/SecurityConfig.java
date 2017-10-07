@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("Configuring Security");
         http
+                .csrf().disable()
                 .formLogin().loginPage("/signin")
                 .loginProcessingUrl("/login/authenticate")
                 .failureUrl("/login?param.error=bad_credentials").permitAll()

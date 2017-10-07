@@ -10,8 +10,7 @@
 <div class="row" layout:fragment="content">
     <table>
         <tr th:each="cabRequest :${cabRequestList}">
-            <td th:text="${cabRequest.projectName}"> </td>
-            <td th:text="${cabRequest.managerEmail}"> </td>
+            <td th:text="${cabRequest.requester.email}"> </td>
             <td><input type="button" name="reject" th:attr="request-id=${cabRequest.id}" value="Reject"> </td>
             <td><input type="button" name="approve" th:attr="request-id=${cabRequest.id}" value="Approve"> </td>
         </tr>

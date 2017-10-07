@@ -5,7 +5,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -17,11 +19,22 @@ public class Zone {
 
     private String name;
 
+    @OneToMany(mappedBy = "zone")
+    List<CabRequest> cabRequestList = new ArrayList<>();
+
     @CreatedDate
     private Date creationTime;
 
     @LastModifiedDate
     private Date modificationTime;
+
+    public List<CabRequest> getCabRequestList() {
+        return cabRequestList;
+    }
+
+    public void setCabRequestList(List<CabRequest> cabRequestList) {
+        this.cabRequestList = cabRequestList;
+    }
 
     public Date getCreationTime() {
         return creationTime;

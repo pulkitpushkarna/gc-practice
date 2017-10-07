@@ -35,7 +35,7 @@ public class CabRequest {
 
     String dropLocation;
 
-
+    @Enumerated(EnumType.STRING)
     CabRequestType cabRequestType;
 
     @ManyToOne
@@ -51,6 +51,14 @@ public class CabRequest {
     private CabRequestStatus cabRequestStatus;
 
     private Date approvalDate;
+
+    public List<NewerRouteMapping> getNewerRouteMapping() {
+        return newerRouteMapping;
+    }
+
+    public void setNewerRouteMapping(List<NewerRouteMapping> newerRouteMapping) {
+        this.newerRouteMapping = newerRouteMapping;
+    }
 
     public CabRequestType getCabRequestType() {
         return cabRequestType;

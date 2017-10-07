@@ -5,6 +5,7 @@ import com.springmvc.entity.CabRequest;
 import com.springmvc.entity.Route;
 import com.springmvc.enums.CabRequestType;
 import com.springmvc.repositories.RouteRepository;
+import com.springmvc.repositories.ZoneRepository;
 import com.springmvc.service.CabRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class CabRequestController {
     CabRequestService cabRequestService;
 
     @Autowired
-    RouteRepository routeRepository;
+    ZoneRepository zoneRepository;
 
     @RequestMapping(value = "/cancelCabRequest")
     @ResponseBody
@@ -33,18 +34,17 @@ public class CabRequestController {
     @RequestMapping("/cabRequestSubmission")
     @ResponseBody
     public CabRequestCO cabRequestSubmission(CabRequestCO cabRequestCO){
+        System.out.println("In controller");
         cabRequestService.saveCabRequest(cabRequestCO);
         return cabRequestCO;
     }
 
     @RequestMapping("/cabRequest")
     public ModelAndView cabRequest(){
-        List<CabRequest> cabRequestList = cabRequestService.getCabRequestsForNewer();
         List<CabRequestType> cabRequestTypes = Arrays.asList(CabRequestType.values());
         ModelAndView modelAndView = new ModelAndView("cabRequest");
-        modelAndView.addObject("routeList",routeRepository.findAll());
+        modelAndView.addObject("zoneList",zoneRepository.findAll());
         modelAndView.addObject("cabRequestTypes",cabRequestTypes);
-        modelAndView.addObject("cabRequestList",cabRequestList);
         return modelAndView;
     }
 

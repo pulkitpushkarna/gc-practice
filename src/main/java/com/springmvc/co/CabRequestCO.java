@@ -9,11 +9,10 @@ import java.util.Date;
 public class CabRequestCO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
-    private Date pickUpDate;
+    private Date travelDate;
     private String dropLocation;
     private String pickUpLocation;
-    private String projectName;
-    private String projectManager;
+    private Long zoneId;
     private CabRequestType cabRequestType;
 
     public CabRequestType getCabRequestType() {
@@ -32,12 +31,20 @@ public class CabRequestCO {
         this.pickUpLocation = pickUpLocation;
     }
 
-    public Date getPickUpDate() {
-        return pickUpDate;
+    public Date getTravelDate() {
+        return travelDate;
     }
 
-    public void setPickUpDate(Date pickUpDate) {
-        this.pickUpDate = pickUpDate;
+    public void setTravelDate(Date travelDate) {
+        this.travelDate = travelDate;
+    }
+
+    public Long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Long zoneId) {
+        this.zoneId = zoneId;
     }
 
     public String getDropLocation() {
@@ -48,19 +55,4 @@ public class CabRequestCO {
         this.dropLocation = dropLocation;
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getProjectManager() {
-        return projectManager;
-    }
-
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
-    }
 }
