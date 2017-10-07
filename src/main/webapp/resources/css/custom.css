@@ -50,6 +50,12 @@
 .pickup{
     position:relative
 }
+.d-ib{
+    display:inline-block
+}
+.ml-10{
+    margin-left: 10px
+}
 
 
 @media only screen and (max-width: 767px) {
