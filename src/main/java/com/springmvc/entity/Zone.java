@@ -22,11 +22,22 @@ public class Zone {
     @OneToMany(mappedBy = "zone")
     List<CabRequest> cabRequestList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "zone")
+    List<Route> route;
+
     @CreatedDate
     private Date creationTime;
 
     @LastModifiedDate
     private Date modificationTime;
+
+    public List<Route> getRoute() {
+        return route;
+    }
+
+    public void setRoute(List<Route> route) {
+        this.route = route;
+    }
 
     public List<CabRequest> getCabRequestList() {
         return cabRequestList;

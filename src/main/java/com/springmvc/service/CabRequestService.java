@@ -83,4 +83,8 @@ public class CabRequestService {
         Newer newer = springSecurityService.getCurrentUser();
         return null;
     }
+
+    public CabRequest getCabRequestForId(long cabRequestId){
+        return cabRequestRepository.findOne(cabRequestId);
+    }
 }
