@@ -4,11 +4,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/mainLayout}">
 <head>
-    <title>Sign In</title>
+    <title>Cost Management</title>
 </head>
 <body>
 
 <div class="row" layout:fragment="content">
+
     <input type="month" id="filter">
     <div>
         Month/Year
@@ -35,7 +36,7 @@
             <td th:text="${monthlyExpenditur.cabRouteMapping.route.zone.name}"> </td>
             <td th:text="${monthlyExpenditur.cabRouteMapping.route.routeName}"> </td>
             <td th:text="${monthlyExpenditur.amountSpend}"> </td>&nbsp;
-            <td th:text="${monthlyExpenditureamountRecieved}"> </td>
+            <td th:text="${monthlyExpenditur.amountRecieved}"> </td>
         </tr>
     </table>
 </div>

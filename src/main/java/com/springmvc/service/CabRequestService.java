@@ -1,16 +1,17 @@
 package com.springmvc.service;
 
 import com.springmvc.co.CabRequestCO;
-import com.springmvc.entity.CabRequest;
-import com.springmvc.entity.Newer;
-import com.springmvc.entity.Zone;
+import com.springmvc.entity.*;
 import com.springmvc.enums.CabRequestStatus;
 import com.springmvc.enums.CabRequestType;
 import com.springmvc.repositories.CabRequestRepository;
+import com.springmvc.repositories.NewerRouteMappingRepository;
+import com.springmvc.repositories.RouteRepository;
 import com.springmvc.repositories.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,7 +24,13 @@ public class CabRequestService {
     SpringSecurityService springSecurityService;
 
     @Autowired
+    RouteRepository routeRepository;
+
+    @Autowired
     ZoneRepository zoneRepository;
+
+    @Autowired
+    NewerRouteMappingRepository newerRouteMappingRepository;
 
     public void saveCabRequest(CabRequestCO cabRequestCO) {
         CabRequest cabRequest = new CabRequest();
@@ -72,19 +79,30 @@ public class CabRequestService {
 
     public void approveCabRequest(Long cabRequestId) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
-        if (cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)) {
-//            cabRequest.setApprovalDate(new Date());
-        }
         cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
         cabRequestRepository.save(cabRequest);
     }
 
     public List<CabRequest> getApprovedAdhocCabRequestsOfNewer() {
         Newer newer = springSecurityService.getCurrentUser();
-        return null;
+        return cabRequestRepository.findAllByRequesterAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPROVED,CabRequestType.AD_HOC);
     }
 
     public CabRequest getCabRequestForId(long cabRequestId){
         return cabRequestRepository.findOne(cabRequestId);
+    }
+
+    public void approvePermanentCabRequest(long routeId, long cabRequestId){
+        Route route = routeRepository.findOne(routeId);
+        CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
+        cabRequest.setCabRequestStatus(CabRequestStatus.APPROVED);
+        Newer requester = cabRequest.getRequester();
+        NewerRouteMapping newerRouteMapping = new NewerRouteMapping();
+        newerRouteMapping.setRoute(route);
+        newerRouteMapping.setNewer(requester);
+        newerRouteMapping.setCabRequest(cabRequest);
+        newerRouteMapping.setJoinedDate(new Date());
+        newerRouteMapping.setActive(true);
+        newerRouteMappingRepository.save(newerRouteMapping);
     }
 }

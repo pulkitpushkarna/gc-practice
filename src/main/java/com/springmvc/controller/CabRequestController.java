@@ -93,7 +93,6 @@ public class CabRequestController {
     public ModelAndView approveOrRejectAdhocRequest(@PathVariable("cabRequestId") long cabRequestId){
         ModelAndView modelAndView = new ModelAndView("approveOrRejectAdhocRequest");
         modelAndView.addObject("cabRequest",cabRequestService.getCabRequestForId(cabRequestId));
-        System.out.println("cabRequestId>>>"+cabRequestId);
         return modelAndView;
     }
 
@@ -101,11 +100,16 @@ public class CabRequestController {
     public ModelAndView approveOrRejectPermanentRequest(@PathVariable("cabRequestId") long cabRequestId ){
         CabRequest cabRequest = cabRequestService.getCabRequestForId(cabRequestId);
         ModelAndView modelAndView = new ModelAndView("approveOrRejectPermanentRequest");
-        modelAndView.addObject("cabRequest",cabRequest);
         Zone zone = cabRequest.getZone();
-
-
-        System.out.println("cabRequestId>>>"+cabRequestId);
+        modelAndView.addObject("cabRequest",cabRequest);
+        modelAndView.addObject("routes",zone.getRoute());
         return modelAndView;
+    }
+
+    @RequestMapping("approvePermanentRequest")
+    @ResponseBody
+    public String approvePermanentRequest(long routeId, long cabRequestId){
+        cabRequestService.approvePermanentCabRequest(routeId,cabRequestId);
+        return "Success";
     }
 }

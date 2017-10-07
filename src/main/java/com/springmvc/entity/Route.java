@@ -27,11 +27,11 @@ public class Route {
 
     @JsonIgnore
     @OneToMany(mappedBy = "route")
-    List<NewerRouteMapping> newerRouteMapping;
+    private List<NewerRouteMapping> newerRouteMapping;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "route")
-    List<CabRouteMapping> cabRouteMapping;
+    @OneToMany(mappedBy = "route", cascade = CascadeType.PERSIST)
+    private List<CabRouteMapping> cabRouteMapping;
 
     @CreatedDate
     private Date creationTime;

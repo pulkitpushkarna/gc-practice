@@ -8,6 +8,12 @@
 </head>
 <body>
 <div class="row" layout:fragment="content">
+    <div th:text="${cabRequest.travelDate}"> </div>
+    <div th:text="${cabRequest.requester.email}"> </div>
+    <div th:text="${cabRequest.pickUpLocation}"> </div>
+    <div th:text="${cabRequest.dropLocation}"> </div>
+    <div th:text="${cabRequest.creationTime}"> </div>
+    <div th:text="${cabRequest.cabRequestStatus}"> </div>
     <button id="approve" value="Approve" th:attr="cab-request-id=${cabRequest.id}">Approve</button>
     <button id="reject" value="Reject" th:attr="cab-request-id=${cabRequest.id}">reject</button>
 </div>
@@ -16,11 +22,25 @@
     <script>
             jQuery(document).ready(function(){
                 jQuery("#approve").click(function(){
-                    alert(jQuery(this).attr("cab-request-id"));
+                    var cabRequestId = jQuery(this).attr("cab-request-id");
+                    jQuery.ajax({
+                            url: "/approveCabRequest",
+                            data: {cabRequestId: cabRequestId},
+                            success : function(){
+                               window.location.href="/adhocCabRequestsForApproval";
+                            }
+                        });
                 });
 
                 jQuery("#reject").click(function(){
-                    alert(jQuery(this).attr("cab-request-id"));
+                    var cabRequestId = jQuery(this).attr("cab-request-id");
+                    jQuery.ajax({
+                            url: "/rejectCabRequest",
+                            data: {cabRequestId: cabRequestId},
+                            success : function(){
+                                window.location.href="/adhocCabRequestsForApproval";
+                            }
+                        });
                 });
 
             });

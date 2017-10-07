@@ -1,31 +1,98 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="/resources/js/jquery-1.12.4.js"></script>
+</head>
+<body>
+<div class="row" layout:fragment="content">
+    <div class="col-xs-12 col-sm-7">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Create Routes</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>Route Name</label>
+                                    <input type="text" id="routeName" class="form-control">
+
+                            </div>
+                              <div class="form-group">
+                                  <label>Stops</label>
+                                  <div>
+                                      <div class="input-group date addStop">
+                                          <input type="text" id="stopName" class="form-control">
+                                          <span class="input-group-addon no-padding">
+                                              <button class="btn btn-success" type="button" id="submitStop">Add Stop</button>
+                                          </span>
+
+                                      </div>
+                                      <ul class="stopDetail" id="stops"></ul>
+                                  </div>
+                              </div>
+                            <div class="form-group">
+                                <label>Cab</label>
+                                <select name="cab" id="cab" class="form-control">
+                                    <option th:each="cab : ${cabs}">
+                                        <span th:text="${cab.vehicleRegNumber}" th:id="${cab.id}"></span>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Zone</label>
+                                <select name="zone" id="zone" class="form-control">
+                                    <option th:each="zone : ${zones}">
+                                        <span th:text="${zone.name}" th:id="${zone.id}"></span>
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <button id="submit"  type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-5">
+
+    </div>
+</div>
+<th:block layout:fragment="post-common-scripts">
     <script src="/resources/js/jquery-ui.js"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
+    <script>
         $(function() {
             let stops = $("#stops");
             stops.sortable();
             stops.disableSelection();
-            $("#addStop").click(function() {
-                $("#stopName").toggle();
-                $("#submitStop").toggle();
-            });
 
             $("#submitStop").click(function() {
                 let stopNameElem = $("#stopName");
                 let stopName = stopNameElem.val();
-                stops.append(`<li>${stopName}</li>`);
-                stopNameElem.hide();
+                stops.append(`<li>${stopName} <span class="removeStop"><i class="fa fa-times"></i></span></li>`);
                 stopNameElem.val("");
-                $("#submitStop").hide();
                 stops.sortable();
                 stops.disableSelection();
             });
+
+            $('#stops').on('click','.removeStop', function(){
+                    $(this).parent().remove();
+            })
 
             jQuery("#submit").click(function() {
                 let routeName = jQuery("#routeName").val();
@@ -36,12 +103,14 @@
                 });
                 let cabRegNo = $("#vehicleRegNumber").val();
                 let cabType = parseInt($("#cabType").val());
+                let zoneName = $("#zone").val();
                 let data = {
                     routeName: routeName,
                     stops: stopsList,
-                    cabRegId: cab
+                    cabRegId: cab,
+                    zoneName: zoneName
                 };
-                let addRoutePath = "/route/add?_csrf=" + [[${_csrf.token}]];
+                let addRoutePath = "/route/add";
                 jQuery.ajax({
                     headers: {
                         'Accept': 'application/json',
@@ -57,38 +126,8 @@
                 });
             });
         });
-        /*]]>*/
     </script>
-</head>
-<body>
-<table layout:fragment="content">
-    <tr>
-        <td>Route Name</td>
-        <td><input type="text" id="routeName"></td>
-    </tr>
-    <tr>
-        <td>Stops
-            <button id="addStop">Add Stop</button>
-            <input type="text" id="stopName" style="display: none">
-            <button id="submitStop" style="display: none">Add</button>
-        </td>
-        <td>
-            <ul id="stops"></ul>
-        </td>
-    </tr>
-    <tr>
-        <td>Cab</td>
-        <td>
-            <select name="cab" id="cab">
-                <option th:each="cab : ${cabs}">
-                    <span th:text="${cab.vehicleRegNumber}" th:id="${cab.id}"></span>
-                </option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td><input type="button" value="Submit" id="submit"></td>
-    </tr>
-</table>
+</th:block>
+
 </body>
 </html>

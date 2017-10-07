@@ -39,7 +39,7 @@ public class CostManagementService {
                 me.setCabRouteMapping(obj);
                 ZonePrice zonePrice = zonePriceRepository.findByZoneAndCabType(obj.getRoute().getZone(), obj.getCab().getCabType());
                 me.setAmountSpend(zonePrice.getCost());
-                me.setAmountRecieved(obj.getRoute().getNewerRouteMapping().size()*2200);
+                me.setAmountRecieved(obj.getRoute().getNewerRouteMapping().stream().filter(a->a.isActive()).collect(Collectors.toList()).size()*2200);
                 me.setMonth(Month.of(obj.getModificationTime().getMonth()+1));
                 //monthlyExpenditureRepository.save(me);
                 return me;
