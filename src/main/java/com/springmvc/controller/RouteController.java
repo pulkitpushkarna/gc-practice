@@ -2,11 +2,12 @@ package com.springmvc.controller;
 
 import com.springmvc.co.RouteCommand;
 import com.springmvc.entity.Cab;
-import com.springmvc.entity.Route;
+import com.springmvc.entity.Zone;
 import com.springmvc.exceptions.BindingException;
 import com.springmvc.service.CabService;
 import com.springmvc.service.RouteService;
-import com.springmvc.vo.RouteListVO;
+import com.springmvc.service.ZoneService;
+import com.springmvc.vo.RouteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -28,10 +29,13 @@ public class RouteController {
     @Autowired
     private CabService cabService;
 
+    @Autowired
+    private ZoneService zoneService;
+
     @RequestMapping(path = "/route", method = RequestMethod.GET)
-    public String listRoutes(@RequestParam int offset, @RequestParam int limit, Model model) {
-        System.out.println("offset " +offset + "limit");
-        List<RouteListVO> routeList = routeService.listRoutes(new PageRequest(offset,limit));
+    public String listRoutes(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit, Model model) {
+        System.out.println("offset " + offset + "limit");
+        List<RouteVO> routeList = routeService.listRoutes(new PageRequest((offset == null) ? 0 : offset, (limit == null) ? 10 : limit));
         model.addAttribute("routes", routeList);
         return "route";
     }
@@ -39,7 +43,9 @@ public class RouteController {
     @RequestMapping(value = "/route/add", method = RequestMethod.GET)
     public String addRoute(Model model) {
         List<Cab> cabList = cabService.getCabsWithNoRoute();
+        List<Zone> zoneList = zoneService.getAllZones();
         model.addAttribute("cabs", cabList);
+        model.addAttribute("zones", zoneList);
         return "addRoute";
     }
 

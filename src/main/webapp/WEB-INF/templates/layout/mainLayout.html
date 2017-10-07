@@ -57,9 +57,10 @@
                     <li>
                         <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">approvedAdhocCabRequests</span> </a>
                     </li>
-
+                    <li>
+                        <a th:href="@{/costManagement}"><i class="fa fa-file"></i> <span class="nav-label">Route</span> </a>
+                    </li>
                 </ul>
-
             </div>
         </nav>
     </div>
@@ -81,14 +82,7 @@
                 </nav>
             </div>
             <div class="wrapper wrapper-content animated fadeInRight">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <div layout:fragment="content">
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-
-                    </div>
+                <div layout:fragment="content">
                 </div>
             </div>
             <div layout:fragment="copy">

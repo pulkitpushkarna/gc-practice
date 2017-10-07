@@ -5,8 +5,7 @@
     <title>Title</title>
     <script src="/resources/js/jquery-1.12.4.js"></script>
     <script src="/resources/js/jquery-ui.js"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
+    <script>
         $(function() {
             let stops = $("#stops");
             stops.sortable();
@@ -36,12 +35,14 @@
                 });
                 let cabRegNo = $("#vehicleRegNumber").val();
                 let cabType = parseInt($("#cabType").val());
+                let zoneName = $("#zone").val();
                 let data = {
                     routeName: routeName,
                     stops: stopsList,
-                    cabRegId: cab
+                    cabRegId: cab,
+                    zoneName: zoneName
                 };
-                let addRoutePath = "/route/add?_csrf=" + [[${_csrf.token}]];
+                let addRoutePath = "/route/add";
                 jQuery.ajax({
                     headers: {
                         'Accept': 'application/json',
@@ -57,7 +58,6 @@
                 });
             });
         });
-        /*]]>*/
     </script>
 </head>
 <body>
@@ -82,6 +82,16 @@
             <select name="cab" id="cab">
                 <option th:each="cab : ${cabs}">
                     <span th:text="${cab.vehicleRegNumber}" th:id="${cab.id}"></span>
+                </option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Zone</td>
+        <td>
+            <select name="zone" id="zone">
+                <option th:each="zone : ${zones}">
+                    <span th:text="${zone.name}" th:id="${zone.id}"></span>
                 </option>
             </select>
         </td>
