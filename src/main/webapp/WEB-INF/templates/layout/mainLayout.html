@@ -37,22 +37,25 @@
                         </div>
                     </li>
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
+                        <a th:href="@{/}"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
                     </li>
-                    <li>
-                        <a href="myCabs.html"><i class="fa fa-edit"></i> <span class="nav-label">My Cabs</span> </a>
-                    </li>
-                    <li>
-                        <a href="reports.html"><i class="fa fa-file"></i> <span class="nav-label">Reports</span> </a>
-                    </li>
+
                     <li>
                         <a th:href="@{/costManagement}"><i class="fa fa-file"></i> <span class="nav-label">Cost Management</span> </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Adhoc Cab Requests</span> </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Permanent Cab Requests</span> </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">approvedAdhocCabRequests</span> </a>
                     </li>
                     <li>
                         <a th:href="@{/route}"><i class="fa fa-file"></i> <span class="nav-label">Route</span> </a>
                     </li>
                 </ul>
-
             </div>
         </nav>
     </div>
@@ -65,7 +68,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <a href="#">
+                            <a th:href="@{/logout}">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>

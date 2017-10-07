@@ -116,6 +116,5 @@ public class Bootstrap {
 //
 //        cabRouteMappingRepository.save(cabRouteMapping);
 
-
     }
 }
