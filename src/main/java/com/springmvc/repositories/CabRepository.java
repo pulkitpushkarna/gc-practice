@@ -12,5 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface CabRepository extends PagingAndSortingRepository<Cab, Long> {
+    List<Cab> findByCabRouteMappingListIsNull();
     Cab findByVehicleRegNumber(String vehicleRegNo);
 }

@@ -24,10 +24,10 @@ public class Route {
     @ManyToOne
     private Zone zone;
 
-    @OneToMany(mappedBy = "route", cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "route")
     private List<NewerRouteMapping> newerRouteMapping;
 
-    @OneToMany(mappedBy = "route")
+    @OneToMany(mappedBy = "route", cascade = CascadeType.PERSIST)
     private List<CabRouteMapping> cabRouteMapping;
 
     @CreatedDate

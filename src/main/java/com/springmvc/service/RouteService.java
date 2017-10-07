@@ -43,6 +43,7 @@ public class RouteService {
                 routeVO.setCabName(cab.getVehicleModel() + "-" + cab.getVehicleRegNumber());
             }
             routeVO.setZone(route.getZone().getName());
+            routeVO.setCreatedOn(route.getCreationTime());
             routeVO.setTotalNewersInRoute((int) (route.getNewerRouteMapping().stream().filter(NewerRouteMapping::isActive).count()));
             List<Stop> stops = route.getStops();
             routeVO.setName(route.getRouteName());
@@ -71,9 +72,11 @@ public class RouteService {
             route.setStops(stops);
             Zone zone = zoneRepository.findByName(routeCommand.getZoneName());
             route.setZone(zone);
-            CabRouteMapping cabRouteMapping = cabRouteMappingRepository.findByCabAndIsActiveIsTrue(cab);
+            CabRouteMapping cabRouteMapping = new CabRouteMapping();
             List<CabRouteMapping> cabRouteMappings = new ArrayList<>();
+            cabRouteMapping.setCab(cab);
             cabRouteMapping.setRoute(route);
+            cabRouteMapping.setActive(true);
             cabRouteMappings.add(cabRouteMapping);
             route.setCabRouteMapping(cabRouteMappings);
             routeRepository.save(route);

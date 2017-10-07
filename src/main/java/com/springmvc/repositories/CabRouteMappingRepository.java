@@ -10,6 +10,6 @@ import java.util.List;
  * Created by diwakar on 07/10/17.
  */
 public interface CabRouteMappingRepository extends CrudRepository<CabRouteMapping,Long> {
-    List<CabRouteMapping> findByIsActiveIsTrueAndRouteIsNull();
+//    List<CabRouteMapping> findByIsActiveIsTrueAndRouteIsNull();
     CabRouteMapping findByCabAndIsActiveIsTrue(Cab cab);
 }

@@ -28,7 +28,7 @@ public class CabService {
     private CabRouteMappingRepository cabRouteMappingRepository;
 
     public List<Cab> getCabsWithNoRoute(){
-        return cabRouteMappingRepository.findByIsActiveIsTrueAndRouteIsNull().stream().map(CabRouteMapping::getCab).collect(Collectors.toList());
+        return cabRepository.findByCabRouteMappingListIsNull();
     }
 
     public List<Cab> getAllCabs(){
@@ -45,12 +45,6 @@ public class CabService {
         cab.setVehicleRegNumber(cabCommand.getVehicleRegNo());
         cab.setCabType(cabCommand.getCabType());
         cab.setVehicleModel(cabCommand.getCabModel());
-        List<CabRouteMapping> cabRouteMappings = new ArrayList<>();
-        CabRouteMapping cabRouteMapping = new CabRouteMapping();
-        cabRouteMapping.setCab(cab);
-        cabRouteMapping.setActive(true);
-        cabRouteMappings.add(cabRouteMapping);
-        cab.setCabRouteMappingList(cabRouteMappings);
         cabRepository.save(cab);
     }
 
