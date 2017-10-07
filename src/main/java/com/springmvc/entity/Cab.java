@@ -1,5 +1,6 @@
 package com.springmvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springmvc.enums.CabType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -24,6 +25,7 @@ public class Cab {
 
     private String vehicleModel;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cab")
     List<CabRouteMapping> cabRouteMappingList;
 

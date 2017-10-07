@@ -5,6 +5,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.Month;
 import java.util.Date;
 
 @Entity
@@ -18,6 +19,9 @@ public class MonthlyExpenditure {
     long amountSpend;
 
     long amountRecieved;
+
+    @Enumerated(EnumType.STRING)
+    Month month;
 
     @ManyToOne
     CabRouteMapping cabRouteMapping;
@@ -80,5 +84,13 @@ public class MonthlyExpenditure {
     public MonthlyExpenditure setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
         return this;
+    }
+
+    public Month getMonth() {
+        return month;
+    }
+
+    public void setMonth(Month month) {
+        this.month = month;
     }
 }
