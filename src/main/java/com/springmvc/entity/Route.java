@@ -27,11 +27,11 @@ public class Route {
 
     @JsonIgnore
     @OneToMany(mappedBy = "route")
-    List<NewerRouteMapping> newerRouteMapping;
+    private List<NewerRouteMapping> newerRouteMapping;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "route")
-    List<CabRouteMapping> cabRouteMapping;
+    @OneToMany(mappedBy = "route", cascade = CascadeType.PERSIST)
+    private List<CabRouteMapping> cabRouteMapping;
 
     @CreatedDate
     private Date creationTime;
@@ -103,6 +103,10 @@ public class Route {
 
     public void setStops(List<Stop> stops) {
         this.stops = stops;
+    }
+
+    public List<NewerRouteMapping> getNewerRouteMapping() {
+        return newerRouteMapping;
     }
 
     @Override
