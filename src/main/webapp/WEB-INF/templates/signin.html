@@ -19,8 +19,15 @@
         .logo{
            background:#1ab394 url('http://www.tothenew.com/themes/ttnd/images/logo.png') 103px 14px no-repeat;
            border-radius: 4px 4px 0 0 ;
+           height:100px
          }
          .loginButton{
+            padding: 20px;
+            text-align: center;
+            background: #fff;
+            border-radius: 0 0 4px 4px;
+         }
+         .loginButton a{
             border-radius: 0 0 4px 4px;
             padding: 12px;
             background: #1c84c6;
@@ -30,14 +37,19 @@
             text-decoration: none;
             display: inline-block;
          }
+         .loginButton a:hover{
+            background: #1371ad;
+         }
     </style>
 </head>
 <body class="gray-bg">
     <div class="center-console">
         <div class="logo">
         </div>
-        <div class="loginButton">
-            <a class="btn btn-success" th:href="@{/auth/google(scope='email')}">Google+</a>
+        <div>
+            <div class="loginButton">
+                <a class="btn btn-success" th:href="@{/auth/google(scope='email')}">Google+</a>
+            </div>
         </div>
     </div>
 </body>
