@@ -25,16 +25,16 @@
                 <td><input type="text" id="pickUpDate"></td>
             </tr>
             <tr id="route-td">
-            <td>Route</td>
+            <td>Zone</td>
             <td>
-                <select id="route" name="route" >
-                    <option th:each="route : ${routeList}"
-                            th:value="${route.id}" th:text="${route.name}">
+                <select id="zone" name="zone" >
+                    <option th:each="zone : ${zoneList}"
+                            th:value="${zone.id}" th:text="${zone.name}">
                     </option>
                 </select>
             </td>
             </tr>
-            <tr id="drop-location-td" hidden>
+            <tr>
                 <td>Drop Location</td>
                 <td><input type="text" id="dropLocation">  </td>
             </tr>
@@ -43,27 +43,7 @@
                 <td><input type="text" id="pickUpLocation"></td>
             </tr>
             <tr>
-                <td>Project Name</td>
-                <td><input type="text" id="projectName"></td>
-            </tr>
-            <tr>
-                <td>Project Manager</td>
-                <td><input type="text" id="projectManager"></td>
-            </tr>
-            <tr>
                 <td><input type="button" value="Submit" id="submit"></td>
-            </tr>
-        </table>
-
-        <table>
-            <tr th:each="cabRequest : ${cabRequestList}">
-                <td th:text="${cabRequest.dropLocation}"> </td>
-                <td th:text="${cabRequest.projectName}"> </td>
-                <td th:text="${cabRequest.dropLocation}"> </td>
-                <td th:text="${cabRequest.managerEmail}"> </td>
-                <td th:text="${cabRequest.cabRequestStatus}"></td>
-                <td><input th:id="${cabRequest.id}" type="button" name="cancelCabRequest" value="Cancel"/></td>
-
             </tr>
         </table>
     </div>
@@ -73,59 +53,47 @@
                 $( "#pickUpDate" ).datetimepicker();
 
                 jQuery("#cabRequestType").change(function(){
-                   console.log("<<<<<jQuery(this).val()>>>>>"+jQuery(this).val());
                    var cabRequest = jQuery(this).val();
                    if(cabRequest==="PERMANENT"){
                         jQuery("#route-td").show();
                         jQuery("#date-td").hide();
-                        jQuery("#drop-location-td").hide();
                         jQuery("#pickup-location-td").hide();
                    }else{
                         jQuery("#route-td").hide();
                         jQuery("#date-td").show();
-                        jQuery("#drop-location-td").show();
                         jQuery("#pickup-location-td").show();
                    }
                 });
 
-                jQuery("input[name='cancelCabRequest']").click(function(){
-                    var cabRequestId = jQuery(this).attr("id");
-                    jQuery.ajax({
-                        url:"/cancelCabRequest",
-                        data:{
-                            cabRequestId: cabRequestId
-                        },
-                        success:function(data){
-                            alert(data)
-                        }
-                    });
-                });
-
                 jQuery("#submit").click(function(){
                     var pickUpDate = jQuery("#pickUpDate").val();
+                    console.log("pickUpDate>>>>"+pickUpDate);
                     var dropLocation = jQuery("#dropLocation").val();
                     var projectName = jQuery("#projectName").val();
                     var projectManager = jQuery("#projectManager").val();
                     var cabRequestType = jQuery("#cabRequestType").val();
                     var pickUpLocation = jQuery("#pickUpLocation").val();
+                    var zoneId = jQuery("#zone").val();
+                    var data = {
+                                    dropLocation: dropLocation,
+                                    cabRequestType: cabRequestType,
+                                    pickUpLocation: pickUpLocation
+                                };
+
+                   if(cabRequestType==="PERMANENT"){
+                        data.zoneId = zoneId
+                   }else{
+                        data.travelDate = pickUpDate
+                   }
 
                     jQuery.ajax({
-                        url:"/cabRequestSubmission",
-                        data:{
-                            pickUpDate: pickUpDate,
-                            dropLocation: dropLocation,
-                            projectName: projectName,
-                            projectManager: projectManager,
-                            cabRequestType: cabRequestType,
-                            pickUpLocation: pickUpLocation
-                        },
+                        url: "/cabRequestSubmission",
+                        type: "Post",
+                        data: data,
                         success:function(data){
                             jQuery("#pickUpDate").val("");
                             jQuery("#dropLocation").val("");
-                            jQuery("#projectName").val("");
-                            jQuery("#cabRequestType").val("");
                             jQuery("#pickUpDate").val("");
-                            jQuery("#projectManager").val("");
                             jQuery("#pickUpLocation").val("");
                             alert("Request submitted successfully!!");
                         }

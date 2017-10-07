@@ -3,9 +3,11 @@ package com.springmvc.service;
 import com.springmvc.co.CabRequestCO;
 import com.springmvc.entity.CabRequest;
 import com.springmvc.entity.Newer;
+import com.springmvc.entity.Zone;
 import com.springmvc.enums.CabRequestStatus;
 import com.springmvc.enums.CabRequestType;
 import com.springmvc.repositories.CabRequestRepository;
+import com.springmvc.repositories.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,24 @@ public class CabRequestService {
     @Autowired
     SpringSecurityService springSecurityService;
 
+    @Autowired
+    ZoneRepository zoneRepository;
+
     public void saveCabRequest(CabRequestCO cabRequestCO) {
         CabRequest cabRequest = new CabRequest();
         cabRequest.setDropLocation(cabRequestCO.getDropLocation());
+        cabRequest.setPickUpLocation(cabRequestCO.getPickUpLocation());
         cabRequest.setCabRequestStatus(CabRequestStatus.APPLIED);
         cabRequest.setCabRequestType(cabRequestCO.getCabRequestType());
         cabRequest.setRequester(springSecurityService.getCurrentUser());
+        if(cabRequestCO.getZoneId()!=null) {
+            Zone zone = zoneRepository.findOne(cabRequestCO.getZoneId());
+            cabRequest.setZone(zone);
+            zone.getCabRequestList().add(cabRequest);
+            zoneRepository.save(zone);
+        }else{
+            cabRequest.setTravelDate(cabRequestCO.getTravelDate());
+        }
         cabRequestRepository.save(cabRequest);
     }
 
@@ -68,5 +82,9 @@ public class CabRequestService {
     public List<CabRequest> getApprovedAdhocCabRequestsOfNewer() {
         Newer newer = springSecurityService.getCurrentUser();
         return null;
+    }
+
+    public CabRequest getCabRequestForId(long cabRequestId){
+        return cabRequestRepository.findOne(cabRequestId);
     }
 }

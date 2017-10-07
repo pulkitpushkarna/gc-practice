@@ -6,13 +6,19 @@ import com.springmvc.entity.*;
 import com.springmvc.enums.BaseZone;
 import com.springmvc.enums.CabType;
 import com.springmvc.enums.Vendor;
+<<<<<<< HEAD
 import com.springmvc.repositories.*;
+=======
+import com.springmvc.repositories.VendorRepository;
+import com.springmvc.repositories.ZoneRepository;
+>>>>>>> c640413bbf9ad3086ffb105141ddc2513016ade7
 import com.springmvc.service.VendorService;
 import com.springmvc.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,7 @@ public class Bootstrap {
 
     @Autowired
     ZoneService zoneService;
+
     @Autowired
     VendorService vendorService;
     @Autowired
@@ -35,8 +42,15 @@ public class Bootstrap {
     @Autowired
     CabRouteMappingRepository cabRouteMappingRepository;
 
+    @Autowired
+    ZoneRepository zoneRepository;
+
+    @Autowired
+    VendorRepository vendorRepository;
+
     @EventListener(ContextRefreshedEvent.class)
     void startUpEvent() {
+
         for (BaseZone zone : BaseZone.values()) {
             ZoneCO zoneCO = new ZoneCO();
             zoneCO.setName(zone.getName());
@@ -55,12 +69,17 @@ public class Bootstrap {
             zonePriceRepository.save(zp);
             zonePriceRepository.save(zp2);
 
+
         }
-        for (Vendor vendor : Vendor.values()) {
-            VendorCO vendorCO = new VendorCO();
-            vendorCO.setName(vendor.getName());
-            vendorService.saveVendor(vendorCO);
+        System.out.println("vendorRepository.findAll()>>>>>"+vendorRepository.findAll());
+        if(ObjectUtils.isEmpty(vendorRepository.findAll())) {
+            for (Vendor vendor : Vendor.values()) {
+                VendorCO vendorCO = new VendorCO();
+                vendorCO.setName(vendor.getName());
+                vendorService.saveVendor(vendorCO);
+            }
         }
+
 
         Cab cab = new Cab();
         cab.setVehicleRegNumber("DL-15RD6651");
@@ -104,6 +123,6 @@ public class Bootstrap {
 
         cabRouteMappingRepository.save(cabRouteMapping);
 
-    }
 
+    }
 }

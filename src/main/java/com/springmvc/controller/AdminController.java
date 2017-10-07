@@ -14,7 +14,6 @@ import com.springmvc.service.CabRouteMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +27,6 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping("/admin")
-@Secured("ROLE_GOD")
 public class AdminController {
 
     @Autowired

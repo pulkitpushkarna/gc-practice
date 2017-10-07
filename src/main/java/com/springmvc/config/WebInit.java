@@ -13,7 +13,7 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebConfig.class, PersistenceConfig.class, SecurityConfig.class, SocialConfig.class};
+        return new Class<?>[]{RootConfig.class, WebConfig.class, PersistenceConfig.class, SecurityConfig.class, SocialConfig.class};
     }
 
     @Override

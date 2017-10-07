@@ -3,11 +3,15 @@ package com.springmvc.controller;
 import com.springmvc.co.CabRequestCO;
 import com.springmvc.entity.CabRequest;
 import com.springmvc.entity.Route;
+import com.springmvc.entity.Zone;
 import com.springmvc.enums.CabRequestType;
+import com.springmvc.repositories.CabRequestRepository;
 import com.springmvc.repositories.RouteRepository;
+import com.springmvc.repositories.ZoneRepository;
 import com.springmvc.service.CabRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +25,7 @@ public class CabRequestController {
     CabRequestService cabRequestService;
 
     @Autowired
-    RouteRepository routeRepository;
+    ZoneRepository zoneRepository;
 
     @RequestMapping(value = "/cancelCabRequest")
     @ResponseBody
@@ -33,18 +37,17 @@ public class CabRequestController {
     @RequestMapping("/cabRequestSubmission")
     @ResponseBody
     public CabRequestCO cabRequestSubmission(CabRequestCO cabRequestCO){
+        System.out.println("In controller");
         cabRequestService.saveCabRequest(cabRequestCO);
         return cabRequestCO;
     }
 
     @RequestMapping("/cabRequest")
     public ModelAndView cabRequest(){
-        List<CabRequest> cabRequestList = cabRequestService.getCabRequestsForNewer();
         List<CabRequestType> cabRequestTypes = Arrays.asList(CabRequestType.values());
         ModelAndView modelAndView = new ModelAndView("cabRequest");
-        modelAndView.addObject("routeList",routeRepository.findAll());
+        modelAndView.addObject("zoneList",zoneRepository.findAll());
         modelAndView.addObject("cabRequestTypes",cabRequestTypes);
-        modelAndView.addObject("cabRequestList",cabRequestList);
         return modelAndView;
     }
 
@@ -86,4 +89,23 @@ public class CabRequestController {
         return modelAndView;
     }
 
+    @RequestMapping("approveOrRejectAdhocRequest/{cabRequestId}")
+    public ModelAndView approveOrRejectAdhocRequest(@PathVariable("cabRequestId") long cabRequestId){
+        ModelAndView modelAndView = new ModelAndView("approveOrRejectAdhocRequest");
+        modelAndView.addObject("cabRequest",cabRequestService.getCabRequestForId(cabRequestId));
+        System.out.println("cabRequestId>>>"+cabRequestId);
+        return modelAndView;
+    }
+
+    @RequestMapping("approveOrRejectPermanentRequest/{cabRequestId}")
+    public ModelAndView approveOrRejectPermanentRequest(@PathVariable("cabRequestId") long cabRequestId ){
+        CabRequest cabRequest = cabRequestService.getCabRequestForId(cabRequestId);
+        ModelAndView modelAndView = new ModelAndView("approveOrRejectPermanentRequest");
+        modelAndView.addObject("cabRequest",cabRequest);
+        Zone zone = cabRequest.getZone();
+
+
+        System.out.println("cabRequestId>>>"+cabRequestId);
+        return modelAndView;
+    }
 }
