@@ -32,15 +32,6 @@ public class AdminController {
     @Autowired
     private NewerRepository newerRepository;
 
-    @Autowired
-    private CabRouteMappingService cabRouteMappingService;
-
-    @Autowired
-    private ZonePriceRepository zonePriceRepository;
-
-    @Autowired
-    private MonthlyExpenditureRepository monthlyExpenditureRepository;
-
 
     @GetMapping("/list")
     public ModelAndView list(PageRequestCO pageRequest) {
@@ -62,7 +53,7 @@ public class AdminController {
         return false;
     }
 
-    @GetMapping("/getCostData/{year}/{month}")
+/*    @GetMapping("/getCostData/{year}/{month}")
     @ResponseBody
     public List<MonthlyExpenditure> getCostData(@PathVariable("year") int year, @PathVariable("month") int month, PageRequestCO pageRequestCO){
         Pageable pageable = new PageRequest(pageRequestCO.getPageNumber(), pageRequestCO.getPageSize());
@@ -76,12 +67,12 @@ public class AdminController {
             me.setAmountSpend(zonePrice.getCost());
             me.setAmountRecieved(obj.getRoute().getNewerRouteMapping().size()*2200);
             me.setMonth(Month.of(obj.getModificationTime().getMonth()));
-            monthlyExpenditureRepository.save(me);
+            //monthlyExpenditureRepository.save(me);
 
             return me;
 
         }).collect(Collectors.toList());
 
-    }
+    }*/
 
 }

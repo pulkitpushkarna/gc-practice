@@ -50,13 +50,13 @@ public class Bootstrap {
 //            zoneService.saveZone(zoneCO);
 //
 //            ZonePrice zp = new ZonePrice();
-//            zp.setCabType(CabType.FOUR_SEARTER);
-//            zp.setCost(100);
+//            zp.setCabType(CabType.FOUR_SEATER);
+//            zp.setCost(10000);
 //            zp.setZone(zoneRepository.findByName(zone.getName()));
 //
 //            ZonePrice zp2 = new ZonePrice();
 //            zp2.setCabType(CabType.SEVEN_SEATER);
-//            zp2.setCost(200);
+//            zp2.setCost(20000);
 //            zp2.setZone(zoneRepository.findByName(zone.getName()));
 //
 //            zonePriceRepository.save(zp);
@@ -76,7 +76,7 @@ public class Bootstrap {
 //
 //        Cab cab = new Cab();
 //        cab.setVehicleRegNumber("DL-15RD6651");
-//        cab.setCabType(CabType.FOUR_SEARTER);
+//        cab.setCabType(CabType.FOUR_SEATER);
 //        cab.setVehicleModel("Wagon-R");
 //
 //        cabRepository.save(cab);
@@ -95,13 +95,13 @@ public class Bootstrap {
 //        zoneRepository.save(zone);
 //
 //        ZonePrice zp = new ZonePrice();
-//        zp.setCabType(CabType.FOUR_SEARTER);
-//        zp.setCost(100);
+//        zp.setCabType(CabType.FOUR_SEATER);
+//        zp.setCost(10000);
 //        zp.setZone(zoneRepository.findByName(zone.getName()));
 //
 //        ZonePrice zp2 = new ZonePrice();
 //        zp2.setCabType(CabType.SEVEN_SEATER);
-//        zp2.setCost(200);
+//        zp2.setCost(20000);
 //        zp2.setZone(zoneRepository.findByName(zone.getName()));
 //
 //        zonePriceRepository.save(zp);
@@ -113,6 +113,7 @@ public class Bootstrap {
 //        CabRouteMapping cabRouteMapping = new CabRouteMapping();
 //        cabRouteMapping.setCab(cab);
 //        cabRouteMapping.setRoute(route);
+//        cabRouteMapping.setActive(true);
 //
 //        cabRouteMappingRepository.save(cabRouteMapping);
 

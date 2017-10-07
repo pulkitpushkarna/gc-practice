@@ -29,7 +29,7 @@ public class CabRouteMappingService {
         cal.set(year, month, lastDay);
         Date endDate = cal.getTime();
         System.out.println("Dates" + startDate+ "   " + endDate);
-        List<CabRouteMapping> list = cabRouteMappingRepository.findAllByCreationTimeBetween(startDate, endDate, pageable);
+        List<CabRouteMapping> list = cabRouteMappingRepository.findAllByIsActiveAndCreationTimeBetween(true, startDate, endDate, pageable);
 
         return list;
 

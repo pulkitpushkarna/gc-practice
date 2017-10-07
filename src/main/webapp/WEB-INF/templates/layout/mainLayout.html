@@ -10,6 +10,7 @@
         <link href="/resources/font-awesome/css/font-awesome.css" rel="stylesheet">
         <link href="/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
         <link href="/resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+        <link href="/resources/css/plugins/toastr/toastr.min.css" rel="stylesheet">
         <link href="/resources/css/animate.css" rel="stylesheet">
         <link href="/resources/css/style.css" rel="stylesheet">
         <link href="/resources/css/custom.css" rel="stylesheet">
@@ -62,7 +63,7 @@
                         <a th:href="@{/pendingPermanentCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">Pending Permanent Cab Requests</span> </a>
                     </li>
                     <li>
-                        <a th:href="@{/costManagement}"><i class="fa fa-file"></i> <span class="nav-label">Route</span> </a>
+                        <a th:href="@{/route}"><i class="fa fa-file"></i> <span class="nav-label">Route</span> </a>
                     </li>
                 </ul>
             </div>
@@ -117,6 +118,9 @@
 
     <!-- Data Table -->
     <script src="/resources/js/plugins/dataTables/datatables.min.js"></script>
+
+    <!-- Toastr script -->
+    <script src="/resources/js/plugins/toastr/toastr.min.js"></script>
 
     <!-- Custom code and plugin initialization -->
     <script src="/resources/js/application.js"></script>
