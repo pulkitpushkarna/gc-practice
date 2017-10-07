@@ -101,4 +101,12 @@ public class NewerRouteMapping {
         this.modificationTime = modificationTime;
     }
 
+    public CabRequest getCabRequest() {
+        return cabRequest;
+    }
+
+    public NewerRouteMapping setCabRequest(CabRequest cabRequest) {
+        this.cabRequest = cabRequest;
+        return this;
+    }
 }

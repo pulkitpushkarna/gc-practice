@@ -24,9 +24,6 @@ public class CabRequestService {
     public void saveCabRequest(CabRequestCO cabRequestCO) {
         CabRequest cabRequest = new CabRequest();
         cabRequest.setDropLocation(cabRequestCO.getDropLocation());
-        cabRequest.setManagerName(cabRequestCO.getProjectManager());
-        cabRequest.setRequestDate(cabRequestCO.getPickUpDate());
-        cabRequest.setProjectName(cabRequestCO.getProjectName());
         cabRequest.setCabRequestStatus(CabRequestStatus.APPLIED);
         cabRequest.setCabRequestType(cabRequestCO.getCabRequestType());
         cabRequest.setRequester(springSecurityService.getCurrentUser());

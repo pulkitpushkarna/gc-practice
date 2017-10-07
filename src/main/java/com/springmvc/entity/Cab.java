@@ -74,6 +74,24 @@ public class Cab {
         this.vehicleRegNumber = vehicleRegNumber;
     }
 
+    public String getVehicleModel() {
+        return vehicleModel;
+    }
+
+    public Cab setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
+        return this;
+    }
+
+    public List<CabRouteMapping> getCabRouteMappingList() {
+        return cabRouteMappingList;
+    }
+
+    public Cab setCabRouteMappingList(List<CabRouteMapping> cabRouteMappingList) {
+        this.cabRouteMappingList = cabRouteMappingList;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Cab{" +

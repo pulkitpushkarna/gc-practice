@@ -37,7 +37,6 @@ public class CabRequest {
 
     CabRequestType cabRequestType;
 
-//    TODO: rename
     @ManyToOne
     Newer requester;
 
@@ -50,16 +49,7 @@ public class CabRequest {
     @Enumerated(EnumType.STRING)
     private CabRequestStatus cabRequestStatus;
 
-    private boolean isActive;
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
+    private Date approvalDate;
 
     public CabRequestType getCabRequestType() {
         return cabRequestType;
@@ -117,6 +107,14 @@ public class CabRequest {
         this.dropLocation = dropLocation;
     }
 
+    public Date getApprovalDate() {
+        return approvalDate;
+    }
+
+    public CabRequest setApprovalDate(Date approvalDate) {
+        this.approvalDate = approvalDate;
+        return this;
+    }
 
     public long getId() {
         return id;
@@ -126,6 +124,41 @@ public class CabRequest {
         this.id = id;
     }
 
+    public Date getTravelDate() {
+        return travelDate;
+    }
+
+    public CabRequest setTravelDate(Date travelDate) {
+        this.travelDate = travelDate;
+        return this;
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public CabRequest setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+        return this;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public CabRequest setZone(Zone zone) {
+        this.zone = zone;
+        return this;
+    }
+
+    public NewerRouteMapping getNewerRouteMapping() {
+        return newerRouteMapping;
+    }
+
+    public CabRequest setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
+        this.newerRouteMapping = newerRouteMapping;
+        return this;
+    }
 
     @Override
     public String toString() {

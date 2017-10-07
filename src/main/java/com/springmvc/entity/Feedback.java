@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -24,7 +25,7 @@ public class Feedback {
     Newer initiater;
 
     @OneToMany(mappedBy = "feedback")
-    FeedbackComment feedbackComment;
+    List<FeedbackComment> comments;
 
     @CreatedDate
     private Date creationTime;
@@ -52,6 +53,46 @@ public class Feedback {
         this.id = id;
     }
 
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public Feedback setFeedback(String feedback) {
+        this.feedback = feedback;
+        return this;
+    }
+
+    public CabRequest getCabRequest() {
+        return cabRequest;
+    }
+
+    public Feedback setCabRequest(CabRequest cabRequest) {
+        this.cabRequest = cabRequest;
+        return this;
+    }
+
+    public Newer getInitiater() {
+        return initiater;
+    }
+
+    public Feedback setInitiater(Newer initiater) {
+        this.initiater = initiater;
+        return this;
+    }
+
+    public Feedback setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+        return this;
+    }
+
+    public List<FeedbackComment> getComments() {
+        return comments;
+    }
+
+    public Feedback setComments(List<FeedbackComment> comments) {
+        this.comments = comments;
+        return this;
+    }
 
     @Override
     public String toString() {

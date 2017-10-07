@@ -51,6 +51,11 @@ public class Stop {
         this.stopName = stopName;
     }
 
+    public Stop setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Stop{" +

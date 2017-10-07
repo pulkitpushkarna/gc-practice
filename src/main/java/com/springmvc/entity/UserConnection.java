@@ -120,4 +120,9 @@ public class UserConnection {
     public int getId() {
         return id;
     }
+
+    public UserConnection setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+        return this;
+    }
 }

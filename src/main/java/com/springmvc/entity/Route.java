@@ -84,6 +84,24 @@ public class Route {
         this.stops = stops;
     }
 
+    public NewerRouteMapping getNewerRouteMapping() {
+        return newerRouteMapping;
+    }
+
+    public Route setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
+        this.newerRouteMapping = newerRouteMapping;
+        return this;
+    }
+
+    public CabRouteMapping getCabRouteMapping() {
+        return cabRouteMapping;
+    }
+
+    public Route setCabRouteMapping(CabRouteMapping cabRouteMapping) {
+        this.cabRouteMapping = cabRouteMapping;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Route{" +

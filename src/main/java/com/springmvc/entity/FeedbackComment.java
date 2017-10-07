@@ -22,7 +22,7 @@ public class FeedbackComment {
     private String comment;
 
     @ManyToOne
-    Newer commentator;
+    Newer commenter;
 
     @CreatedDate
     private Date creationTime;
@@ -64,6 +64,20 @@ public class FeedbackComment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Newer getCommenter() {
+        return commenter;
+    }
+
+    public FeedbackComment setCommenter(Newer commenter) {
+        this.commenter = commenter;
+        return this;
+    }
+
+    public FeedbackComment setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+        return this;
     }
 
     @Override

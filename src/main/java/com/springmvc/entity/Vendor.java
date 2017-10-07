@@ -70,6 +70,11 @@ public class Vendor {
         this.contact = contact;
     }
 
+    public Vendor setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Role{" +

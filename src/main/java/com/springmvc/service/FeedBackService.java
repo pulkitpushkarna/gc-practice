@@ -15,11 +15,11 @@ public class FeedBackService {
 
     public void insertFeedBack(FeedbackCO feedbackCO) {
         if (feedbackCO != null) {
-            Newer newer = feedbackCO.getNewer();
+            Newer newer = feedbackCO.getInitiator();
             Feedback feedback = new Feedback();
-            feedback.setDate(feedbackCO.getDate());
-            feedback.setNewer(newer);
-            feedback.setCab(newer.getCab());
+            feedback.setInitiater(newer);
+            feedback.setFeedback(feedbackCO.getFeedback());
+            feedback.setCabRequest(feedbackCO.getCabRequest());
             feedbackRepository.save(feedback);
         }
     }
