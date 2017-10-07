@@ -43,6 +43,7 @@ public class Bootstrap {
     @EventListener(ContextRefreshedEvent.class)
     void startUpEvent() {
 
+
 //        for (BaseZone zone : BaseZone.values()) {
 //            ZoneCO zoneCO = new ZoneCO();
 //            zoneCO.setName(zone.getName());

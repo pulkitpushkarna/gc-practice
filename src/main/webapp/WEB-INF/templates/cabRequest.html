@@ -7,52 +7,94 @@
 
     </head>
     <body>
-    <div class="row" layout:fragment="content">
-        <table>
-            <tr>
-                <td>Request Type</td>
-                <td>
-                    <select id="cabRequestType" name="cabRequestType" >
-                        <option th:each="cabRequestType : ${cabRequestTypes}"
-                            th:value="${cabRequestType}" th:text="${cabRequestType.getName()}"
-                                th:selected="${cabRequestType.name.equals('Permanent')}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr id="date-td" hidden>
-                <td>Select the Date</td>
-                <td><input type="text" id="pickUpDate"></td>
-            </tr>
-            <tr id="route-td">
-            <td>Zone</td>
-            <td>
-                <select id="zone" name="zone" >
-                    <option th:each="zone : ${zoneList}"
-                            th:value="${zone.id}" th:text="${zone.name}">
-                    </option>
-                </select>
-            </td>
-            </tr>
-            <tr>
-                <td>Drop Location</td>
-                <td><input type="text" id="dropLocation">  </td>
-            </tr>
-            <tr id="pickup-location-td" hidden>
-                <td>Pickup Location</td>
-                <td><input type="text" id="pickUpLocation"></td>
-            </tr>
-            <tr>
-                <td><input type="button" value="Submit" id="submit"></td>
-            </tr>
-        </table>
+
+
+    <div class="ibox float-e-margins" layout:fragment="content">
+        <div class="ibox-title">
+            <h5>Submit Cab Request</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form role="form">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="radio" checked="checked" value="PERMANENT" id="option1" name="cabRequestType">
+                                    <label for="option1">Permanent</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="radio"  id="option2" value="AD_HOC" name="cabRequestType">
+                                    <label for="option2">Adhoc</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group" id="date-td" hidden>
+                            <label>Travel Date</label>
+                            <div class="input-group date pickup" id="pickUpDate">
+                                <input type="text" placeholder="dd/mm/yyyy" class="form-control" value="">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group" id="route-td">
+                            <label>Zone</label>
+                            <select id="zone" name="zone" class="form-control m-b">
+                                <option th:each="zone : ${zoneList}"
+                                        th:value="${zone.id}" th:text="${zone.name}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Drop Location</label>
+                            <textarea class="form-control" type="text" id="dropLocation"></textarea>
+                        </div>
+                        <div class="form-group" id="pickup-location-td" hidden>
+                            <label>Pickup Location</label>
+                            <textarea class="form-control" type="text" id="pickUpLocation"></textarea>
+                        </div>
+                        <div>
+                            <button data-toggle="modal" type="button" data-target="#confirmation" class="btn btn-sm btn-primary m-t-n-xs"><strong>Submit</strong></button>
+                            <div class="modal inmodal fade" id="confirmation" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h2 class="text-center">
+                                                Are you sure?
+                                            </h2>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            <button id="submit"  type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
+
     <th:block layout:fragment="post-common-scripts">
         <script>
             $( function() {
                 $( "#pickUpDate" ).datetimepicker();
 
-                jQuery("#cabRequestType").change(function(){
+                jQuery("input[name='cabRequestType']").click(function(){
                    var cabRequest = jQuery(this).val();
                    if(cabRequest==="PERMANENT"){
                         jQuery("#route-td").show();
@@ -66,12 +108,13 @@
                 });
 
                 jQuery("#submit").click(function(){
+                   var cabRequestType = jQuery("input[name='cabRequestType']:checked").val()
+
                     var pickUpDate = jQuery("#pickUpDate").val();
                     console.log("pickUpDate>>>>"+pickUpDate);
                     var dropLocation = jQuery("#dropLocation").val();
                     var projectName = jQuery("#projectName").val();
                     var projectManager = jQuery("#projectManager").val();
-                    var cabRequestType = jQuery("#cabRequestType").val();
                     var pickUpLocation = jQuery("#pickUpLocation").val();
                     var zoneId = jQuery("#zone").val();
                     var data = {

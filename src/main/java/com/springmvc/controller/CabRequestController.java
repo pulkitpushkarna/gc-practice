@@ -42,7 +42,7 @@ public class CabRequestController {
         return cabRequestCO;
     }
 
-    @RequestMapping("/cabRequest")
+    @RequestMapping("/")
     public ModelAndView cabRequest(){
         List<CabRequestType> cabRequestTypes = Arrays.asList(CabRequestType.values());
         ModelAndView modelAndView = new ModelAndView("cabRequest");
