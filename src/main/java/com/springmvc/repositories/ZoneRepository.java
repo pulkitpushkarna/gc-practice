@@ -1,12 +1,10 @@
 package com.springmvc.repositories;
 
+import com.springmvc.entity.Zone;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by diwakar on 17/09/17.
- */
 @Repository
-public interface RoleRepository extends CrudRepository<Role,Long> {
+public interface ZoneRepository extends CrudRepository<Zone, Long> {
 
 }

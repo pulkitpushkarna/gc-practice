@@ -1,12 +1,14 @@
 package com.springmvc.co;
 
+import com.springmvc.enums.CabType;
+
 /**
  * Created by diwakar on 05/10/17.
  */
 public class CabCommand {
 
     private String vehicleRegNo;
-    private int capacity;
+    private CabType capacity;
     private String cabModel;
 
     public String getVehicleRegNo() {
@@ -17,11 +19,11 @@ public class CabCommand {
         this.vehicleRegNo = vehicleRegNo;
     }
 
-    public int getCapacity() {
+    public CabType getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(CabType capacity) {
         this.capacity = capacity;
     }
 

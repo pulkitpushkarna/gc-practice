@@ -9,13 +9,15 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Stop {
+public class Vendor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String stopName;
+    private String name;
+    private String contactPersonName;
+    private String contact;
 
     @CreatedDate
     private Date creationTime;
@@ -35,6 +37,7 @@ public class Stop {
         return modificationTime;
     }
 
+
     public long getId() {
         return id;
     }
@@ -43,19 +46,35 @@ public class Stop {
         this.id = id;
     }
 
-    public String getStopName() {
-        return stopName;
+    public String getName() {
+        return name;
     }
 
-    public void setStopName(String stopName) {
-        this.stopName = stopName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContactPersonName() {
+        return contactPersonName;
+    }
+
+    public void setContactPersonName(String contactPersonName) {
+        this.contactPersonName = contactPersonName;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     @Override
     public String toString() {
-        return "Stop{" +
+        return "Role{" +
                 "id=" + id +
-                ", stopName='" + stopName + '\'' +
+                ", name=" + name +
                 '}';
     }
 }

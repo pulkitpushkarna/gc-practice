@@ -3,6 +3,6 @@ package com.springmvc.enums;
 public enum  CabRequestStatus {
     APPLIED,
     REJECTED,
-    CANCEL,
+    CANCELED,
     APPROVED
 }

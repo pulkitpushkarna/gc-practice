@@ -11,11 +11,11 @@
                 console.log("Button clicked");
                 let routeName = jQuery("#vehicleRegNumber").val();
                 let cabRegNo = $("#vehicleRegNumber").val();
-                let maxCapacity = parseInt($("#maxCapacity").val());
+                let cabType = parseInt($("#cabType").val());
                 let cabModel = $("#cabModel").val();
                 let data = {
                     vehicleRegNo: cabRegNo,
-                    capacity: maxCapacity,
+                    cabType: cabType,
                     cabModel: cabModel
                 };
                 let addRoutePath = "/cab/add?_csrf=" + [[${_csrf.token}]];
@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <td>Cab Capacity</td>
-        <td><input type="number" id="maxCapacity"></td>
+        <td><input type="number" id="cabType"></td>
     </tr>
     <tr>
         <td>Cab Model</td>

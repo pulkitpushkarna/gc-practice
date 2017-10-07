@@ -15,14 +15,14 @@
             <th class="col-md-3">email</th>
             <th class="col-md-3">Role</th>
         </tr>
-        <tr class="row" th:each="newer : ${newers}">
-            <td class="col-md-3" th:text="${newer.newerId}"></td>
-            <td class="col-md-3" th:text="${newer.firstName+ ' ' +newer.lastName}"></td>
-            <td class="col-md-3" th:text="${newer.email}"></td>
+        <tr class="row" th:each="requester : ${newers}">
+            <td class="col-md-3" th:text="${requester.newerId}"></td>
+            <td class="col-md-3" th:text="${requester.firstName+ ' ' +requester.lastName}"></td>
+            <td class="col-md-3" th:text="${requester.email}"></td>
             <td class="col-md-3">
-                <select th:id="${'selected-role-'+newer.newerId}" th:attr="data-id=${newer.newerId}" name="role">
-                    <option th:text="${newer.userRole.name}"></option>
-                    <option th:each="role : ${T(com.springmvc.enums.UserRole).listRolesExcept(newer.userRole)}" th:value="${role}" th:text="${role.getName()}"></option>
+                <select th:id="${'selected-role-'+requester.newerId}" th:attr="data-id=${requester.newerId}" name="role">
+                    <option th:text="${requester.userRole.name}"></option>
+                    <option th:each="role : ${T(com.springmvc.enums.UserRole).listRolesExcept(requester.userRole)}" th:value="${role}" th:text="${role.getName()}"></option>
                 </select>
             </td>
         </tr>

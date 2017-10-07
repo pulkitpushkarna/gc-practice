@@ -5,6 +5,7 @@ import com.springmvc.enums.CabRequestType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,28 +17,29 @@ public class CabRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private Date requestDate;
+    //    TODO: rename
+    private Date travelDate;
+
+    //    TODO: add zone id
+    @OneToOne
+    Feedback feedback;
 
     @ManyToOne
-    private Route route;
+    private Zone zone;
 
+    @OneToMany(mappedBy = "cabRequest")
+    NewerRouteMapping newerRouteMapping;
+
+    String pickUpLocation;
+
+    String dropLocation;
+
+
+    CabRequestType cabRequestType;
+
+//    TODO: rename
     @ManyToOne
-    private Newer newer;
-
-    private String pickUpLocation;
-
-    private String dropLocation;
-
-    private String projectName;
-
-    private String managerName;
-
-    @Enumerated(EnumType.STRING)
-    private CabRequestType cabRequestType;
-
-    private Date approvalDate;
-
-    private Date unavailingDate;
+    Newer requester;
 
     @CreatedDate
     private Date creationTime;
@@ -58,21 +60,6 @@ public class CabRequest {
         isActive = active;
     }
 
-    public Date getApprovalDate() {
-        return approvalDate;
-    }
-
-    public void setApprovalDate(Date approvalDate) {
-        this.approvalDate = approvalDate;
-    }
-
-    public Date getUnavailingDate() {
-        return unavailingDate;
-    }
-
-    public void setUnavailingDate(Date unavailingDate) {
-        this.unavailingDate = unavailingDate;
-    }
 
     public CabRequestType getCabRequestType() {
         return cabRequestType;
@@ -105,6 +92,7 @@ public class CabRequest {
     public void setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
     }
+
     public CabRequestStatus getCabRequestStatus() {
         return cabRequestStatus;
     }
@@ -113,12 +101,12 @@ public class CabRequest {
         this.cabRequestStatus = cabRequestStatus;
     }
 
-    public Newer getNewer() {
-        return newer;
+    public Newer getRequester() {
+        return requester;
     }
 
-    public void setNewer(Newer newer) {
-        this.newer = newer;
+    public void setRequester(Newer requester) {
+        this.requester = requester;
     }
 
     public String getDropLocation() {
@@ -129,21 +117,6 @@ public class CabRequest {
         this.dropLocation = dropLocation;
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
-    }
 
     public long getId() {
         return id;
@@ -153,33 +126,14 @@ public class CabRequest {
         this.id = id;
     }
 
-    public Date getRequestDate() {
-        return requestDate;
-    }
-
-    public void setRequestDate(Date requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
 
     @Override
     public String toString() {
         return "CabRequest{" +
                 "id=" + id +
-                ", requestDate=" + requestDate +
-                ", route=" + route +
-                ", newer=" + newer +
+                ", requester=" + requester +
                 ", pickUpLocation='" + pickUpLocation + '\'' +
                 ", dropLocation='" + dropLocation + '\'' +
-                ", projectName='" + projectName + '\'' +
-                ", managerName='" + managerName + '\'' +
                 ", cabRequestType=" + cabRequestType +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +

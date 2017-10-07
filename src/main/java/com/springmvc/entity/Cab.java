@@ -1,5 +1,6 @@
 package com.springmvc.entity;
 
+import com.springmvc.enums.CabType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -7,11 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-/**
- * Created by diwakar on 01/10/17.
- */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Cab {
@@ -20,23 +17,22 @@ public class Cab {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private int maxCapacity;
+    //    TODO: change to enum (big/small or seater)
+    private CabType cabType;
 
     private String vehicleRegNumber;
 
-    private String cabModel;
+    private String vehicleModel;
 
-    @OneToOne
-    private Route route;
-
-    @OneToMany
-    private Set<Feedback> feedbacks;
+    @OneToMany(mappedBy = "cab")
+    List<CabRouteMapping> cabRouteMappingList;
 
     @CreatedDate
     private Date creationTime;
 
     @LastModifiedDate
     private Date modificationTime;
+
 
     public Date getCreationTime() {
         return creationTime;
@@ -62,12 +58,12 @@ public class Cab {
         this.id = id;
     }
 
-    public int getMaxCapacity() {
-        return maxCapacity;
+    public CabType getCabType() {
+        return cabType;
     }
 
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
+    public void setCabType(CabType cabType) {
+        this.cabType = cabType;
     }
 
     public String getVehicleRegNumber() {
@@ -78,39 +74,12 @@ public class Cab {
         this.vehicleRegNumber = vehicleRegNumber;
     }
 
-    public Set<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(Set<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
-    }
-
-    public String getCabModel() {
-        return cabModel;
-    }
-
-    public void setCabModel(String cabModel) {
-        this.cabModel = cabModel;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
-
     @Override
     public String toString() {
         return "Cab{" +
                 "id=" + id +
-                ", maxCapacity=" + maxCapacity +
+                ", cabType=" + cabType +
                 ", vehicleRegNumber='" + vehicleRegNumber + '\'' +
-                ", cabModel='" + cabModel + '\'' +
-                ", route=" + route +
-                ", feedbacks=" + feedbacks +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +
                 '}';

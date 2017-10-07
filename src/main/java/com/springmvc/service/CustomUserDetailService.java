@@ -1,7 +1,6 @@
 package com.springmvc.service;
 
 import com.springmvc.entity.Newer;
-import com.springmvc.entity.Role;
 import com.springmvc.repositories.NewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

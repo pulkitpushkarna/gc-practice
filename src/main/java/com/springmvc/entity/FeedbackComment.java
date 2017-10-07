@@ -1,6 +1,5 @@
 package com.springmvc.entity;
 
-import com.springmvc.enums.UserRole;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,14 +9,20 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Role {
+public class FeedbackComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Enumerated(value = EnumType.STRING)
-    private UserRole userRole;
+
+    @ManyToOne
+    private Feedback feedback;
+
+    private String comment;
+
+    @ManyToOne
+    Newer commentator;
 
     @CreatedDate
     private Date creationTime;
@@ -37,7 +42,6 @@ public class Role {
         return modificationTime;
     }
 
-
     public long getId() {
         return id;
     }
@@ -46,19 +50,28 @@ public class Role {
         this.id = id;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public Feedback getFeedback() {
+        return feedback;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "Feedback{" +
                 "id=" + id +
-                ", userRole=" + userRole +
+                ", comment=" + comment +
+                ", Feedback ID=" + feedback.getId() +
                 '}';
     }
 }

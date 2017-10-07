@@ -6,7 +6,6 @@ import com.springmvc.entity.Newer;
 import com.springmvc.enums.CabRequestStatus;
 import com.springmvc.enums.CabRequestType;
 import com.springmvc.repositories.CabRequestRepository;
-import com.springmvc.repositories.NewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class CabRequestService {
     @Autowired
     SpringSecurityService springSecurityService;
 
-    public void saveCabRequest(CabRequestCO cabRequestCO){
+    public void saveCabRequest(CabRequestCO cabRequestCO) {
         CabRequest cabRequest = new CabRequest();
         cabRequest.setDropLocation(cabRequestCO.getDropLocation());
         cabRequest.setManagerName(cabRequestCO.getProjectManager());
@@ -30,40 +29,40 @@ public class CabRequestService {
         cabRequest.setProjectName(cabRequestCO.getProjectName());
         cabRequest.setCabRequestStatus(CabRequestStatus.APPLIED);
         cabRequest.setCabRequestType(cabRequestCO.getCabRequestType());
-        cabRequest.setNewer(springSecurityService.getCurrentUser());
+        cabRequest.setRequester(springSecurityService.getCurrentUser());
         cabRequestRepository.save(cabRequest);
     }
 
-    public List<CabRequest> getCabRequestsForNewer(){
+    public List<CabRequest> getCabRequestsForNewer() {
         Newer newer = springSecurityService.getCurrentUser();
-        return cabRequestRepository.findAllByNewerAndCabRequestStatus(newer,CabRequestStatus.APPLIED);
+        return cabRequestRepository.findAllByNewerAndCabRequestStatus(newer, CabRequestStatus.APPLIED);
     }
 
-    public void cancelCabRequest(Long cabRequestId){
+    public void cancelCabRequest(Long cabRequestId) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
-        cabRequest.setCabRequestStatus(CabRequestStatus.CANCEL);
+        cabRequest.setCabRequestStatus(CabRequestStatus.CANCELED);
         cabRequestRepository.save(cabRequest);
     }
 
-    public List<CabRequest> getPermanentCabRequestsForApproval(){
+    public List<CabRequest> getPermanentCabRequestsForApproval() {
         List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPLIED, CabRequestType.PERMANENT);
         return cabRequestList;
     }
 
-    public List<CabRequest> adhocCabRequestsForApproval(){
+    public List<CabRequest> adhocCabRequestsForApproval() {
         List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPLIED, CabRequestType.AD_HOC);
         return cabRequestList;
     }
 
-    public void rejectCabRequest(Long cabRequestId){
+    public void rejectCabRequest(Long cabRequestId) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
         cabRequest.setCabRequestStatus(CabRequestStatus.REJECTED);
         cabRequestRepository.save(cabRequest);
     }
 
-    public void approveCabRequest(Long cabRequestId){
+    public void approveCabRequest(Long cabRequestId) {
         CabRequest cabRequest = cabRequestRepository.findOne(cabRequestId);
-        if(cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)){
+        if (cabRequest.getCabRequestType().equals(CabRequestType.PERMANENT)) {
             cabRequest.setApprovalDate(new Date());
         }
         cabRequest.setActive(true);
@@ -71,8 +70,8 @@ public class CabRequestService {
         cabRequestRepository.save(cabRequest);
     }
 
-    public List<CabRequest> getApprovedAdhocCabRequestsOfNewer(){
+    public List<CabRequest> getApprovedAdhocCabRequestsOfNewer() {
         Newer newer = springSecurityService.getCurrentUser();
-        return cabRequestRepository.findAllByNewerAndCabRequestStatusAndCabRequestType(newer,CabRequestStatus.APPROVED,CabRequestType.AD_HOC);
+        return cabRequestRepository.findAllByNewerAndCabRequestStatusAndCabRequestType(newer, CabRequestStatus.APPROVED, CabRequestType.AD_HOC);
     }
 }

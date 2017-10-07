@@ -7,7 +7,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -22,16 +21,14 @@ public class Route {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Stop> stops;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
-    private Cab cab;
-
-    @ManyToMany
-    private List<Newer> newers;
+    @ManyToOne
+    private Zone zone;
 
     @OneToMany(mappedBy = "route")
-    private Set<CabRequest> cabRequests;
+    NewerRouteMapping newerRouteMapping;
 
-    private boolean isActive;
+    @OneToMany(mappedBy = "route")
+    CabRouteMapping cabRouteMapping;
 
     @CreatedDate
     private Date creationTime;
@@ -49,6 +46,18 @@ public class Route {
 
     public Date getModificationTime() {
         return modificationTime;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
+
+    public void setModificationTime(Date modificationTime) {
+        this.modificationTime = modificationTime;
     }
 
     public long getId() {
@@ -75,48 +84,12 @@ public class Route {
         this.stops = stops;
     }
 
-    public Set<CabRequest> getCabRequests() {
-        return cabRequests;
-    }
-
-    public void setCabRequests(Set<CabRequest> cabRequests) {
-        this.cabRequests = cabRequests;
-    }
-
-    public Cab getCab() {
-        return cab;
-    }
-
-    public void setCab(Cab cab) {
-        this.cab = cab;
-    }
-
-    public List<Newer> getCabbies() {
-        return newers;
-    }
-
-    public void setCabbies(List<Newer> cabbies) {
-        this.newers = cabbies;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     @Override
     public String toString() {
         return "Route{" +
                 "id=" + id +
                 ", routeName='" + routeName + '\'' +
                 ", stops=" + stops +
-                ", cab=" + cab +
-                ", cabbies=" + newers +
-                ", cabRequests=" + cabRequests +
-                ", isActive=" + isActive +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +
                 '}';

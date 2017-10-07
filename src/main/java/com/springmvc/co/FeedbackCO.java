@@ -3,19 +3,12 @@ package com.springmvc.co;
 import com.springmvc.entity.Newer;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.Date;
 
-/**
- * Created by diwakar on 02/10/17.
- */
-public class FeedbackCommand {
+public class FeedbackCO {
 
     @NotNull
     private Date date;
-
-    @NotNull
-    private String driverName;
 
     private Newer newer;
 
@@ -25,14 +18,6 @@ public class FeedbackCommand {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getDriverName() {
-        return driverName;
-    }
-
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
     }
 
     public Newer getNewer() {
@@ -45,9 +30,8 @@ public class FeedbackCommand {
 
     @Override
     public String toString() {
-        return "FeedbackCommand{" +
+        return "FeedbackCO{" +
                 "date=" + date +
-                ", driverName='" + driverName + '\'' +
                 ", newer=" + newer +
                 '}';
     }

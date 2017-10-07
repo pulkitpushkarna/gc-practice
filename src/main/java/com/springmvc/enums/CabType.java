@@ -1,14 +1,14 @@
 package com.springmvc.enums;
 
-public enum CabRequestType {
+//TODO: PHASE -II : Remove hard coded and allow to Add/Edit from UI
+public enum CabType {
 
-    AD_HOC("Ad-hoc"),
-//    ONE_TIME("One-Time"),
-    PERMANENT("Permanent");
+    FOUR_SEARTER("Four Seater"),
+    SEVEN_SEATER("Seven Seater");
 
     private String name;
 
-    CabRequestType(String name) {
+    CabType(String name) {
         this.name = name;
     }
 

@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created by diwakar on 17/09/17.
- */
+//TODO: Rename to Role
 public enum UserRole {
     ROLE_GOD("God"), ROLE_ADMIN("Admin"), ROLE_NEWER("Newer");
 

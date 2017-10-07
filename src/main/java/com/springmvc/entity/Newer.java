@@ -9,11 +9,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Newer implements Serializable{
+public class Newer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,35 +20,48 @@ public class Newer implements Serializable{
 
     private long newerId;
 
+    //    TODO: remove
     private String username;
 
+    //    TODO: change to name
     private String firstName;
 
     private String lastName;
 
     private String email;
 
+    //    TODO: Remove
     private String password;
 
-    @Enumerated(value = EnumType.STRING)
-    private UserRole userRole ;
+    private String reportingManagerEmail;
 
-    @ManyToMany
-    private List<Route> newerRoutes;
+    @Enumerated(value = EnumType.STRING)
+    private UserRole userRole;
+
 
     private String managerEmail;
 
-    @ManyToOne
-    private Cab cab;
+    @OneToMany(mappedBy = "requester")
+    private List<CabRequest> cabRequests;
 
-    @OneToMany(mappedBy = "newer")
-    private Set<CabRequest> cabRequests;
+    @OneToMany(mappedBy = "requester")
+    private NewerRouteMapping newerRouteMapping;
+
+    private boolean isPaying;
 
     @CreatedDate
     private Date creationTime;
 
     @LastModifiedDate
     private Date modificationTime;
+
+    public boolean isPaying() {
+        return isPaying;
+    }
+
+    public void setPaying(boolean paying) {
+        isPaying = paying;
+    }
 
     public UserRole getUserRole() {
         return userRole;
@@ -128,37 +140,6 @@ public class Newer implements Serializable{
         this.email = email;
     }
 
-    public List<Route> getRoute() {
-        return newerRoutes;
-    }
-
-    public void setRoute(List<Route> route) {
-        this.newerRoutes = route;
-    }
-
-    public Cab getCab() {
-        return cab;
-    }
-
-    public void setCab(Cab cab) {
-        this.cab = cab;
-    }
-
-    public List<Route> getNewerRoutes() {
-        return newerRoutes;
-    }
-
-    public void setNewerRoutes(List<Route> newerRoutes) {
-        this.newerRoutes = newerRoutes;
-    }
-
-    public Set<CabRequest> getCabRequests() {
-        return cabRequests;
-    }
-
-    public void setCabRequests(Set<CabRequest> cabRequests) {
-        this.cabRequests = cabRequests;
-    }
 
     public void setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
@@ -172,7 +153,33 @@ public class Newer implements Serializable{
         this.managerEmail = managerEmail;
     }
 
+    public String getReportingManagerEmail() {
+        return reportingManagerEmail;
+    }
+
+    public void setReportingManagerEmail(String reportingManagerEmail) {
+        this.reportingManagerEmail = reportingManagerEmail;
+    }
+
+    public List<CabRequest> getCabRequests() {
+        return cabRequests;
+    }
+
+    public void setCabRequests(List<CabRequest> cabRequests) {
+        this.cabRequests = cabRequests;
+    }
+
+
+    public NewerRouteMapping getNewerRouteMapping() {
+        return newerRouteMapping;
+    }
+
+    public void setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
+        this.newerRouteMapping = newerRouteMapping;
+    }
+
     @Override
+
     public String toString() {
         return "Newer{" +
                 "id=" + id +
@@ -183,9 +190,7 @@ public class Newer implements Serializable{
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userRole=" + userRole +
-                ", newerRoutes=" + newerRoutes +
                 ", managerEmail=" + managerEmail +
-                ", cab=" + cab +
                 ", cabRequests=" + cabRequests +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +

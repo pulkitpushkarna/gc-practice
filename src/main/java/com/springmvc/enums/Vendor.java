@@ -1,14 +1,15 @@
 package com.springmvc.enums;
 
-public enum CabRequestType {
+public enum Vendor {
 
-    AD_HOC("Ad-hoc"),
-//    ONE_TIME("One-Time"),
-    PERMANENT("Permanent");
+    CITY_HEART("City Heart"),
+    CAR_CART("Car Cart"),
+    JSR("JSR"),
+    RIDHI_TRAVELS("Ridhi Travels");
 
     private String name;
 
-    CabRequestType(String name) {
+    Vendor(String name) {
         this.name = name;
     }
 
