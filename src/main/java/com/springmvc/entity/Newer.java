@@ -44,8 +44,8 @@ public class Newer implements Serializable {
     @OneToMany(mappedBy = "requester")
     private List<CabRequest> cabRequests;
 
-    @OneToMany(mappedBy = "requester")
-    private NewerRouteMapping newerRouteMapping;
+    @OneToMany(mappedBy = "newer")
+    private List<NewerRouteMapping> newerRouteMapping;
 
     private boolean isPaying;
 
@@ -170,11 +170,11 @@ public class Newer implements Serializable {
     }
 
 
-    public NewerRouteMapping getNewerRouteMapping() {
+    public List<NewerRouteMapping> getNewerRouteMapping() {
         return newerRouteMapping;
     }
 
-    public void setNewerRouteMapping(NewerRouteMapping newerRouteMapping) {
+    public void setNewerRouteMapping(List<NewerRouteMapping> newerRouteMapping) {
         this.newerRouteMapping = newerRouteMapping;
     }
 

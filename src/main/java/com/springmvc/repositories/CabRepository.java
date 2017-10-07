@@ -12,9 +12,5 @@ import java.util.List;
  */
 @Repository
 public interface CabRepository extends PagingAndSortingRepository<Cab, Long> {
-
-    List<Cab> findAllByRouteIsNull();
-
     Cab findByVehicleRegNumber(String vehicleRegNo);
-
 }

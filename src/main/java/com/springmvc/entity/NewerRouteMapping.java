@@ -1,7 +1,6 @@
 package com.springmvc.entity;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -17,19 +16,19 @@ public class NewerRouteMapping {
     private long id;
 
     @ManyToOne
-    Route route;
+    private Route route;
 
     @ManyToOne
-    Newer newer;
+    private Newer newer;
 
-    boolean isActive;
+    private boolean isActive;
 
     @ManyToOne
-    CabRequest cabRequest;
+    private CabRequest cabRequest;
 
-    Date endDate;
+    private Date endDate;
 
-    Date joinedDate;
+    private Date joinedDate;
 
     @CreatedDate
     private Date creationTime;

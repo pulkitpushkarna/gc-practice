@@ -31,7 +31,7 @@ public class CabRequestService {
 
     public List<CabRequest> getCabRequestsForNewer() {
         Newer newer = springSecurityService.getCurrentUser();
-        return cabRequestRepository.findAllByNewerAndCabRequestStatus(newer, CabRequestStatus.APPLIED);
+        return null;
     }
 
     public void cancelCabRequest(Long cabRequestId) {
@@ -67,6 +67,6 @@ public class CabRequestService {
 
     public List<CabRequest> getApprovedAdhocCabRequestsOfNewer() {
         Newer newer = springSecurityService.getCurrentUser();
-        return cabRequestRepository.findAllByNewerAndCabRequestStatusAndCabRequestType(newer, CabRequestStatus.APPROVED, CabRequestType.AD_HOC);
+        return null;
     }
 }

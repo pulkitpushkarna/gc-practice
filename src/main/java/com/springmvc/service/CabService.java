@@ -20,7 +20,7 @@ public class CabService {
     private CabRepository cabRepository;
 
     public List<Cab> getCabsWithNoRoute(){
-        return cabRepository.findAllByRouteIsNull();
+        return null;
     }
 
     public List<Cab> getAllCabs(){
