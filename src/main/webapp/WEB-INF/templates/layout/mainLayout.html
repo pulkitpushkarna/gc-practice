@@ -42,19 +42,24 @@
                     </li>
 
                     <li>
-                        <a th:href="@{/costManagement}"><i class="fa fa-file"></i> <span class="nav-label">Cost Management</span> </a>
+                        <a th:href="@{/costManagement}"><i class="fa fa-rupee"></i> <span class="nav-label">Cost Management</span> </a>
                     </li>
                     <li>
-                        <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Adhoc Cab Requests</span> </a>
+                        <a><i class="fa fa-list"></i> <span class="nav-label">Cab Requests</span> </a>
+                        <ul class="nav nav-third-level collapse">
+                            <li>
+                                <a th:href="@{/adhocCabRequestsForApproval}">Adhoc</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/permanentCabRequestsForApproval}">Permanent</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Permanent Cab Requests</span> </a>
+                        <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-angle-double-right"></i> <span class="nav-label">approvedAdhocCabRequests</span> </a>
                     </li>
                     <li>
-                        <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">approvedAdhocCabRequests</span> </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/route}"><i class="fa fa-file"></i> <span class="nav-label">Route</span> </a>
+                        <a th:href="@{/route}"><i class="fa fa-align-justify"></i> <span class="nav-label">Route</span> </a>
                     </li>
                 </ul>
             </div>
