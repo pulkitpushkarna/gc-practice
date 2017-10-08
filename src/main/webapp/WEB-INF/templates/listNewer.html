@@ -8,25 +8,50 @@
 </head>
 <body>
 <div class="row" layout:fragment="content">
-    <table class="table table-border">
-        <tr class="row">
-            <th class="col-md-3">EmpId</th>
-            <th class="col-md-3">Name</th>
-            <th class="col-md-3">email</th>
-            <th class="col-md-3">Role</th>
-        </tr>
-        <tr class="row" th:each="requester : ${newers}">
-            <td class="col-md-3" th:text="${requester.newerId}"></td>
-            <td class="col-md-3" th:text="${requester.firstName+ ' ' +requester.lastName}"></td>
-            <td class="col-md-3" th:text="${requester.email}"></td>
-            <td class="col-md-3">
-                <select th:id="${'selected-role-'+requester.newerId}" th:attr="data-id=${requester.newerId}" name="role">
-                    <option th:text="${requester.userRole.name}"></option>
-                    <option th:each="role : ${T(com.springmvc.enums.UserRole).listRolesExcept(requester.userRole)}" th:value="${role}" th:text="${role.getName()}"></option>
-                </select>
-            </td>
-        </tr>
-    </table>
+    <div class="col-xs-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Manage Permissions</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>EmpId</th>
+                            <th>Name</th>
+                            <th>email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="requester : ${newers}">
+                            <td th:text="${requester.newerId}"></td>
+                            <td th:text="${requester.firstName+ ' ' +requester.lastName}"></td>
+                            <td th:text="${requester.email}"></td>
+                            <td>
+                                <select th:id="${'selected-role-'+requester.newerId}"
+                                        th:attr="data-id=${requester.newerId}" name="role">
+                                    <option th:text="${requester.userRole.name}"></option>
+                                    <option th:each="role : ${T(com.springmvc.enums.UserRole).listRolesExcept(requester.userRole)}"
+                                            th:value="${role}" th:text="${role.getName()}"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <th:block layout:fragment="post-common-scripts">
