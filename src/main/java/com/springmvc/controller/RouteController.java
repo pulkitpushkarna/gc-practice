@@ -76,7 +76,9 @@ public class RouteController {
     }
 
     @RequestMapping(value = "/route/remove", method = RequestMethod.DELETE)
-    public void deleteRoute(@RequestParam long id) {
+    @ResponseBody
+    public boolean deleteRoute(@RequestParam long id){
         routeService.deleteRoute(id);
+        return true;
     }
 }

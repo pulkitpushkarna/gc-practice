@@ -86,6 +86,10 @@ public class RouteService {
     }
 
     public void deleteRoute(long id) {
+        Route route = routeRepository.findOne(id);
+        CabRouteMapping cabRouteMapping = cabRouteMappingRepository.findByRoute(route);
+        cabRouteMapping.setRoute(null);
+        cabRouteMappingRepository.save(cabRouteMapping);
         routeRepository.delete(id);
     }
 
