@@ -31,6 +31,7 @@
                         <th>Created Time</th>
                         <th>Pickup Location</th>
                         <th>Drop Location</th>
+                        <th>Reason</th>
                         <th align="center">Action</th>
                     </tr>
                     </thead>
@@ -41,6 +42,7 @@
                         <td th:text="${cabRequest.creationTime}"> </td>
                         <td th:text="${cabRequest.pickUpLocation}"> </td>
                         <td th:text="${cabRequest.dropLocation}"> </td>
+                        <td th:text="${cabRequest.reason}"> </td>
                         <td>
                             <div class="action">
                                 <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
@@ -59,13 +61,31 @@
     </div>
 </div>
 
+    <th:block th:include="feedback :: adhoc-cab-feedback-form('adhoc-cab-feedback-modal', 'adhoc-cab-feedback-form-id')"></th:block>
+</div>
+
 <th:block layout:fragment="post-common-scripts">
     <script>
-    jQuery(document).ready(function(){
-        jQuery("input[name='feedback']").click(function(){
-            alert("Feedback");
-        })
-    });
+        jQuery(document).on("click", '.adHocFeedbackFormModalButton', function(){
+            var newerId = jQuery(this).data('newer-id');
+            var cabRequestId = jQuery(this).data('cab-request-id');
+
+            jQuery(".modal-body #newerId").val(newerId);
+            jQuery(".modal-body #cabRequestId").val(cabRequestId);
+            jQuery(".modal-body #feedbackText").val('');
+        });
+
+        jQuery("#adhoc-cab-feedback-form-id #submit").on("click", function () {
+            var form = jQuery("#adhoc-cab-feedback-form-id");
+            var url = form.attr('action');
+            var data = form.serialize();
+            makePostCall(url, data, function(data) {
+                console.log("Feedback submitted...")
+            }, function(e, h){
+                console.log("ERROR : ",h);
+                console.log("ERROR : ",e);
+            })
+        });
     </script>
 </th:block>
 
