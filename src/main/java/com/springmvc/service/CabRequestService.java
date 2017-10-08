@@ -8,6 +8,7 @@ import com.springmvc.repositories.*;
 import com.springmvc.vo.CabRequestDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,16 @@ public class CabRequestService {
 
     @Autowired
     NewerRouteMappingRepository newerRouteMappingRepository;
+
+    public boolean checkWhetherUserHavePermanentRequest(){
+        boolean resultValue = true;
+        Newer newer = springSecurityService.getCurrentUser();
+        List<CabRequest> cabRequestList=cabRequestRepository.findAllByRequesterAndCabRequestType(newer, CabRequestType.PERMANENT);
+        if(ObjectUtils.isEmpty(cabRequestList)){
+            resultValue = false;
+        }
+        return resultValue;
+    }
 
     public void saveCabRequest(CabRequestCO cabRequestCO) {
         CabRequest cabRequest = new CabRequest();

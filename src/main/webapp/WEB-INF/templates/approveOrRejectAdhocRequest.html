@@ -86,6 +86,7 @@
                             url: "/rejectCabRequest",
                             data: {cabRequestId: cabRequestId},
                             success : function(){
+
                                 toastr.options.progressBar = true;
                                 toastr.success('Your Cab Request has been submitted');
                                 toastr.options.onHidden = function() { window.location.href="/adhocCabRequestsForApproval"; }

@@ -32,6 +32,13 @@ public class CabRequestController {
     @Autowired
     SpringSecurityService springSecurityService;
 
+
+    @RequestMapping("/checkWhetherUserHavePermanentRequest")
+    @ResponseBody
+    boolean checkWhetherUserHavePermanentRequest(){
+        return cabRequestService.checkWhetherUserHavePermanentRequest();
+    }
+
     @RequestMapping(value = "/cancelCabRequest")
     @ResponseBody
     public String cancelCabRequest(Long cabRequestId) {
@@ -41,8 +48,7 @@ public class CabRequestController {
 
     @RequestMapping("/cabRequestSubmission")
     @ResponseBody
-    public CabRequestCO cabRequestSubmission(CabRequestCO cabRequestCO) {
-        System.out.println("In controller");
+    public CabRequestCO cabRequestSubmission(CabRequestCO cabRequestCO){
         cabRequestService.saveCabRequest(cabRequestCO);
         return cabRequestCO;
     }
