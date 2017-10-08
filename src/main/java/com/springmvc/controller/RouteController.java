@@ -2,6 +2,7 @@ package com.springmvc.controller;
 
 import com.springmvc.co.RouteCommand;
 import com.springmvc.entity.Cab;
+import com.springmvc.entity.Route;
 import com.springmvc.entity.Zone;
 import com.springmvc.exceptions.BindingException;
 import com.springmvc.service.CabService;

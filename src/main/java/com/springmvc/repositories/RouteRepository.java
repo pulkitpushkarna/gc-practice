@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RouteRepository extends PagingAndSortingRepository<Route, Long> {
-
+  Route findByRouteName(String routeName);
 }

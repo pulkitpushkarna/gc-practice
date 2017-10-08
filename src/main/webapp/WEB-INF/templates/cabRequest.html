@@ -129,7 +129,7 @@
                 if (cabRequestType === "PERMANENT") {
                     data.zoneId = zoneId;
                 } else {
-                    data.travelDate = pickUpDate;
+                    data.travelDate = $.trim(pickUpDate);
                     data.reason = reason;
                 }
 

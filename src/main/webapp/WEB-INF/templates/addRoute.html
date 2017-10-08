@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <label>Route Name</label>
                                 <input type="text" id="routeName"
-                                       th:value="${route != null && route.routeName != null}? ${route.routeName}:''"
+                                       th:disabled="${route != null && route.routeName != null}" th:value="${route != null && route.routeName != null}? ${route.routeName}:''"
                                        class="form-control">
 
                             </div>
@@ -128,6 +128,8 @@
                         $('#wrapper').removeClass('sk-loading');
                         toastr.options.progressBar = true;
                         toastr.success('Route has been Added');
+                        console.log(data);
+                        window.location.href="/route"
                     },
                     'error':function(){
                         $('#wrapper').removeClass('sk-loading');

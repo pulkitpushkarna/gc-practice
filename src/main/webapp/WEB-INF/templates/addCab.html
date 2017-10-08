@@ -76,6 +76,7 @@
                     'success': function(data) {
                         $('#wrapper').removeClass('sk-loading');
                         toastr.options.progressBar = true;
+                        window.location.href = "/";
                         toastr.success('Cab has been added');
                     },
                     error:function(){

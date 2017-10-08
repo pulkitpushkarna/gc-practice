@@ -60,9 +60,10 @@ public class RouteService {
 
     public void insertRoute(RouteCommand routeCommand) {
         if (routeCommand != null) {
+            Route routeToUpdate = routeRepository.findByRouteName(routeCommand.getRouteName());
             List<String> stopList = routeCommand.getStops();
             Cab cab = cabRepository.findByVehicleRegNumber(routeCommand.getCabRegId());
-            Route route = new Route();
+            Route route = (routeToUpdate == null) ? new Route() : routeToUpdate;
             List<Stop> stops = new ArrayList<>();
             for (String stopName : stopList) {
                 Stop stop = new Stop();
