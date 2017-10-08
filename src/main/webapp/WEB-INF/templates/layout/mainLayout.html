@@ -26,7 +26,7 @@
     <div layout:fragment="page-header">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav metismenu" id="side-menu">
+                <ul sec:authorize="isAuthenticated()" class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element text-center">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -38,24 +38,30 @@
                             IN+
                         </div>
                     </li>
-                    <li sec:authorize="isAuthenticated() and hasRole('ROLE_GOD')">
+                    <li sec:authorize="hasRole('ROLE_GOD')">
                         <a th:href="@{/admin/list}"><i class="fa fa-shield"></i> <span class="nav-label">Manage Permission</span> </a>
                     </li>
-                    <li class="active">
+                    <li class="active" sec:authorize="hasRole('ROLE_NEWER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_GOD')">
                         <a th:href="@{/}"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOD')">
                         <a><i class="fa fa-thumbs-up"></i> <span class="nav-label">Newer Request</span>  <span class="fa fa-angle-right ml-8"></span></a>
                         <ul class="nav nav-third-level collapse">
                             <li>
-                                <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Adhoc</span> </a>
+                                <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Pending Adhoc</span> </a>
                             </li>
                             <li>
-                                <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Permanent</span> </a>
+                                <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Pending Permanent</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/adhocCabRequestsApprovedByAdmin}"><i class="fa fa-minus"></i> <span class="nav-label">Approved Adhoc</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/permanentCabRequestsApprovedByAdmin}"><i class="fa fa-minus"></i> <span class="nav-label">Approved Permanent</span> </a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasRole('ROLE_NEWER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_GOD')">
                         <a><i class="fa fa-list"></i> <span class="nav-label">My Rides</span> <span class="fa fa-angle-right ml-8"></span> </a>
                         <ul class="nav nav-third-level collapse">
                             <li>
@@ -72,13 +78,13 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOD')">
                         <a th:href="@{/route}"><i class="fa fa-location-arrow"></i> <span class="nav-label">Route</span> </a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOD')">
                         <a th:href="@{/cab/add}"><i class="fa fa-plus-square-o"></i> <span class="nav-label">Add Cab</span> </a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOD')">
                         <a th:href="@{/costManagement}"><i class="fa fa-rupee"></i> <span class="nav-label">Cost Management</span> </a>
                     </li>
                 </ul>
@@ -91,7 +97,7 @@
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     </div>
-                    <ul class="nav navbar-top-links navbar-right">
+                    <ul sec:authorize="isAuthenticated()" class="nav navbar-top-links navbar-right">
                         <li>
                             <a th:href="@{/logout}">
                                 <i class="fa fa-sign-out"></i> Log out

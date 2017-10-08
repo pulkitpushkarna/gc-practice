@@ -78,8 +78,18 @@ public class CabRequestService {
         return cabRequestList;
     }
 
+    public List<CabRequest> getPermanentCabRequestsApprovedByAdmin() {
+        List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPROVED, CabRequestType.PERMANENT);
+        return cabRequestList;
+    }
+
     public List<CabRequest> adhocCabRequestsForApproval() {
         List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPLIED, CabRequestType.AD_HOC);
+        return cabRequestList;
+    }
+
+    public List<CabRequest> adhocCabRequestsApprovedByAdmin() {
+        List<CabRequest> cabRequestList = cabRequestRepository.findAllByCabRequestStatusAndCabRequestType(CabRequestStatus.APPROVED, CabRequestType.AD_HOC);
         return cabRequestList;
     }
 
