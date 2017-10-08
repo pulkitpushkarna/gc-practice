@@ -107,6 +107,13 @@ public class Newer implements Serializable {
         this.lastName = lastName;
     }
 
+    public String getName() {
+        if (getFirstName().isEmpty() && getLastName().isEmpty())
+            return getEmail();
+        else
+            return (getLastName().isEmpty() ? getFirstName() : getFirstName() + " " + getLastName());
+    }
+
     public String getEmail() {
         return email;
     }
