@@ -44,7 +44,7 @@ public class SocialConfig implements SocialConfigurer {
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
         System.out.println("adding connection factory");
-        connectionFactoryConfigurer.addConnectionFactory(new GoogleConnectionFactory("359140698416-gv9e78dkjjrq0al0fkm31lp8hvdsnhqj.apps.googleusercontent.com","tGP8iMqHLbMSxsY2On_jEZZM"));
+        connectionFactoryConfigurer.addConnectionFactory(new GoogleConnectionFactory(appConfig.getGoogleId(),appConfig.getGoogleSecret()));
     }
 
     /**
