@@ -42,7 +42,7 @@
                                 <ul class="dropdown-menu dropdown-user">
                                     <li><a th:href="@{'/cabRequestDetails/'+${cabRequest.id}}">View Details</a>
                                     </li>
-                                    <li><a href="#">Cancel</a>
+                                    <li><a id="cancel" th:attr="cabRequestId=${cabRequest.id}">Cancel</a>
                                     </li>
                                 </ul>
                             </div>
@@ -58,9 +58,19 @@
 <th:block layout:fragment="post-common-scripts">
     <script>
     jQuery(document).ready(function(){
-        jQuery("input[name='feedback']").click(function(){
-            alert("Feedback");
-        })
+
+
+    jQuery("#cancel").click(function(){
+            var cabRequestId = jQuery(this).attr("cabRequestId");
+            jQuery.ajax({
+                url:"/cancelCabRequest",
+                data :{cabRequestId: cabRequestId},
+                success:function(){
+                    location.reload();
+                }
+            });
+        });
+
     });
     </script>
 </th:block>
