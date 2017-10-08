@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CabRequestRepository extends CrudRepository<CabRequest, Long>{
 
-//    List<CabRequest> findAllByNewerAndCabRequestStatus(Newer newer, CabRequestStatus cabRequestStatus);
+    List<CabRequest> findAllByRequesterAndCabRequestType(Newer newer, CabRequestType cabRequestType);
 
     List<CabRequest> findAllByCabRequestStatusAndCabRequestType(CabRequestStatus cabRequestStatus, CabRequestType cabRequestType);
 

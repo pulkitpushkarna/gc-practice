@@ -105,7 +105,29 @@
 }
 
 .action .dropdown-menu{
-        left:-50%;
+
+}
+
+.ml-8{
+ margin-left:8px;
+}
+
+.active .fa-angle-right:before{
+   content: "\f107";
+}
+
+.button-group{
+    background: #fff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.p-15{
+    padding:15px;
+}
+.dropdown-toggle{
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 

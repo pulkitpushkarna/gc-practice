@@ -22,7 +22,7 @@ public class FeedbackComment {
     private String comment;
 
     @ManyToOne
-    Newer commenter;
+    private Newer commenter;
 
     @CreatedDate
     private Date creationTime;

@@ -16,16 +16,17 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    String feedback;
+    private String feedback;
 
     @OneToOne
-    CabRequest cabRequest;
+    private CabRequest cabRequest;
 
     @ManyToOne
-    Newer initiater;
+    private Newer initiator;
 
     @OneToMany(mappedBy = "feedback")
-    List<FeedbackComment> comments;
+    @OrderBy("creationTime ASC")
+    private List<FeedbackComment> comments;
 
     @CreatedDate
     private Date creationTime;
@@ -71,12 +72,12 @@ public class Feedback {
         return this;
     }
 
-    public Newer getInitiater() {
-        return initiater;
+    public Newer getInitiator() {
+        return initiator;
     }
 
-    public Feedback setInitiater(Newer initiater) {
-        this.initiater = initiater;
+    public Feedback setInitiator(Newer initiator) {
+        this.initiator = initiator;
         return this;
     }
 

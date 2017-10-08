@@ -1,17 +1,18 @@
 package com.springmvc.co;
 
-public class FeedbackCO {
+import com.springmvc.entity.Feedback;
 
-    private Long cabRequestId;
+public class FeedbackCommentCO {
 
+    private Feedback feedback;
     private String comment;
 
-    public Long getCabRequestId() {
-        return cabRequestId;
+    public Feedback getFeedback() {
+        return feedback;
     }
 
-    public void setCabRequestId(Long cabRequestId) {
-        this.cabRequestId = cabRequestId;
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
 
     public String getComment() {
@@ -24,8 +25,8 @@ public class FeedbackCO {
 
     @Override
     public String toString() {
-        return "FeedbackCO{" +
-                "cabRequestId=" + cabRequestId +
+        return "FeedbackCommentCO{" +
+                "feedback=" + feedback.getId() +
                 ", comment='" + comment + '\'' +
                 '}';
     }

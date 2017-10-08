@@ -60,6 +60,10 @@ gretty {
     contextPath = '/'
 }
 
+war {
+    baseName = 'ROOT'
+}
+
 //tomcatRun {
 //    contextPath = ""
 //    httpPort = 8080
