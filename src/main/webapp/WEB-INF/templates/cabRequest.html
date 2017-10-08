@@ -112,6 +112,7 @@
                 });
 
                 jQuery("#submit").click(function(){
+
                     var cabRequestType = jQuery("input[name='cabRequestType']:checked").val()
                     var pickUpDate = jQuery("#pickUpDate").val();
                     var dropLocation = jQuery("#dropLocation").val();
@@ -134,6 +135,12 @@
                    }
 
                     jQuery.ajax({
+                        url:"/checkWhetherUserHavePermanentRequest",
+                        success:function(data){
+                            if(data === true && cabRequestType==="PERMANENT"){
+                                toastr.error('User already have a permanent request');
+                            }else{
+                                        jQuery.ajax({
                         url: "/cabRequestSubmission",
                         type: "Post",
                         data: data,
@@ -147,6 +154,9 @@
                         },
                         error:function(){
                             toastr.error('Cab request failed','Please try after sometime')
+                        }
+                    });
+                            }
                         }
                     });
                 });

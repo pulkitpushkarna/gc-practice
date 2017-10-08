@@ -34,6 +34,13 @@ public class CabRequestController {
     @Autowired
     SpringSecurityService springSecurityService;
 
+
+    @RequestMapping("/checkWhetherUserHavePermanentRequest")
+    @ResponseBody
+    boolean checkWhetherUserHavePermanentRequest(){
+        return cabRequestService.checkWhetherUserHavePermanentRequest();
+    }
+
     @RequestMapping(value = "/cancelCabRequest")
     @ResponseBody
     public String cancelCabRequest(Long cabRequestId){
