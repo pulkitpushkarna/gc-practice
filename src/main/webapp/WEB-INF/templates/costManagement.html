@@ -79,7 +79,7 @@
             jQuery("#filter").on("change",function(event){
                 var data = event.currentTarget.value;
                 var arr = data.split("-");
-                window.location.href="http://localhost:8080/costManagement/" + arr[0]+"/"+arr[1];
+                window.location.href="/costManagement/" + arr[0]+"/"+arr[1];
             });
         });
 
