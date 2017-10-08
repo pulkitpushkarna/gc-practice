@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{application.title.short}"></title>
@@ -36,6 +37,9 @@
                         <div class="logo-element">
                             IN+
                         </div>
+                    </li>
+                    <li sec:authorize="isAuthenticated() and hasRole('ROLE_GOD')">
+                        <a th:href="@{/admin/list}"><i class="fa fa-shield"></i> <span class="nav-label">Manage Permission</span> </a>
                     </li>
                     <li class="active">
                         <a th:href="@{/}"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
