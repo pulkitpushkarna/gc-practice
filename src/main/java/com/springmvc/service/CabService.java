@@ -49,4 +49,8 @@ public class CabService {
         cabRepository.save(cab);
     }
 
+    public Cab getCabByRegId(String regId){
+        return cabRepository.findByVehicleRegNumber(regId);
+    }
+
 }

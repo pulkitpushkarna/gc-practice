@@ -44,11 +44,11 @@ public class Bootstrap {
     void startUpEvent() {
 
 
-//        for (BaseZone zone : BaseZone.values()) {
-//            ZoneCO zoneCO = new ZoneCO();
-//            zoneCO.setName(zone.getName());
-//            zoneService.saveZone(zoneCO);
-//
+        for (BaseZone zone : BaseZone.values()) {
+            ZoneCO zoneCO = new ZoneCO();
+            zoneCO.setName(zone.getName());
+            zoneService.saveZone(zoneCO);
+        }
 //            ZonePrice zp = new ZonePrice();
 //            zp.setCabType(CabType.FOUR_SEATER);
 //            zp.setCost(10000);

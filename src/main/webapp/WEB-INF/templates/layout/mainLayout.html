@@ -29,8 +29,8 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element text-center">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <div class="field-content"><img src="http://success-factor.s3.amazonaws.com/prod/profilePicFolder/68b9d178-a6ae-4337-944c-2f4ea2654bbf_jitender.chand1@tothenew.com.jpg"></div>
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Jitender Chand</strong>
+                                <div class="field-content"><img th:src="${#session.getAttribute('profilePicUrl')}"></div>
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold" th:text="${#session.getAttribute('userFullName')}" ></strong>
                              </span>  </span> </a>
                         </div>
                         <div class="logo-element">
