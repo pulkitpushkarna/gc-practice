@@ -35,6 +35,10 @@ public class CabRequest {
 
     String dropLocation;
 
+    String reason;
+
+    String details;
+
     @Enumerated(EnumType.STRING)
     CabRequestType cabRequestType;
 
@@ -51,6 +55,22 @@ public class CabRequest {
     private CabRequestStatus cabRequestStatus;
 
     private Date approvalDate;
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
     public List<NewerRouteMapping> getNewerRouteMapping() {
         return newerRouteMapping;

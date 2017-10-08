@@ -10,12 +10,11 @@
 <div class="row" layout:fragment="content">
     <table>
         <tr th:each="cabRequest :${cabRequestList}">
-            <td th:text="${cabRequest.travelDate}"> </td>
             <td th:text="${cabRequest.requester.email}"> </td>
-            <td th:text="${cabRequest.pickUpLocation}"> </td>
-            <td th:text="${cabRequest.dropLocation}"> </td>
+            <td th:text="${cabRequest.zone.name}"></td>
+            <td th:text="${cabRequest.requester.email}"> </td>
             <td th:text="${cabRequest.creationTime}"> </td>
-            <td th:text="${cabRequest.details}"> </td>
+            <td th:text="${cabRequest.cabRequestStatus}"> </td>
             <td><input type="button" name="feedback" th:attr="request-id=${cabRequest.id}" value="Feedback"> </td>
         </tr>
     </table>

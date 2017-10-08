@@ -14,6 +14,8 @@
     <div th:text="${cabRequest.dropLocation}"> </div>
     <div th:text="${cabRequest.creationTime}"> </div>
     <div th:text="${cabRequest.cabRequestStatus}"> </div>
+    <div th:text="${cabRequest.reason}"> </div>
+    <div><input type="text" id="details"/></div>
     <button id="approve" value="Approve" th:attr="cab-request-id=${cabRequest.id}">Approve</button>
     <button id="reject" value="Reject" th:attr="cab-request-id=${cabRequest.id}">reject</button>
 </div>
@@ -22,10 +24,14 @@
     <script>
             jQuery(document).ready(function(){
                 jQuery("#approve").click(function(){
+                    var details = jQuery("#details").val();
                     var cabRequestId = jQuery(this).attr("cab-request-id");
                     jQuery.ajax({
                             url: "/approveCabRequest",
-                            data: {cabRequestId: cabRequestId},
+                            data: {
+                                    cabRequestId: cabRequestId,
+                                    details: details
+                                    },
                             success : function(){
                                window.location.href="/adhocCabRequestsForApproval";
                             }
@@ -38,7 +44,7 @@
                             url: "/rejectCabRequest",
                             data: {cabRequestId: cabRequestId},
                             success : function(){
-                                window.location.href="/adhocCabRequestsForApproval";
+                               window.location.href="/adhocCabRequestsForApproval";
                             }
                         });
                 });

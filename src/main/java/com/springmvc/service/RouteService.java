@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by diwakar on 02/10/17.
@@ -42,6 +43,7 @@ public class RouteService {
                 Cab cab = cabRouteMapping.get().getCab();
                 routeVO.setCabName(cab.getVehicleModel() + "-" + cab.getVehicleRegNumber());
             }
+            routeVO.setRouteId(route.getId());
             routeVO.setZone(route.getZone().getName());
             routeVO.setCreatedOn(route.getCreationTime());
             routeVO.setTotalNewersInRoute((int) (route.getNewerRouteMapping().stream().filter(NewerRouteMapping::isActive).count()));
@@ -81,6 +83,21 @@ public class RouteService {
             route.setCabRouteMapping(cabRouteMappings);
             routeRepository.save(route);
         }
+    }
+
+    public void deleteRoute(long id){
+        routeRepository.delete(id);
+    }
+
+    public RouteCommand getRoute(long id){
+        Route route = routeRepository.findOne(id);
+        RouteCommand routeCommand = new RouteCommand();
+        Optional<CabRouteMapping> cabRouteMapping = route.getCabRouteMapping().stream().filter(CabRouteMapping::getActive).findFirst();
+        cabRouteMapping.ifPresent(cabRouteMapping1 -> routeCommand.setCabRegId(cabRouteMapping1.getCab().getVehicleRegNumber()));
+        routeCommand.setRouteName(route.getRouteName());
+        routeCommand.setStops(route.getStops().stream().map(Stop::getStopName).collect(Collectors.toList()));
+        routeCommand.setZoneName(route.getZone().getName());
+        return routeCommand;
     }
 
 }
