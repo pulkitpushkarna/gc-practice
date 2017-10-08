@@ -13,13 +13,6 @@
             <div class="ibox-title">
                 <h5>Submit Cab Request</h5>
                 <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
                 </div>
             </div>
             <div class="ibox-content">
@@ -75,12 +68,12 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <h2 class="text-center">
-                                                Are you sure?
+                                                Do yo want to submit this request?
                                             </h2>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <button id="submit"  type="submit" class="btn btn-primary">Submit</button>
+                                            <button id="submit"  type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -119,10 +112,8 @@
                 });
 
                 jQuery("#submit").click(function(){
-                   var cabRequestType = jQuery("input[name='cabRequestType']:checked").val()
-
+                    var cabRequestType = jQuery("input[name='cabRequestType']:checked").val()
                     var pickUpDate = jQuery("#pickUpDate").val();
-                    console.log("pickUpDate>>>>"+pickUpDate);
                     var dropLocation = jQuery("#dropLocation").val();
                     var projectName = jQuery("#projectName").val();
                     var projectManager = jQuery("#projectManager").val();
@@ -152,7 +143,6 @@
                             jQuery("#pickUpDate").val("");
                             jQuery("#pickUpLocation").val("");
                             jQuery("#reason").val("");
-                            alert("Request submitted successfully!!");
                             toastr.success('Your Cab Request has been submitted');
                         },
                         error:function(){
