@@ -3,22 +3,18 @@ package com.springmvc.controller;
 import com.springmvc.co.CabRequestCO;
 import com.springmvc.entity.CabRequest;
 import com.springmvc.entity.Newer;
-import com.springmvc.entity.Route;
 import com.springmvc.entity.Zone;
 import com.springmvc.enums.CabRequestType;
-import com.springmvc.repositories.CabRequestRepository;
-import com.springmvc.repositories.RouteRepository;
 import com.springmvc.repositories.ZoneRepository;
 import com.springmvc.service.CabRequestService;
-import com.springmvc.vo.CabRequestDetailsVO;
 import com.springmvc.service.SpringSecurityService;
+import com.springmvc.vo.CabRequestDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
@@ -52,10 +48,10 @@ public class CabRequestController {
     }
 
     @RequestMapping("/")
-    public ModelAndView cabRequest(HttpSession httpSession){
+    public ModelAndView cabRequest(HttpSession httpSession) {
         Newer newer = springSecurityService.getCurrentUser();
-        httpSession.setAttribute("profilePicUrl",newer.getProfilePicUrl());
-        httpSession.setAttribute("userFullName",newer.getFirstName()+" "+newer.getLastName());
+        httpSession.setAttribute("profilePicUrl", newer.getProfilePicUrl());
+        httpSession.setAttribute("userFullName", newer.getFirstName() + " " + newer.getLastName());
         List<CabRequestType> cabRequestTypes = Arrays.asList(CabRequestType.values());
         ModelAndView modelAndView = new ModelAndView("cabRequest");
         modelAndView.addObject("zoneList", zoneRepository.findAll());
