@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Created by diwakar on 02/10/17.
- */
 @Service
 public class RouteService {
 
@@ -85,11 +84,11 @@ public class RouteService {
         }
     }
 
-    public void deleteRoute(long id){
+    public void deleteRoute(long id) {
         routeRepository.delete(id);
     }
 
-    public RouteCommand getRoute(long id){
+    public RouteCommand getRoute(long id) {
         Route route = routeRepository.findOne(id);
         RouteCommand routeCommand = new RouteCommand();
         Optional<CabRouteMapping> cabRouteMapping = route.getCabRouteMapping().stream().filter(CabRouteMapping::getActive).findFirst();
@@ -99,5 +98,4 @@ public class RouteService {
         routeCommand.setZoneName(route.getZone().getName());
         return routeCommand;
     }
-
 }

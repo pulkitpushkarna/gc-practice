@@ -4,20 +4,56 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/mainLayout}">
 <head>
-    <title>Sign In</title>
+    <title>Cab Request</title>
 </head>
 <body>
-<div class="row" layout:fragment="content">
-    <div th:text="${cabRequest.travelDate}"> </div>
-    <div th:text="${cabRequest.requester.email}"> </div>
-    <div th:text="${cabRequest.pickUpLocation}"> </div>
-    <div th:text="${cabRequest.dropLocation}"> </div>
-    <div th:text="${cabRequest.creationTime}"> </div>
-    <div th:text="${cabRequest.cabRequestStatus}"> </div>
-    <div th:text="${cabRequest.reason}"> </div>
-    <div><input type="text" id="details"/></div>
-    <button id="approve" value="Approve" th:attr="cab-request-id=${cabRequest.id}">Approve</button>
-    <button id="reject" value="Reject" th:attr="cab-request-id=${cabRequest.id}">reject</button>
+<div class="wrapper wrapper-content animated" layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7">
+            <div class="fuel-table-responsive">
+                <div class="fuel-table">
+                    <div class="heading">
+                        <p class="no-borders"> Details </p>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <p> Request Date</p><div class="right-txt" th:text="${cabRequest.creationTime}"></div>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <p>Travel Date</p><div class="right-txt" th:text="${cabRequest.travelDate}"></div>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <p>Email</p><div class="right-txt" th:text="${cabRequest.requester.email}"></div>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <p>Pickup Location </p><div class="right-txt" th:text="${cabRequest.pickUpLocation}"></div>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <p>Drop Location </p><div class="right-txt" th:text="${cabRequest.dropLocation}"></div>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <p>Reason</p><div class="right-txt" th:text="${cabRequest.reason}"></div>
+                    </div>
+                    <div class="fuel-detal-txt bg-primary">
+                        <p>Status</p><div class="right-txt" th:text="${cabRequest.cabRequestStatus}"></div>
+                    </div>
+                    <div class="fuel-detal-txt">
+                        <div class="form-group">
+                            <label class="no-borders">Message (Optional)</label>
+                            <div class="p-15">
+                                <textarea rows="4" id="details" class="form-control" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 button-group">
+                        <button id="approve" class="btn btn-w-m btn-success" value="Approve" th:attr="cab-request-id=${cabRequest.id}">Approve</button>
+                        <button id="reject" class="btn btn-w-m btn-default" value="Reject" th:attr="cab-request-id=${cabRequest.id}">reject</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <th:block layout:fragment="post-common-scripts">
@@ -33,7 +69,13 @@
                                     details: details
                                     },
                             success : function(){
-                               window.location.href="/adhocCabRequestsForApproval";
+                                toastr.options.progressBar = true;
+                                toastr.success('Your Cab Request has been submitted');
+                                toastr.options.onHidden = function() { window.location.href="/adhocCabRequestsForApproval"; }
+                            },
+                            error:function(){
+                                toastr.options.progressBar = true;
+                                toastr.error('Cab request failed','Please try after sometime')
                             }
                         });
                 });
@@ -44,7 +86,14 @@
                             url: "/rejectCabRequest",
                             data: {cabRequestId: cabRequestId},
                             success : function(){
-                                window.location.href="/adhocCabRequestsForApproval";
+
+                                toastr.options.progressBar = true;
+                                toastr.success('Your Cab Request has been submitted');
+                                toastr.options.onHidden = function() { window.location.href="/adhocCabRequestsForApproval"; }
+                            },
+                            error:function(){
+                                toastr.options.progressBar = true;
+                                toastr.error('Cab request failed','Please try after sometime')
                             }
                         });
                 });
