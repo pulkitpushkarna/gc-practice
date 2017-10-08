@@ -1,6 +1,8 @@
 package com.springmvc.service;
 
+import com.springmvc.entity.Cab;
 import com.springmvc.entity.CabRouteMapping;
+import com.springmvc.entity.Route;
 import com.springmvc.repositories.CabRouteMappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +36,4 @@ public class CabRouteMappingService {
         return list;
 
     }
-
-
 }

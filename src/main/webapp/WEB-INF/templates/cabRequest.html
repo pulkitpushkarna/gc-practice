@@ -25,7 +25,6 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <form role="form">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -69,30 +68,25 @@
                                 <label>Reason</label>
                                 <textarea class="form-control" type="text" id="reason"></textarea>
                             </div>
-                            <div>
-                                <button data-toggle="modal" type="button" data-target="#confirmation"
-                                        class="btn btn-sm btn-primary m-t-n-xs"><strong>Submit</strong></button>
-                                <div class="modal inmodal fade" id="confirmation" tabindex="-1" role="dialog"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <h2 class="text-center">
-                                                    Are you sure?
-                                                </h2>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close
-                                                </button>
-                                                <button id="submit" type="submit" class="btn btn-primary">Submit
-                                                </button>
-                                            </div>
+                        <div>
+                            <button data-toggle="modal" type="button" data-target="#confirmation" class="btn btn-sm btn-primary m-t-n-xs"><strong>Submit</strong></button>
+                            <div class="modal inmodal fade" id="confirmation" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h2 class="text-center">
+                                                Are you sure?
+                                            </h2>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                                            <button id="submit"  type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                </div>
 
                 </div>
             </div>
@@ -147,26 +141,27 @@
                     data.reason = reason;
                 }
 
-                jQuery.ajax({
-                    url: "/cabRequestSubmission",
-                    type: "Post",
-                    data: data,
-                    success: function (data) {
-                        jQuery("#pickUpDate").val("");
-                        jQuery("#dropLocation").val("");
-                        jQuery("#pickUpDate").val("");
-                        jQuery("#pickUpLocation").val("");
-                        jQuery("#reason").val("");
-                        alert("Request submitted successfully!!");
-                        toastr.success('Your Cab Request has been submitted');
-                    },
-                    error: function () {
-                        toastr.error('Cab request failed', 'Please try after sometime')
-                    }
+                    jQuery.ajax({
+                        url: "/cabRequestSubmission",
+                        type: "Post",
+                        data: data,
+                        success:function(data){
+                            jQuery("#pickUpDate").val("");
+                            jQuery("#dropLocation").val("");
+                            jQuery("#pickUpDate").val("");
+                            jQuery("#pickUpLocation").val("");
+                            jQuery("#reason").val("");
+                            toastr.options.progressBar = true;
+                            toastr.success('Your Cab Request has been submitted');
+                        },
+                        error:function(){
+                            toastr.options.progressBar = true;
+                            toastr.error('Cab request failed','Please try after sometime')
+                        }
+                    });
                 });
-            });
-        });
-    </script>
-</th:block>
-</body>
+            } );
+        </script>
+    </th:block>
+    </body>
 </html>

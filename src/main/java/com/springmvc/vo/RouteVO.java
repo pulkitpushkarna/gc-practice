@@ -3,6 +3,7 @@ package com.springmvc.vo;
 import java.util.Date;
 
 public class RouteVO {
+    private long routeId;
     private String name;
     private Date createdOn;
     private String zone;
@@ -10,6 +11,14 @@ public class RouteVO {
     private String endPoint;
     private String cabName;
     private int totalNewersInRoute;
+
+    public long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(long routeId) {
+        this.routeId = routeId;
+    }
 
     public String getName() {
         return name;
@@ -70,9 +79,10 @@ public class RouteVO {
     @Override
     public String toString() {
         return "RouteVO{" +
-                "name='" + name + '\'' +
+                "routeId=" + routeId +
+                ", name='" + name + '\'' +
                 ", createdOn=" + createdOn +
-                ", zone=" + zone +
+                ", zone='" + zone + '\'' +
                 ", startPoint='" + startPoint + '\'' +
                 ", endPoint='" + endPoint + '\'' +
                 ", cabName='" + cabName + '\'' +

@@ -29,8 +29,8 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element text-center">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <div class="field-content"><img src="http://success-factor.s3.amazonaws.com/prod/profilePicFolder/68b9d178-a6ae-4337-944c-2f4ea2654bbf_jitender.chand1@tothenew.com.jpg"></div>
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Jitender Chand</strong>
+                                <div class="field-content"><img th:src="${#session.getAttribute('profilePicUrl')}"></div>
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold" th:text="${#session.getAttribute('userFullName')}" ></strong>
                              </span>  </span> </a>
                         </div>
                         <div class="logo-element">
@@ -41,29 +41,39 @@
                         <a th:href="@{/}"><i class="fa fa-car"></i> <span class="nav-label">Cab Request</span></a>
                     </li>
 
-                    <li >
-                        <a th:href="@{/costManagement}"><i class="fa fa-file"></i> <span class="nav-label">Cost Management</span> </a>
+                    <li>
+                        <a th:href="@{/costManagement}"><i class="fa fa-rupee"></i> <span class="nav-label">Cost Management</span> </a>
                     </li>
                     <li>
-                        <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Adhoc Cab Requests</span> </a>
+                        <a><i class="fa fa-thumbs-up"></i> <span class="nav-label">Newer Request</span> </a>
+                        <ul class="nav nav-third-level collapse">
+                            <li>
+                                <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Adhoc</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Permanent</span> </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-file"></i> <span class="nav-label">Permanent Cab Requests</span> </a>
+                        <a><i class="fa fa-list"></i> <span class="nav-label">My Rides</span> </a>
+                        <ul class="nav nav-third-level collapse">
+                            <li>
+                                <a th:href="@{/pendingAdhocCabRequests}"><i class="fa fa-minus"></i> <span class="nav-label">Pending Adhoc</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/pendingPermanentCabRequests}"><i class="fa fa-minus"></i> <span class="nav-label">Pending Permanent</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-minus"></i> <span class="nav-label">Approved Adhoc</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/approvedPermanentCabRequests}"><i class="fa fa-minus"></i> <span class="nav-label">Approved Permanent</span> </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a th:href="@{/approvedAdhocCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">Approved Adhoc Cab Requests</span> </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/pendingAdhocCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">Pending Adhoc Cab Requests</span> </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/approvedPermanentCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">Approved Permanent Cab Requests</span> </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/pendingPermanentCabRequests}"><i class="fa fa-file"></i> <span class="nav-label">Pending Permanent Cab Requests</span> </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/route}"><i class="fa fa-file"></i> <span class="nav-label">Route</span> </a>
+                        <a th:href="@{/route}"><i class="fa fa-align-justify"></i> <span class="nav-label">Route</span> </a>
                     </li>
                 </ul>
             </div>
@@ -86,7 +96,7 @@
 
                 </nav>
             </div>
-            <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="wrapper wrapper-content fadeInRight">
                 <div layout:fragment="content">
                 </div>
             </div>
