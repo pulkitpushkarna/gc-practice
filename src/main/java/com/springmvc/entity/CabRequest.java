@@ -18,32 +18,30 @@ public class CabRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //    TODO: rename
     private Date travelDate;
 
-    //    TODO: add zone id
     @OneToOne
-    Feedback feedback;
+    private Feedback feedback;
 
     @ManyToOne
     private Zone zone;
 
     @OneToMany(mappedBy = "cabRequest")
-    List<NewerRouteMapping> newerRouteMapping;
+    private List<NewerRouteMapping> newerRouteMapping;
 
-    String pickUpLocation;
+    private String pickUpLocation;
 
-    String dropLocation;
+    private String dropLocation;
 
-    String reason;
+    private String reason;
 
-    String details;
+    private String details;
 
     @Enumerated(EnumType.STRING)
-    CabRequestType cabRequestType;
+    private CabRequestType cabRequestType;
 
     @ManyToOne
-    Newer requester;
+    private Newer requester;
 
     @CreatedDate
     private Date creationTime;

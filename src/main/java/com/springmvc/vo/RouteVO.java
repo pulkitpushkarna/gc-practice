@@ -2,9 +2,6 @@ package com.springmvc.vo;
 
 import java.util.Date;
 
-/**
- * Created by diwakar on 06/10/17.
- */
 public class RouteVO {
     private long routeId;
     private String name;

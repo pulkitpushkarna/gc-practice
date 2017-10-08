@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
+<head>
+    <title>Cab Request Details</title>
+</head>
+<body>
+
+<div class="row" layout:fragment="content">
+    <input type="hidden" id="cabRequestId" th:attr="cab-request-id=${cabRequestDetailsVO.cabRequest.id}"/>
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-xs-12 col-sm-7">
+                <div class="fuel-table-responsive">
+                    <div class="fuel-table">
+                        <div class="heading">
+                            <p class="no-borders"> Details </p>
+                        </div>
+                        <div class="fuel-detal-txt">
+                            <p>
+                                <span th:text="#{cabRequest.requestDate.label}">Request Date</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${#dates.format(cabRequestDetailsVO.cabRequest.creationTime, 'dd MMM dd yyyy, HH:mm')}"></span>
+                            </div>
+                        </div>
+                        <div class="fuel-detal-txt" th:if="${cabRequestDetailsVO.isRequestAdhoc()}">
+                            <p>
+                                <span th:text="#{cabRequest.travelDate.label}">Travel Date</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${#dates.format(cabRequestDetailsVO.cabRequest.travelDate, 'dd MMM yyyy, HH:mm')}"></span>
+                            </div>
+                        </div>
+                        <div class="fuel-detal-txt" th:if="${!cabRequestDetailsVO.isRequestAdhoc()}">
+                            <!--<div>-->
+                            <p>
+                                <span th:text="#{cabRequest.towards.label}">Towards</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${cabRequestDetailsVO.cabRequest.zone.name}"></span>
+                            </div>
+                        </div>
+                        <div class="fuel-detal-txt" th:if="${cabRequestDetailsVO.isRequestAdhoc()}">
+                            <!--<div>-->
+                            <p>
+                                <span th:text="#{cabRequest.pickupLocation.label}">Pickup Point</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${cabRequestDetailsVO.cabRequest.pickUpLocation}"></span>
+                            </div>
+                        </div>
+                        <div class="fuel-detal-txt" th:if="${cabRequestDetailsVO.isRequestAdhoc()}">
+                            <p>
+                                <span th:text="#{cabRequest.dropLocation.label}">Drop Point</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${cabRequestDetailsVO.cabRequest.dropLocation}"></span>
+                            </div>
+                        </div>
+                        <div class="fuel-detal-txt" th:if="${cabRequestDetailsVO.isRequestAdhoc()}">
+                            <p>
+                                <span th:text="#{cabRequest.reasonForRequest.label}">Reason</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${cabRequestDetailsVO.cabRequest.reason}"></span>
+                            </div>
+                        </div>
+                        <div class="fuel-detal-txt">
+                            <p>
+                                <span th:text="#{cabRequest.status.label}">Status</span>
+                            </p>
+                            <div class="right-txt">
+                                <span th:text="${cabRequestDetailsVO.cabRequest.cabRequestStatus.name}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wrapper wrapper-content animated clearfix"
+         th:if="${cabRequestDetailsVO.feedback!=null || cabRequestDetailsVO.showingdetailsForRequester}">
+        <div class="row">
+            <div class="col-xs-12 col-sm-7">
+                <div class="ibox-content mb-40">
+                    <div class="chat-activity-list" th:if="${cabRequestDetailsVO.feedback!=null}">
+                        <div class="chat-element bg-info">
+                            <div class="media-body ">
+                                <!--<small class="pull-left">5m ago</small>-->
+                                <strong><span th:text="${cabRequestDetailsVO.feedback.initiator.name}"></span></strong>
+                                <p class="m-b-xs"><span th:text="${cabRequestDetailsVO.feedback.feedback}"></span></p>
+                                <small class="text-muted">
+                                    <span th:text="${#dates.format(cabRequestDetailsVO.feedback.creationTime, 'dd MMM yyyy, HH:mm')}"></span>
+                                </small>
+                                <!--<small class="text-muted">Today 4:21 pm - 12.06.2014</small>-->
+                            </div>
+                        </div>
+                        <div th:if="${cabRequestDetailsVO.feedback.comments.size()!=0}">
+                            <div th:each="comment, iter : ${cabRequestDetailsVO.feedback.comments}">
+                                <div class="chat-element" th:class="${iter.even}? '' : 'right'">
+                                    <div class="media-body" th:class="${iter.even}? '' : 'text-right'">
+                                        <strong><span th:text="${comment.commenter.name}"></span></strong>
+                                        <p class="m-b-xs">
+                                            <span th:text="${comment.comment}"></span>
+                                        </p>
+                                        <small class="text-muted">
+                                            <span th:text="${#dates.format(comment.creationTime, 'dd MMM yyyy, HH:mm')}"></span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-form">
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea id="comment" class="form-control" placeholder="Message"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button id="addComment" type="submit" class="btn btn-sm btn-primary m-t-n-xs">
+                                    <strong>Post Comment</strong></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="post-common-scripts">
+    <script src="/resources/js/feedback.js"></script>
+</th:block>
+</body>
+</html>
