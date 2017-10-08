@@ -34,11 +34,11 @@ public class CabService {
     }
 
     public void insertCab(CabCommand cabCommand) {
-        Cab cab = new Cab();
+        Cab cabToUpdate = cabRepository.findByVehicleRegNumber(cabCommand.getVehicleRegNo());
+        Cab cab = (cabToUpdate == null) ? new Cab() : cabToUpdate;
         cab.setVehicleRegNumber(cabCommand.getVehicleRegNo());
         cab.setCabType(cabCommand.getCabType());
         cab.setVehicleModel(cabCommand.getCabModel());
-
         cabRepository.save(cab);
     }
 
