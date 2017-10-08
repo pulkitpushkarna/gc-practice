@@ -73,9 +73,7 @@
                                 $('#wrapper').removeClass('sk-loading');
                                 toastr.options.progressBar = true;
                                 toastr.success('Cab Request has been approved');
-                                toastr.options.onHidden = function() {
-                                 window.location.href="/adhocCabRequestsForApproval";
-                                 }
+                                setTimeout(function(){ window.location.href="/adhocCabRequestsForApproval"; }, 3000);
                             },
                             error:function(){
                                 $('#wrapper').removeClass('sk-loading');
@@ -95,7 +93,7 @@
                                 $('#wrapper').removeClass('sk-loading');
                                 toastr.options.progressBar = true;
                                 toastr.success('Cab Request has been rejected');
-                                toastr.options.onHidden = function() { window.location.href="/adhocCabRequestsForApproval"; }
+                                setTimeout(function(){ window.location.href="/adhocCabRequestsForApproval"; }, 3000);
                             },
                             error:function(){
                                 $('#wrapper').removeClass('sk-loading');
