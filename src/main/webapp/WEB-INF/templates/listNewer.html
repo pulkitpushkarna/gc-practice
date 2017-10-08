@@ -7,6 +7,7 @@
     <title>Newer List</title>
 </head>
 <body>
+
 <div class="row" layout:fragment="content">
     <div class="col-xs-12">
         <div class="ibox float-e-margins">
@@ -22,33 +23,29 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>EmpId</th>
-                            <th>Name</th>
-                            <th>email</th>
-                            <th>Role</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="requester : ${newers}">
-                            <td th:text="${requester.newerId}"></td>
-                            <td th:text="${requester.firstName+ ' ' +requester.lastName}"></td>
-                            <td th:text="${requester.email}"></td>
-                            <td>
-                                <select th:id="${'selected-role-'+requester.newerId}"
-                                        th:attr="data-id=${requester.newerId}" name="role">
-                                    <option th:text="${requester.userRole.name}"></option>
-                                    <option th:each="role : ${T(com.springmvc.enums.UserRole).listRolesExcept(requester.userRole)}"
-                                            th:value="${role}" th:text="${role.getName()}"></option>
-                                </select>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        <th>EmpId</th>
+                        <th>Name</th>
+                        <th>email</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="requester : ${newers}">
+                        <td th:text="${requester.newerId}"></td>
+                        <td th:text="${requester.firstName+ ' ' +requester.lastName}"></td>
+                        <td th:text="${requester.email}"></td>
+                        <td>
+                            <select class="form-control" th:id="${'selected-role-'+requester.newerId}" th:attr="data-id=${requester.newerId}" name="role">
+                                <option th:text="${requester.userRole.name}"></option>
+                                <option th:each="role : ${T(com.springmvc.enums.UserRole).listRolesExcept(requester.userRole)}" th:value="${role}" th:text="${role.getName()}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -62,9 +59,16 @@
             var newerId = $(this).data("id");
             var baseUrl = /*[[@{/admin/updateRole}]]*/ '';
             console.log(baseUrl);
+            $('#wrapper').addClass('sk-loading');
             var finalUrl = baseUrl + "/" + newerId;
             makePutCall(finalUrl, {role: selectedRole}, function (data) {
-                console.log("Is Role Changed???? ", data);
+                $('#wrapper').removeClass('sk-loading');
+                toastr.options.progressBar = true;
+                toastr.success('Request has been submitted');
+            }, function(){
+                $('#wrapper').removeClass('sk-loading');
+                toastr.options.progressBar = true;
+                toastr.error('Request failed','Please try after sometime')
             })
         });
         /*]]>*/

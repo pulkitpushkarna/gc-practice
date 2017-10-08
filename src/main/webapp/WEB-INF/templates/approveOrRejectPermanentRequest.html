@@ -58,36 +58,42 @@
                 jQuery("#approve").click(function(){
                   var routeId = jQuery("#route").val();
                   var cabRequestId = jQuery(this).attr("cab-request-id");
+                  $('#wrapper').addClass('sk-loading');
                   jQuery.ajax({
                         url:"/approvePermanentRequest",
                         data:{
                              routeId: routeId,
                              cabRequestId: cabRequestId
                         },success:function(){
+                            $('#wrapper').removeClass('sk-loading');
                             toastr.options.progressBar = true;
-                            toastr.success('Your Cab Request has been submitted');
+                            toastr.success('Cab Request has been approved');
                             toastr.options.onHidden = function() { window.location.href="/permanentCabRequestsForApproval"; }
                         },
                         error:function(){
+                            $('#wrapper').removeClass('sk-loading');
                             toastr.options.progressBar = true;
-                            toastr.error('Cab request failed','Please try after sometime')
+                            toastr.error('failed','Please try after sometime')
                         }
                   });
                 });
 
                 jQuery("#reject").click(function(){
+                        $('#wrapper').addClass('sk-loading');
                         var cabRequestId = jQuery(this).attr("cab-request-id");
                         jQuery.ajax({
                             url: "/rejectCabRequest",
                             data: {cabRequestId: cabRequestId},
                             success : function(){
+                                $('#wrapper').removeClass('sk-loading');
                                 toastr.options.progressBar = true;
-                                toastr.success('Your Cab Request has been submitted');
+                                toastr.success('Cab Request has been rejected');
                                 toastr.options.onHidden = function() { window.location.href="/permanentCabRequestsForApproval"; }
                             },
                             error: function(){
+                                $('#wrapper').removeClass('sk-loading');
                                 toastr.options.progressBar = true;
-                                toastr.error('Cab request failed','Please try after sometime')
+                                toastr.error('failed','Please try after sometime')
                             }
                         });
                 });

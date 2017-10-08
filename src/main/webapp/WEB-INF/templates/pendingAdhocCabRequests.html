@@ -86,12 +86,19 @@
         });
 
         jQuery("#adhoc-cab-feedback-form-id #submit").on("click", function () {
+            $('#wrapper').addClass('sk-loading');
             var form = jQuery("#adhoc-cab-feedback-form-id");
             var url = form.attr('action');
             var data = form.serialize();
             makePostCall(url, data, function(data) {
+                $('#wrapper').removeClass('sk-loading');
+                toastr.options.progressBar = true;
+                toastr.success('Request has been submitted');
                 console.log("Feedback submitted...")
             }, function(e, h){
+                $('#wrapper').removeClass('sk-loading');
+                toastr.options.progressBar = true;
+                toastr.error('Request failed','Please try after sometime')
                 console.log("ERROR : ",h);
                 console.log("ERROR : ",e);
             })
