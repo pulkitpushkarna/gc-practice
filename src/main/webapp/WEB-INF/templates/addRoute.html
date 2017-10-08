@@ -42,13 +42,7 @@
                                           </span>
 
                                     </div>
-                                    <ul class="stopDetail" id="stops">
-                                      <th:block th:if="${route != null && route.stops != null}">
-                                          <li th:each="stop:${route.stops}">
-                                              <span th:text="${stop}"></span>
-                                          </li>
-                                      </th:block>
-                                    </ul>
+                                    <ul class="stopDetail" id="stops"><th:block th:if="${route != null && route.stops != null}"><li th:each="stop:${route.stops}"><span th:text="${stop}"></span></li></th:block></ul>
                                 </div>
                             </div>
                             <div class="form-group">
