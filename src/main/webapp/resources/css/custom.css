@@ -125,6 +125,11 @@
 .p-15{
     padding:15px;
 }
+.dropdown-toggle{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 
 @media only screen and (max-width: 767px) {
     .fuel-table p{

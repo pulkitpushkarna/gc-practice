@@ -16,7 +16,7 @@ public class SpringSecurityService {
     @Autowired
     NewerRepository newerRepository;
 
-    Newer getCurrentUser() {
+   public Newer getCurrentUser() {
         SocialUser socialUser = loggedInUser();
         return newerRepository.findByEmail(socialUser.getUsername());
     }
