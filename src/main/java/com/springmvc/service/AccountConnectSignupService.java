@@ -39,6 +39,7 @@ public class AccountConnectSignupService implements ConnectionSignUp {
         if (userEmail != null && userEmail.contains(TO_THE_NEW)) {
             Map<String, Object> newerInfo = getNewerInfo(userEmail);
             Long newerId = Long.parseLong((String) newerInfo.get("employeeCode"));
+            String profilePicUrl = (String) newerInfo.get("profilePicUrl");
             Map<String,String> manager = (Map<String, String>) newerInfo.get("reportingManager");
             String managerEmail = manager.get("email");
             Newer newer = new Newer();
@@ -48,6 +49,7 @@ public class AccountConnectSignupService implements ConnectionSignUp {
             newer.setFirstName(userProfile.getFirstName());
             newer.setLastName(userProfile.getLastName());
             newer.setUserRole(UserRole.ROLE_NEWER);
+            newer.setProfilePicUrl(profilePicUrl);
             newerRepository.save(newer);
         }
         return userEmail;

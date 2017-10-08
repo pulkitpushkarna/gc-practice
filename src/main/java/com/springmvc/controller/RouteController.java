@@ -2,6 +2,7 @@ package com.springmvc.controller;
 
 import com.springmvc.co.RouteCommand;
 import com.springmvc.entity.Cab;
+import com.springmvc.entity.Route;
 import com.springmvc.entity.Zone;
 import com.springmvc.exceptions.BindingException;
 import com.springmvc.service.CabService;
@@ -59,6 +60,24 @@ public class RouteController {
             routeService.insertRoute(routeCommand);
             return true;
         }
+    }
+
+    @RequestMapping(value = "/route/update", method = RequestMethod.GET)
+    public String updateRoute(@RequestParam long id, Model model) {
+        RouteCommand routeCommand = routeService.getRoute(id);
+        Cab cab = cabService.getCabByRegId(routeCommand.getCabRegId());
+        List<Cab> cabList = cabService.getCabsWithNoRoute();
+        List<Zone> zoneList = zoneService.getAllZones();
+        cabList.add(cab);
+        model.addAttribute("cabs", cabList);
+        model.addAttribute("zones", zoneList);
+        model.addAttribute("route", routeService.getRoute(id));
+        return "addRoute";
+    }
+
+    @RequestMapping(value = "/route/remove", method = RequestMethod.DELETE)
+    public void deleteRoute(@RequestParam long id) {
+        routeService.deleteRoute(id);
     }
 
 }

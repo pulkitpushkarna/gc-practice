@@ -13,7 +13,7 @@ public class SpringSecurityService {
     @Autowired
     NewerRepository newerRepository;
 
-    Newer getCurrentUser(){
+    public Newer getCurrentUser(){
         SocialUser socialUser=(SocialUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return newerRepository.findByEmail(socialUser.getUsername());
     }

@@ -26,26 +26,35 @@
                         <form role="form">
                             <div class="form-group">
                                 <label>Route Name</label>
-                                    <input type="text" id="routeName" class="form-control">
+                                <input type="text" id="routeName"
+                                       th:value="${route != null && route.routeName != null}? ${route.routeName}:''"
+                                       class="form-control">
 
                             </div>
-                              <div class="form-group">
-                                  <label>Stops</label>
-                                  <div>
-                                      <div class="input-group date addStop">
-                                          <input type="text" id="stopName" class="form-control">
-                                          <span class="input-group-addon no-padding">
-                                              <button class="btn btn-success" type="button" id="submitStop">Add Stop</button>
+                            <div class="form-group">
+                                <label>Stops</label>
+                                <div>
+                                    <div class="input-group date addStop">
+                                        <input type="text" id="stopName" class="form-control">
+                                        <span class="input-group-addon no-padding">
+                                              <button class="btn btn-success" type="button"
+                                                      id="submitStop">Add Stop</button>
                                           </span>
 
-                                      </div>
-                                      <ul class="stopDetail" id="stops"></ul>
-                                  </div>
-                              </div>
+                                    </div>
+                                    <ul class="stopDetail" id="stops">
+                                      <th:block th:if="${route != null && route.stops != null}">
+                                          <li th:each="stop:${route.stops}">
+                                              <span th:text="${stop}"></span>
+                                          </li>
+                                      </th:block>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Cab</label>
                                 <select name="cab" id="cab" class="form-control">
-                                    <option th:each="cab : ${cabs}">
+                                    <option th:each="cab : ${cabs}" th:selected="${route != null && route.cabRegId == cab.vehicleRegNumber}">
                                         <span th:text="${cab.vehicleRegNumber}" th:id="${cab.id}"></span>
                                     </option>
                                 </select>
@@ -53,14 +62,14 @@
                             <div class="form-group">
                                 <label>Zone</label>
                                 <select name="zone" id="zone" class="form-control">
-                                    <option th:each="zone : ${zones}">
+                                    <option th:each="zone : ${zones}" th:selected="${route != null && route.zoneName == zone.name}">
                                         <span th:text="${zone.name}" th:id="${zone.id}"></span>
                                     </option>
                                 </select>
                             </div>
 
                             <div>
-                                <button id="submit"  type="submit" class="btn btn-primary">Submit</button>
+                                <button id="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -90,16 +99,16 @@
                 stops.disableSelection();
             });
 
-            $('#stops').on('click','.removeStop', function(){
-                    $(this).parent().remove();
-            })
+            stops.on('click', '.removeStop', function() {
+                $(this).parent().remove();
+            });
 
             jQuery("#submit").click(function() {
                 let routeName = jQuery("#routeName").val();
                 let cab = jQuery("#cab").val();
                 let stopElemList = stops.children();
                 let stopsList = $.map(stopElemList, function(stopElem) {
-                    return stopElem.innerHTML.trim();
+                    return stopElem.innerText.trim();
                 });
                 let cabRegNo = $("#vehicleRegNumber").val();
                 let cabType = parseInt($("#cabType").val());

@@ -40,11 +40,21 @@ public class Newer implements Serializable {
 
     private boolean isPaying;
 
+    private String profilePicUrl;
+
     @CreatedDate
     private Date creationTime;
 
     @LastModifiedDate
     private Date modificationTime;
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
 
     public boolean isPaying() {
         return isPaying;
