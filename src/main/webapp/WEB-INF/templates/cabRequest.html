@@ -71,7 +71,7 @@
                                                 Do yo want to submit this request?
                                             </h2>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer cabRequestModal">
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                                             <button id="submit"  type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
                                         </div>
@@ -110,7 +110,7 @@
                 }
             });
                 jQuery("#submit").click(function(){
-
+                    $('#wrapper').addClass('sk-loading');
                     var cabRequestType = jQuery("input[name='cabRequestType']:checked").val()
                     var pickUpDate = jQuery("#travelDate").val();
                     var dropLocation = jQuery("#dropLocation").val();
@@ -137,28 +137,36 @@
                         url:"/checkWhetherUserHavePermanentRequest",
                         success:function(result){
                             if(result === true && cabRequestType==="PERMANENT"){
+                                $('#wrapper').removeClass('sk-loading');
                                 toastr.error('User already have a permanent request');
                             }else{
-                                        jQuery.ajax({
-                                            url: "/cabRequestSubmission",
-                                            type: "Post",
-                                            data: data,
-                                            success:function(data){
-                                                jQuery("#travelDate").val("");
-                                                jQuery("#dropLocation").val("");
-                                                jQuery("#pickUpDate").val("");
-                                                jQuery("#pickUpLocation").val("");
-                                                jQuery("#reason").val("");
-                                                toastr.options.progressBar = true;
-                                                toastr.success('Your Cab Request has been submitted');
-                                                    },
-                                                error:function(){
-                                                    toastr.options.progressBar = true;
-                                                    toastr.error('Cab request failed','Please try after sometime')
-                                            }
-                    });
-                            }
-                        }
+                                jQuery.ajax({
+                                    url: "/cabRequestSubmission",
+                                    type: "Post",
+                                    data: data,
+                                    success:function(data){
+                                        $('#wrapper').removeClass('sk-loading');
+                                        jQuery("#travelDate").val("");
+                                        jQuery("#dropLocation").val("");
+                                        jQuery("#pickUpDate").val("");
+                                        jQuery("#pickUpLocation").val("");
+                                        jQuery("#reason").val("");
+                                        toastr.options.progressBar = true;
+                                        toastr.success('Your Cab Request has been submitted');
+                                         },
+                                        error:function(){
+                                            $('#wrapper').removeClass('sk-loading');
+                                            toastr.options.progressBar = true;
+                                            toastr.error('Cab request failed','Please try after sometime')
+                                         }
+                                 });
+                              }
+                           },
+                           error:function(){
+                            $('#wrapper').removeClass('sk-loading');
+                            toastr.options.progressBar = true;
+                            toastr.error('Cab request failed','Please try after sometime')
+                           }
                     });
                 });
             });

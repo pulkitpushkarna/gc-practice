@@ -130,8 +130,33 @@
     padding-right: 10px;
 }
 
+#wrapper .sk-spinner{
+    display: none
+}
 
+#wrapper.sk-loading .sk-spinner{
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+}
 
+#wrapper.sk-loading:after{
+    content: '';
+    background-color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100000;
+    bottom: 0;
+}
+
+.cabRequestModal .btn.btn-primary{
+    margin-bottom: 5px;
+}
 
 @media only screen and (max-width: 767px) {
     .fuel-table p{
