@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class CabRequestCO {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date travelDate;
     private String dropLocation;
     private String pickUpLocation;
