@@ -44,11 +44,10 @@ public class Bootstrap {
     void startUpEvent() {
 
 
-        for (BaseZone zone : BaseZone.values()) {
-            ZoneCO zoneCO = new ZoneCO();
-            zoneCO.setName(zone.getName());
-            zoneService.saveZone(zoneCO);
-        }
+//        for (BaseZone zone : BaseZone.values()) {
+//            ZoneCO zoneCO = new ZoneCO();
+//            zoneCO.setName(zone.getName());
+//            zoneService.saveZone(zoneCO);
 //            ZonePrice zp = new ZonePrice();
 //            zp.setCabType(CabType.FOUR_SEATER);
 //            zp.setCost(10000);
@@ -61,9 +60,9 @@ public class Bootstrap {
 //
 //            zonePriceRepository.save(zp);
 //            zonePriceRepository.save(zp2);
-//
-//
 //        }
+//
+//
 //        System.out.println("vendorRepository.findAll()>>>>>"+vendorRepository.findAll());
 //        if(ObjectUtils.isEmpty(vendorRepository.findAll())) {
 //            for (Vendor vendor : Vendor.values()) {

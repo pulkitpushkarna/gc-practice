@@ -51,7 +51,6 @@ public class CabRequestController {
     @RequestMapping("/cabRequestSubmission")
     @ResponseBody
     public CabRequestCO cabRequestSubmission(CabRequestCO cabRequestCO){
-        System.out.println("In controller");
         cabRequestService.saveCabRequest(cabRequestCO);
         return cabRequestCO;
     }

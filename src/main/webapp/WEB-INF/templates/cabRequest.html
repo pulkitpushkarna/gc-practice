@@ -34,7 +34,7 @@
                             <div class="form-group" id="date-td" hidden>
                                 <label>Travel Date</label>
                                 <div class="input-group date pickup" id="pickUpDate">
-                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control" value="">
+                                    <input type="text" id="travelDate" placeholder="dd/mm/yyyy" class="form-control" value="">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
 
@@ -71,13 +71,8 @@
                                             </h2>
                                         </div>
                                         <div class="modal-footer">
-<<<<<<< HEAD
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                                             <button id="submit"  type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
-=======
-                                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
-                                            <button id="submit"  type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
->>>>>>> c7ed13e36d11e1f60bd97593c21b7edd20ee3824
                                         </div>
                                     </div>
                                 </div>
@@ -117,13 +112,15 @@
                 jQuery("#submit").click(function(){
 
                     var cabRequestType = jQuery("input[name='cabRequestType']:checked").val()
-                    var pickUpDate = jQuery("#pickUpDate").val();
+                    var pickUpDate = jQuery("#travelDate").val();
+                    console.log("pickUpDate>>>>"+pickUpDate);
                     var dropLocation = jQuery("#dropLocation").val();
                     var projectName = jQuery("#projectName").val();
                     var projectManager = jQuery("#projectManager").val();
                     var pickUpLocation = jQuery("#pickUpLocation").val();
                     var zoneId = jQuery("#zone").val();
                     var reason = jQuery("#reason").val();
+
                     var data = {
                                     dropLocation: dropLocation,
                                     cabRequestType: cabRequestType,
@@ -139,33 +136,33 @@
 
                     jQuery.ajax({
                         url:"/checkWhetherUserHavePermanentRequest",
-                        success:function(data){
-                            if(data === true && cabRequestType==="PERMANENT"){
+                        success:function(result){
+                            if(result === true && cabRequestType==="PERMANENT"){
                                 toastr.error('User already have a permanent request');
                             }else{
                                         jQuery.ajax({
-                        url: "/cabRequestSubmission",
-                        type: "Post",
-                        data: data,
-                        success:function(data){
-                            jQuery("#pickUpDate").val("");
-                            jQuery("#dropLocation").val("");
-                            jQuery("#pickUpDate").val("");
-                            jQuery("#pickUpLocation").val("");
-                            jQuery("#reason").val("");
-                            toastr.options.progressBar = true;
-                            toastr.success('Your Cab Request has been submitted');
-                        },
-                        error:function(){
-                            toastr.options.progressBar = true;
-                            toastr.error('Cab request failed','Please try after sometime')
-                        }
+                                            url: "/cabRequestSubmission",
+                                            type: "Post",
+                                            data: data,
+                                            success:function(data){
+                                                jQuery("#travelDate").val("");
+                                                jQuery("#dropLocation").val("");
+                                                jQuery("#pickUpDate").val("");
+                                                jQuery("#pickUpLocation").val("");
+                                                jQuery("#reason").val("");
+                                                toastr.options.progressBar = true;
+                                                toastr.success('Your Cab Request has been submitted');
+                                                    },
+                                                error:function(){
+                                                    toastr.options.progressBar = true;
+                                                    toastr.error('Cab request failed','Please try after sometime')
+                                            }
                     });
                             }
                         }
                     });
                 });
-            } );
+            });
         </script>
     </th:block>
     </body>
