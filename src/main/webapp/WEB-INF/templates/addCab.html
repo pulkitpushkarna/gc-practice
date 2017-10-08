@@ -1,11 +1,56 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="/resources/js/jquery-1.12.4.js"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
+
+
+</head>
+<body>
+<div class="row" layout:fragment="content">
+    <div class="col-xs-12 col-sm-7">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Add Cab</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label>Cab Reg No.</label>
+                            <input class="form-control" type="text" id="vehicleRegNumber">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cab Capacity</label>
+                            <select class="form-control" name="cabType" id="cabType">
+                                <option th:each="cabType : ${cabTypes}" th:value="${cabType}">
+                                    <span th:text="${cabType.name}"></span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cab Model</label>
+                            <input class="form-control" type="text" id="cabModel">
+                        </div>
+                        <div>
+                            <button type="button" id="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Submit</strong></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-5">
+
+    </div>
+</div>
+
+<th:block layout:fragment="post-common-scripts">
+    <script>
         $(function() {
             jQuery("#submit").click(function() {
                 console.log("Button clicked");
@@ -28,37 +73,17 @@
                     'data': JSON.stringify(data),
                     'dataType': 'json',
                     'success': function(data) {
-                        console.log(data);
+                        toastr.options.progressBar = true;
+                        toastr.success('Your Cab Request has been submitted');
+                    },
+                    error:function(){
+                        toastr.options.progressBar = true;
+                        toastr.error('Cab request failed','Please try after sometime')
                     }
                 });
             });
-            /*]]>*/
         });
     </script>
-</head>
-<body>
-<table layout:fragment="content">
-    <tr>
-        <td>Cab Reg No.</td>
-        <td><input type="text" id="vehicleRegNumber"></td>
-    </tr>
-    <tr>
-        <td>Cab Capacity</td>
-        <td>
-            <select name="cabType" id="cabType">
-                <option th:each="cabType : ${cabTypes}" th:value="${cabType}">
-                    <span th:text="${cabType.name}"></span>
-                </option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Cab Model</td>
-        <td><input type="text" id="cabModel"></td>
-    </tr>
-    <tr>
-        <td><input type="button" value="Submit" id="submit"></td>
-    </tr>
-</table>
+</th:block>
 </body>
 </html>
