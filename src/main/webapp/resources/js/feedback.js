@@ -23,7 +23,7 @@ $(function () {
             data: data,
             success: function (data) {
                 //TODO: NEEDS COMMENTS RELOAD
-                alert("Request submitted successfully!!");
+                page.reload();
                 toastr.success('Comment posted successfully!!');
             },
             error: function () {
