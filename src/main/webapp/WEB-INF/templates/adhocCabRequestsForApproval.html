@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <table class="table table-striped table-bordered table-hover dataTables-example" >
+                <table class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -36,17 +36,18 @@
                     </thead>
                     <tbody>
                     <tr class="gradeX" th:each="cabRequest,stats :${cabRequestList}">
-                        <td th:text="${stats.index+1}"> </td>
-                        <td th:text="${cabRequest.travelDate}"> </td>
-                        <td th:text="${cabRequest.creationTime}"> </td>
-                        <td th:text="${cabRequest.pickUpLocation}"> </td>
-                        <td th:text="${cabRequest.dropLocation}"> </td>
-                        <td th:text="${cabRequest.cabRequestStatus}"> </td>
+                        <td th:text="${stats.index+1}"></td>
+                        <td th:text="${cabRequest.travelDate}"></td>
+                        <td th:text="${cabRequest.creationTime}"></td>
+                        <td th:text="${cabRequest.pickUpLocation}"></td>
+                        <td th:text="${cabRequest.dropLocation}"></td>
+                        <td th:text="${cabRequest.cabRequestStatus}"></td>
                         <td>
                             <div class="action">
                                 <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
                                 <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">Process Request</a>
+                                    <li><a th:href="@{'/approveOrRejectAdhocRequest/'+${cabRequest.id}}">Process
+                                        Request</a>
                                     </li>
                                 </ul>
                             </div>
@@ -61,37 +62,37 @@
 
 <th:block layout:fragment="post-common-scripts">
     <script>
-    jQuery(document).ready(function(){
+        jQuery(document).ready(function () {
 
 
-        jQuery("input[name='viewDetails']").click(function(){
-            alert("viewDetails");
-        });
+            jQuery("input[name='viewDetails']").click(function () {
+                alert("viewDetails");
+            });
 
-        jQuery("input[name='reject']").click(function(){
-            var cabRequestId = jQuery(this).attr("request-id");
-            var requestElement = this ;
-            jQuery.ajax({
-                url: "/rejectCabRequest",
-                data : {cabRequestId: cabRequestId},
-                success : function(){
-                    jQuery(requestElement).parent().parent().remove();
-                }
+            jQuery("input[name='reject']").click(function () {
+                var cabRequestId = jQuery(this).attr("request-id");
+                var requestElement = this;
+                jQuery.ajax({
+                    url: "/rejectCabRequest",
+                    data: {cabRequestId: cabRequestId},
+                    success: function () {
+                        jQuery(requestElement).parent().parent().remove();
+                    }
+                });
+            });
+
+            jQuery("input[name='approve']").click(function () {
+                var cabRequestId = jQuery(this).attr("request-id");
+                var requestElement = this;
+                jQuery.ajax({
+                    url: "/approveCabRequest",
+                    data: {cabRequestId: cabRequestId},
+                    success: function () {
+                        jQuery(requestElement).parent().parent().remove();
+                    }
+                })
             });
         });
-
-        jQuery("input[name='approve']").click(function(){
-            var cabRequestId = jQuery(this).attr("request-id");
-            var requestElement = this ;
-            jQuery.ajax({
-                url: "/approveCabRequest",
-                data: {cabRequestId: cabRequestId},
-                success : function(){
-                    jQuery(requestElement).parent().parent().remove();
-                }
-            })
-        });
-    });
     </script>
 </th:block>
 

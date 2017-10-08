@@ -22,6 +22,10 @@ public class AppConfig {
     private String nwUrl;
     @Value("${app.newersworld.uuid}")
     private String nwUuid;
+    @Value("${app.google.clientid}")
+    private String googleId;
+    @Value("${app.google.clientsecret}")
+    private String googleSecret;
 
     public String getUsername() {
         return username;
@@ -69,5 +73,21 @@ public class AppConfig {
 
     public void setNwUuid(String nwUuid) {
         this.nwUuid = nwUuid;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
+    }
+
+    public String getGoogleSecret() {
+        return googleSecret;
+    }
+
+    public void setGoogleSecret(String googleSecret) {
+        this.googleSecret = googleSecret;
     }
 }
