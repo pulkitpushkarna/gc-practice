@@ -52,9 +52,9 @@
                                 <span th:text="${cabRequestDetailsVO.cabRequest.pickUpLocation}"></span>
                             </div>
                         </div>
-                        <div class="fuel-detal-txt" th:if="${cabRequestDetailsVO.isRequestAdhoc()}">
+                        <div class="fuel-detal-txt">
                             <p>
-                                <span th:text="#{cabRequest.dropLocation.label}">Drop Point</span>
+                                <span th:text="${cabRequestDetailsVO.isRequestAdhoc()}?#{cabRequest.dropLocation.label}:#{cabRequest.pickAndDropLocation.label}">Drop Point</span>
                             </p>
                             <div class="right-txt">
                                 <span th:text="${cabRequestDetailsVO.cabRequest.dropLocation}"></span>
@@ -88,12 +88,14 @@
         <div class="row">
             <div class="col-xs-12 col-sm-7">
                 <div class="ibox-content mb-40">
-                    <div class="row">
+                    <div class="row" th:if="${cabRequestDetailsVO.feedback!=null}">
                         <div class="col-xs-12">
                             <div class="panel panel-info">
                                 <div class="panel-body">
-                                    <strong><span th:text="${cabRequestDetailsVO.feedback.initiator.name}"></span></strong>
-                                    <p class="m-b-xs"><span th:text="${cabRequestDetailsVO.feedback.feedback}"></span></p>
+                                    <strong><span
+                                            th:text="${cabRequestDetailsVO.feedback.initiator.name}"></span></strong>
+                                    <p class="m-b-xs"><span th:text="${cabRequestDetailsVO.feedback.feedback}"></span>
+                                    </p>
                                     <small class="text-muted">
                                         <span th:text="${#dates.format(cabRequestDetailsVO.feedback.creationTime, 'dd MMM yyyy, HH:mm')}"></span>
                                     </small>
@@ -105,8 +107,8 @@
                     <div class="chat-activity-list" th:if="${cabRequestDetailsVO.feedback!=null}">
                         <div th:if="${cabRequestDetailsVO.feedback.comments.size()!=0}">
                             <div th:each="comment, iter : ${cabRequestDetailsVO.feedback.comments}">
-                                <div class="chat-element" th:class="${iter.even}? 'chat-element' : 'chat-element right'">
-                                    <div class="media-body" th:class="${iter.even}? 'media-body' : 'media-body text-right'">
+                                <div th:class="${iter.even}? 'chat-element' : 'chat-element right'">
+                                    <div th:class="${iter.even}? 'media-body' : 'media-body text-right'">
                                         <strong><span th:text="${comment.commenter.name}"></span></strong>
                                         <p class="m-b-xs">
                                             <span th:text="${comment.comment}"></span>
