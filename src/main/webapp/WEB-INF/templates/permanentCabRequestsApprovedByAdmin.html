@@ -26,46 +26,40 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Travel Date</th>
                         <th>Created Time</th>
-                        <th>Pickup Location</th>
-                        <th>Drop Location</th>
+                        <th>Zone</th>
+                        <th>Email</th>
                         <th>Status</th>
                         <th align="center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="gradeX" th:each="cabRequest,stats :${cabRequestList}">
+                    <tr class="gradeX" th:each="cabRequest, stats :${cabRequestList}">
                         <td th:text="${stats.index+1}"></td>
-                        <td th:text="${cabRequest.travelDate}"></td>
                         <td th:text="${cabRequest.creationTime}"></td>
-                        <td th:text="${cabRequest.pickUpLocation}"></td>
-                        <td th:text="${cabRequest.dropLocation}"></td>
+                        <td th:text="${cabRequest.zone.name}"></td>
+                        <td th:text="${cabRequest.requester.email}"></td>
                         <td th:text="${cabRequest.cabRequestStatus}"></td>
                         <td>
                             <div class="action">
                                 <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
                                 <ul class="dropdown-menu dropdown-user">
-                                    <li><a th:href="@{'/approveOrRejectAdhocRequest/'+${cabRequest.id}}">Process
-                                        Request</a>
-                                    </li>
                                     <li><a th:href="@{'/cabRequestDetails/'+${cabRequest.id}}">View Details</a>
                                     </li>
                                 </ul>
                             </div>
                         </td>
                     </tr>
-
                 </table>
             </div>
         </div>
     </div>
 </div>
 
+
 <th:block layout:fragment="post-common-scripts">
     <script>
         jQuery(document).ready(function () {
-
 
             jQuery("input[name='viewDetails']").click(function () {
                 alert("viewDetails");

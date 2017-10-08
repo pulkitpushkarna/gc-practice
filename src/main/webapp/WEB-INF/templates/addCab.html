@@ -53,6 +53,7 @@
     <script>
         $(function() {
             jQuery("#submit").click(function() {
+                $('#wrapper').addClass('sk-loading');
                 console.log("Button clicked");
                 let cabRegNo = $("#vehicleRegNumber").val();
                 let cabType =  $("#cabType").val();
@@ -73,13 +74,15 @@
                     'data': JSON.stringify(data),
                     'dataType': 'json',
                     'success': function(data) {
+                        $('#wrapper').removeClass('sk-loading');
                         toastr.options.progressBar = true;
-                        toastr.success('Your Cab Request has been submitted');
-                        window.location.href = "/"
+                        window.location.href = "/";
+                        toastr.success('Cab has been added');
                     },
                     error:function(){
+                        $('#wrapper').removeClass('sk-loading');
                         toastr.options.progressBar = true;
-                        toastr.error('Cab request failed','Please try after sometime')
+                        toastr.error('failed','Please try after sometime')
                     }
                 });
             });

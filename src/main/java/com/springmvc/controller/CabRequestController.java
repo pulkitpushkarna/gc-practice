@@ -81,6 +81,23 @@ public class CabRequestController {
         return modelAndView;
     }
 
+
+    @RequestMapping("/permanentCabRequestsApprovedByAdmin")
+    public ModelAndView cabRequestApprovedByAdmin() {
+        ModelAndView modelAndView = new ModelAndView("permanentCabRequestsApprovedByAdmin");
+        List<CabRequest> cabRequestList = cabRequestService.getPermanentCabRequestsApprovedByAdmin();
+        modelAndView.addObject("cabRequestList", cabRequestList);
+        return modelAndView;
+    }
+
+    @RequestMapping("/adhocCabRequestsApprovedByAdmin")
+    public ModelAndView adhocCabRequestsApprovedByAdmin() {
+        ModelAndView modelAndView = new ModelAndView("adhocCabRequestsForApproval");
+        List<CabRequest> cabRequestList = cabRequestService.adhocCabRequestsApprovedByAdmin();
+        modelAndView.addObject("cabRequestList", cabRequestList);
+        return modelAndView;
+    }
+
     @RequestMapping("/rejectCabRequest")
     @ResponseBody
     public String rejectCabRequest(Long cabRequestId) {

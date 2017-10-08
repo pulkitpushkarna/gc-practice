@@ -42,13 +42,7 @@
                                           </span>
 
                                     </div>
-                                    <ul class="stopDetail" id="stops">
-                                      <th:block th:if="${route != null && route.stops != null}">
-                                          <li th:each="stop:${route.stops}">
-                                              <span th:text="${stop}"></span>
-                                          </li>
-                                      </th:block>
-                                    </ul>
+                                    <ul class="stopDetail" id="stops"><th:block th:if="${route != null && route.stops != null}"><li th:each="stop:${route.stops}"><span th:text="${stop}"></span></li></th:block></ul>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -104,6 +98,7 @@
             });
 
             jQuery("#submit").click(function() {
+                $('#wrapper').addClass('sk-loading');
                 let routeName = jQuery("#routeName").val();
                 let cab = jQuery("#cab").val();
                 let stopElemList = stops.children();
@@ -130,8 +125,16 @@
                     'data': JSON.stringify(data),
                     'dataType': 'json',
                     'success': function(data) {
+                        $('#wrapper').removeClass('sk-loading');
+                        toastr.options.progressBar = true;
+                        toastr.success('Route has been Added');
                         console.log(data);
                         window.location.href="/route"
+                    },
+                    'error':function(){
+                        $('#wrapper').removeClass('sk-loading');
+                        toastr.options.progressBar = true;
+                        toastr.error('Request failed','Please try after sometime')
                     }
                 });
             });
