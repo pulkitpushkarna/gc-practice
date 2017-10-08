@@ -48,10 +48,16 @@
                         <a><i class="fa fa-thumbs-up"></i> <span class="nav-label">Newer Request</span>  <span class="fa fa-angle-right ml-8"></span></a>
                         <ul class="nav nav-third-level collapse">
                             <li>
-                                <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Adhoc</span> </a>
+                                <a th:href="@{/adhocCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Pending Adhoc</span> </a>
                             </li>
                             <li>
-                                <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Permanent</span> </a>
+                                <a th:href="@{/permanentCabRequestsForApproval}"><i class="fa fa-minus"></i> <span class="nav-label">Pending Permanent</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/adhocCabRequestsApprovedByAdmin}"><i class="fa fa-minus"></i> <span class="nav-label">Approved Adhoc</span> </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/permanentCabRequestsApprovedByAdmin}"><i class="fa fa-minus"></i> <span class="nav-label">Approved Permanent</span> </a>
                             </li>
                         </ul>
                     </li>
