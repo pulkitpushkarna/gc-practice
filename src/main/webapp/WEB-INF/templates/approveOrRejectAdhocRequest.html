@@ -71,7 +71,9 @@
                             success : function(){
                                 toastr.options.progressBar = true;
                                 toastr.success('Your Cab Request has been submitted');
-                                toastr.options.onHidden = function() { window.location.href="/adhocCabRequestsForApproval"; }
+                                toastr.options.onHidden = function() {
+                                 window.location.href="/adhocCabRequestsForApproval";
+                                 }
                             },
                             error:function(){
                                 toastr.options.progressBar = true;
