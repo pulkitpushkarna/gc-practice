@@ -44,7 +44,8 @@
                             <div class="action">
                                 <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
                                 <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="">Process Request</a>
+                                    <li><a th:href="@{'/approveOrRejectPermanentRequest/'+${cabRequest.id}}">Process
+                                        Request</a>
                                     </li>
                                 </ul>
                             </div>
