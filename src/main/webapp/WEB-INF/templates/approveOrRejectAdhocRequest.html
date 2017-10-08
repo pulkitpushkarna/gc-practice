@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/mainLayout}">
 <head>
-    <title>Sign In</title>
+    <title>Cab Request</title>
 </head>
 <body>
 <div class="wrapper wrapper-content animated" layout:fragment="content">
@@ -86,7 +86,13 @@
                             url: "/rejectCabRequest",
                             data: {cabRequestId: cabRequestId},
                             success : function(){
-                               window.location.href="/adhocCabRequestsForApproval";
+                                toastr.options.progressBar = true;
+                                toastr.success('Your Cab Request has been submitted');
+                                toastr.options.onHidden = function() { window.location.href="/adhocCabRequestsForApproval"; }
+                            },
+                            error:function(){
+                                toastr.options.progressBar = true;
+                                toastr.error('Cab request failed','Please try after sometime')
                             }
                         });
                 });

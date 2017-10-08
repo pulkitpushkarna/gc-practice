@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
+<head>
+    <title>Cab Request</title>
+</head>
+<body>
+<div class="wrapper wrapper-content animated" layout:fragment="content">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-7">
+                <div class="fuel-table-responsive">
+                    <div class="fuel-table">
+                        <div class="heading">
+                            <p class="no-borders"> Details </p>
+                        </div>
+                        <div class="fuel-detal-txt">
+                            <p> Request Date</p><div class="right-txt">Jul 22, 2017, 8:00pm </div>
+                        </div>
+                        <div class="fuel-detal-txt">
+                            <p>Travel Date</p><div class="right-txt">Jul 22, 2017, 8:00pm</div>
+                        </div>
+                        <div class="fuel-detal-txt">
+                            <p>Location </p><div class="right-txt">Rohini</div>
+                        </div>
+                        <div class="fuel-detal-txt bg-primary" id="green-bg">
+                            <p>Status</p><div class="right-txt">Submitted for Approval </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content clearfix">
+        <div class="row">
+            <div class="col-xs-12 col-sm-7">
+                <div class="ibox-content mb-40">
+                    <div class="chat-activity-list">
+                        <div class="chat-element">
+                            <div class="media-body ">
+                                <small class="pull-right text-navy">1m ago</small>
+                                <strong>Mike Smith</strong>
+                                <p class="m-b-xs">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                                </p>
+                                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            </div>
+                        </div>
+                        <div class="chat-element right">
+                            <div class="media-body text-right ">
+                                <small class="pull-left">5m ago</small>
+                                <strong>John Smith</strong>
+                                <p class="m-b-xs">
+                                    Lorem Ipsum is simply dummy text of the printing.
+                                </p>
+                                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            </div>
+                        </div>
+                        <div class="chat-element ">
+                            <div class="media-body ">
+                                <small class="pull-right">2h ago</small>
+                                <strong>Mike Smith</strong>
+                                <p class="m-b-xs">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                                </p>
+                                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-form">
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Message"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Send message</strong></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<th:block layout:fragment="post-common-scripts">
+
+</th:block>
+
+</body>
+</html>
