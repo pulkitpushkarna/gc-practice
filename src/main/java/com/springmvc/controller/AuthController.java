@@ -13,4 +13,9 @@ public class AuthController {
     public String signIn() {
         return "signin";
     }
+
+    @RequestMapping("/403")
+    public String handle403() {
+        return "error403";
+    }
 }

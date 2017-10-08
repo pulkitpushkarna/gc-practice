@@ -49,6 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .and()
+                .exceptionHandling()
+                .accessDeniedPage("/403")
+                .and()
                 .csrf().disable()
                 .apply(new SpringSocialConfigurer().postLoginUrl("/"));
     }
