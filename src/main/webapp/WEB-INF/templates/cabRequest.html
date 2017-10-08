@@ -25,7 +25,6 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <form role="form">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -75,14 +74,13 @@
                                             </h2>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <button id="submit"  type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                                            <button id="submit"  type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
 
                 </div>
@@ -143,9 +141,11 @@
                             jQuery("#dropLocation").val("");
                             jQuery("#pickUpDate").val("");
                             jQuery("#pickUpLocation").val("");
+                            toastr.options.progressBar = true;
                             toastr.success('Your Cab Request has been submitted');
                         },
                         error:function(){
+                            toastr.options.progressBar = true;
                             toastr.error('Cab request failed','Please try after sometime')
                         }
                     });
