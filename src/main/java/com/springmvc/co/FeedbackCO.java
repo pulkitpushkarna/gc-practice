@@ -1,33 +1,27 @@
 package com.springmvc.co;
 
-import com.springmvc.entity.CabRequest;
-import com.springmvc.entity.Newer;
-
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-
 public class FeedbackCO {
 
-    private Newer initiator;
+    private int initiator;
 
-    private CabRequest cabRequest;
+    private int cabRequest;
 
     private String feedback;
 
-    public Newer getInitiator() {
+    public int getInitiator() {
         return initiator;
     }
 
-    public FeedbackCO setInitiator(Newer initiator) {
+    public FeedbackCO setInitiator(int initiator) {
         this.initiator = initiator;
         return this;
     }
 
-    public CabRequest getCabRequest() {
+    public int getCabRequest() {
         return cabRequest;
     }
 
-    public FeedbackCO setCabRequest(CabRequest cabRequest) {
+    public FeedbackCO setCabRequest(int cabRequest) {
         this.cabRequest = cabRequest;
         return this;
     }

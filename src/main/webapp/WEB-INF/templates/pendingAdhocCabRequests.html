@@ -8,26 +8,58 @@
 </head>
 <body>
 <div class="row" layout:fragment="content">
-    <table>
-        <tr th:each="cabRequest :${cabRequestList}">
-            <td th:text="${cabRequest.travelDate}"> </td>
-            <td th:text="${cabRequest.requester.email}"> </td>
-            <td th:text="${cabRequest.pickUpLocation}"> </td>
-            <td th:text="${cabRequest.dropLocation}"> </td>
-            <td th:text="${cabRequest.creationTime}"> </td>
-            <td th:text="${cabRequest.details}"> </td>
-            <td><input type="button" name="feedback" th:attr="request-id=${cabRequest.id}" value="Feedback"> </td>
-        </tr>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Travel Date</th>
+                    <th>Email</th>
+                    <th>Pickup Location</th>
+                    <th>Drop Location</th>
+                    <th>Created On</th>
+                    <th>Reason</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cabRequest :${cabRequestList}">
+                    <td th:text="${cabRequest.travelDate}"> </td>
+                    <td th:text="${cabRequest.requester.email}"> </td>
+                    <td th:text="${cabRequest.pickUpLocation}"> </td>
+                    <td th:text="${cabRequest.dropLocation}"> </td>
+                    <td th:text="${cabRequest.creationTime}"> </td>
+                    <td th:text="${cabRequest.reason}"> </td>
+                    <td><input class="adHocFeedbackFormModalButton" type="button" data-target="#adhoc-cab-feedback-modal" data-toggle="modal" name="feedback" th:attr="request-id=${cabRequest.id},data-newer-id=${cabRequest.requester.id},data-cab-request-id=${cabRequest.id}" value="Feedback"> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <th:block th:include="feedback :: adhoc-cab-feedback-form('adhoc-cab-feedback-modal', 'adhoc-cab-feedback-form-id')"></th:block>
 </div>
 
 <th:block layout:fragment="post-common-scripts">
     <script>
-    jQuery(document).ready(function(){
-        jQuery("input[name='feedback']").click(function(){
-            alert("Feedback");
-        })
-    });
+        jQuery(document).on("click", '.adHocFeedbackFormModalButton', function(){
+            var newerId = jQuery(this).data('newer-id');
+            var cabRequestId = jQuery(this).data('cab-request-id');
+
+            jQuery(".modal-body #newerId").val(newerId);
+            jQuery(".modal-body #cabRequestId").val(cabRequestId);
+            jQuery(".modal-body #feedbackText").val('');
+        });
+
+        jQuery("#adhoc-cab-feedback-form-id #submit").on("click", function () {
+            var form = jQuery("#adhoc-cab-feedback-form-id");
+            var url = form.attr('action');
+            var data = form.serialize();
+            makePostCall(url, data, function(data) {
+                console.log("Feedback submitted...")
+            }, function(e, h){
+                console.log("ERROR : ",h);
+                console.log("ERROR : ",e);
+            })
+        });
     </script>
 </th:block>
 

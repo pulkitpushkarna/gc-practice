@@ -1,1 +1,35 @@
-This is cab feedback form
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div class="row" th:fragment="adhoc-cab-feedback-form(modalId, formId)">
+    <div class="modal inmodal fade" th:id="${modalId}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form th:action="@{/feedback/submit}" th:method="post" role="form" th:id="${formId}">
+                                    <input type="hidden" name="initiator" id="newerId"/>
+                                    <input type="hidden" name="cabRequest" id="cabRequestId"/>
+                                    <div class="form-group">
+                                        <label>Feedback</label>
+                                        <textarea class="form-control" type="text" name="feedback" id="feedbackText"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">Close
+                                        </button>
+                                        <button id="submit" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
